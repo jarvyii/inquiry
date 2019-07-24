@@ -1,0 +1,75 @@
+body {
+  /*  background-image: url("../img/clockgreen.png");
+    background-repeat:round;  preview: background-color:lightblue; */
+    background-color: white;
+  }
+.jumbotron {
+    height: 145px;
+    padding: 1.5rem 1rem;
+  }
+.inquiry {
+  margin-left: 10%;
+}
+.tracking {
+  margin-top: 5%;
+  margin-left: 10%;
+  width: 350px;
+}
+.showuser {
+  text-align: center;
+}
+.label-inquiry {
+  width:110px;
+  margin-right: 1%;
+  text-align: left;
+}
+.label-tracking {
+  width:110px;
+  margin-right: 1%;
+  text-align: right;
+}
+.input-tracking {
+  margin-left: 0%;
+}
+.line-number {
+  margin-left: 5%;
+}
+.button-inquiry {
+    padding: 14px 20px;
+    margin-left: 2%;
+}
+.button-tracking {
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  margin-left: 10%;
+  margin-top: 1px;
+}
+/* Small media movil */
+@media ( min-width:358px ){
+
+}
+/* Small media movil */
+@media ( min-width:576px ){
+
+
+}
+/* ++++++++++++++++++++++++++++++++++++++++++
+   Media Queries
+++++++++++++++++++++++++++++++++++++++++++++*/
+/* Layout  for 3 columns and 3 Rows in case of medium screen */
+@media ( min-width: 768px ) {
+
+}
+
+@media (min-width:992px) {
+
+  }
+
+/* Layout  for 9 columns in case of big screen */
+
+@media (min-width:1025px) {
+
+  }
+}

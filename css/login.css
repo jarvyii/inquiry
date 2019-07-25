@@ -6,7 +6,7 @@
     margin-top: 40px;
     margin-left: 25%;
     background-color:lightblue;
-    display: none;
+    display: block;
 }
 /* Full-width inputs */
 input[type=text], input[type=password] {

@@ -15,7 +15,7 @@
 <body id="home">
       <!-- Main jumbotron for a  Logo Image about the Company-->
       <div class="container">
-        <div class="jumbotron" id="jumbotron">
+        <div class="jumbotron bg-white" id="jumbotron">
             <img class="img-responsive" width="60%" height="52" src="img/flexiblematerial-bl.png"  alt="Flexible Material">
         </div> <!-- /jumbotron -->
       </div> <!-- /Container-->

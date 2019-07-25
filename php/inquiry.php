@@ -18,48 +18,57 @@ function Head()
    <body id="home">
      <!-- Main jumbotron for a  Logo Image about the Company-->
      <div class="container">
-       <div class="jumbotron" id="jumbotron">
+       <div class="jumbotron bg-white" id="jumbotron">
            <img class="img-responsive" width="60%" height="52" src="../img/flexiblematerial-bl.png"  alt="Flexible Material">
        </div> <!-- /jumbotron -->
      </div> <!-- /Container-->
 <?php
 }
+/*************************************************
+Display the Header of the Tracking and the Column Header for the INformation
+**************************************************/
+function TrackingDisplayHead( $OrderNumber, $LineNumber ){
+  ?>
+  <h3>Tracking Inquiry Display</h3><br>
+  <label>Order Number: <?php echo $OrderNumber ?></label>
+  <br>
+  <label>Line Number: <?php echo $LineNumber ?></label><br>
+  <label>Customer:</label><br>
+  <label>Order Date: /  / </label>
+  <label> Order Quantity:</label><br>
+  <label>Item:</label><br>
+  <div class="row">
+    <div id="machine" class="col-2">
+      <label>Machine</label>
+    </div>
+    <div id="operator" class="col-2">
+      <label>Operator</label>
+    </div>
+    <div id="qty" class="col-2">
+      <label>Qty</label>
+    </div>
+    <div id="startdate" class="col-2">
+      <label>Sart Date/Time</label><br>
+      <input type="datetime" value="<?php echo date("m-d-Y h:ia")?>" readonly>
+    </div>
+    <div id="stopdate" class="col-2">
+      <label>Stop Date/Time</label>
+    </div>
+    <div id="elapsedtime" class="col-2">
+      <label>Elapsed Time</label>
+    </div>
+  </div>
+  <label></label><br>
+ <?php
+}
 /******************************************************
 Display all info using the Variable:
 $BarCode, $OrderCode, $LineNumber
 *******************************************************/
-function TrackingDisplay($RadioCode,   $BarCode, $LineNumber) {
+function TrackingDisplay($OrderNumber, $LineNumber) {
     Head();
-    ?>
-    <h3>Tracking Inquiry Display</h3><br>
-    <label>Order Number:</label><br>
-    <label>Line Number:</label><br>
-    <label>Customer:</label><br>
-    <label>Order Date: /  / </label>
-    <label> Order Quantity:</label><br>
-    <label>Item:</label><br>
-    <div class="row">
-      <div class="col-2">
-        <label>Machine</label>
-      </div>
-      <div class="col-2">
-        <label>Operator</label>
-      </div>
-      <div class="col-2">
-        <label>Qty</label>
-      </div>
-      <div class="col-2">
-        <label>Sart Date/Time</label>
-      </div>
-      <div class="col-2">
-        <label>Stop Date/Time</label>
-      </div>
-      <div class="col-2">
-        <label>Elapsed Time</label>
-      </div>
-    </div>
-    <label></label><br>
-<?php
+    TrackingDisplayHead($OrderNumber, $LineNumber);
+
 }
 /*******************************************************
 Get this Variable  $BarCode, $Machine, $Operator from Operator to be use
@@ -71,14 +80,8 @@ function TrackingInquiry( $BarCode, $Machine, $Operator){
         <input type="hidden" name="inquiry" value="TrackingInquiry"/>
         <div class="tracking container">
           <h3>Tracking Inquiry</h3><br>
-          <input type="radio" name="code" id="radio-code" value="barcode" checked>
-          <label class="label-inquiry" for="code">Scan Bar Code:</label>
-          <input class="input-tracking" type="text" name= "barcode"  id="input-barcode" size = "15" placeholder="Scan Bar Code" autofocus><br>
-
-          <input type="radio" name="code" id ="radio-order" value="order">
-          <label class="label-inquiry" for="input-order">Enter Order:</label>
-          <input class="input-tracking" type="text" name="ordercode"  id="input-ordercode" size="15"
-                placeholder="Enter Order" disabled><br>
+          <label class="label-inquiry" for="ordernumber">Order Number:</label>
+          <input class="input-tracking" type="text" name= "ordernumber"  id="ordernumber" size = "15" placeholder="Enter Order Number" autofocus><br>
           <div class="line-number">
                <label class="label-inquiry" for="linenumber">Line Number:</label>
                <input class="input-tracking" type="text" name = "linenumber" id="linenumber" size ="15" placeholder="Enter Line Number" required><br>
@@ -151,15 +154,11 @@ if (isset($_POST['inquiry'])) {
                   break;
     case 'Tracking': TrackingInquiry($_POST['barcode'], $_POST['machine'],$_POST['operator']);
                      break;
-    case 'TrackingInquiry': if(isset($_POST['barcode'])){
-                              $Code = $_POST['barcode'];
-                              $Parameter ='barcode';
+    case 'TrackingInquiry': if(isset($_POST['ordernumber']) and isset($_POST['linenumber'])){
+                              $OrderNumber = $_POST['ordernumber'];
+                              $LineNumber = $_POST['linenumber'];
+                              TrackingDisplay( $OrderNumber,$LineNumber);
                             }
-                            else{
-                              $Code = $_POST['ordercode'];
-                              $Parameter ='ordercode';
-                            }
-                            TrackingDisplay($Parameter, $Code,$_POST['linenumber']);
                             break;
   }
 }

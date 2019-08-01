@@ -9,7 +9,7 @@ function Head()
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
    <link rel="stylesheet" href="../css/inquiry.css">
@@ -19,7 +19,7 @@ function Head()
      <!-- Main jumbotron for a  Logo Image about the Company-->
      <div class="container">
        <div class="jumbotron bg-white" id="jumbotron">
-           <img class="img-responsive" width="60%" height="52" src="../img/flexiblematerial-bl.png"  alt="Flexible Material">
+           <img class="img-responsive img-fluid" width="60%" height="52" src="../img/flexiblematerial-bl.png"  alt="Flexible Material">
        </div> <!-- /jumbotron -->
      </div> <!-- /Container-->
 <?php
@@ -30,12 +30,10 @@ Display the Header of the Tracking and the Column Header for the INformation
 function TrackingDisplayHead( $OrderNumber, $LineNumber ){
   ?>
   <h3>Tracking Inquiry Display</h3><br>
-  <label>Order Number: <?php echo $OrderNumber ?></label>
-  <br>
-  <label>Line Number: <?php echo $LineNumber ?></label><br>
-  <label>Customer:</label><br>
-  <label>Order Date: /  / </label>
-  <label> Order Quantity:</label><br>
+  <div class="row">
+       <div id="tracking-label" class="col-2"></div>
+       <div id="tracking-value" class="col-10"></div>
+  </div>
   <label>Item:</label><br>
   <div class="row">
     <div id="machine" class="col-2">
@@ -59,6 +57,9 @@ function TrackingDisplayHead( $OrderNumber, $LineNumber ){
     </div>
   </div>
   <label></label><br>
+  <script src="../js/inquirydisplay.js"></script>
+</body>
+</html>
  <?php
 }
 /******************************************************
@@ -78,21 +79,19 @@ function TrackingInquiry( $BarCode, $Machine, $Operator){
   ?>
   <form name="trackinginquiry"  action="inquiry.php" method="post" autocomplete="on">
         <input type="hidden" name="inquiry" value="TrackingInquiry"/>
-        <div class="tracking container">
+        <div class="tracking">
           <h3>Tracking Inquiry</h3><br>
           <label class="label-inquiry" for="ordernumber">Order Number:</label>
           <input class="input-tracking" type="text" name= "ordernumber"  id="ordernumber" size = "15" placeholder="Enter Order Number" autofocus><br>
-          <div class="line-number">
-               <label class="label-inquiry" for="linenumber">Line Number:</label>
-               <input class="input-tracking" type="text" name = "linenumber" id="linenumber" size ="15" placeholder="Enter Line Number" required><br>
-          </div>
-          <div class="row button-inquiry">
-            <div class="col">
-                <button type="submit" class="btn btn-success">Submit</button>
-            </div>
-            <div class="col">
-              <button type="reset" class="btn btn-success">Reset</button>
-            </div>
+          <label class="label-inquiry" for="linenumber">Line Number:</label>
+          <input class="input-tracking" type="number" name = "linenumber" id="linenumber"  placeholder="Enter Line Number" required><br>
+          <div class="button-tracking row">
+             <div class ="col">
+                <button type="submit" class="btn btn-success ">Submit</button>
+             </div>
+              <div class ="col">
+                <button type="reset" class="btn button-reset">Reset</button>
+              </div>
           </div>
         </div>
   </form>
@@ -104,10 +103,10 @@ function TrackingInquiry( $BarCode, $Machine, $Operator){
 function Tracking($UserName) {
   Head();
   ?>
-  <h5 class="showuser">User:<?php echo $UserName?></h5>
   <form name="tracking"  action="inquiry.php" method="post" autocomplete="on">
         <input type="hidden" name="inquiry" value="Tracking"/>
         <div class="tracking">
+          <h5 class="showuser">User: <?php echo $UserName?></h5><br>
           <h3>Tracking</h3><br>
           <label class="label-tracking" for="barcode">Scan Bar Code:</label>
           <input class="input-tracking" type="text" name= "barcode"  id="barcode" size = "15" placeholder="Bar Code" autofocus><br>
@@ -120,7 +119,7 @@ function Tracking($UserName) {
                 <button type="submit" class="btn btn-success">Submit</button>
             </div>
             <div class="col">
-              <button type="resetn" class="btn btn-success">Reset</button>
+              <button type="reset" class="btn button-reset">Reset</button>
             </div>
           </div>
         </div>

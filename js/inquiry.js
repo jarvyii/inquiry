@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  
 /**********************************************************************************
  Check valid the User and password introduced in Login Form. And setup all INFO in the System.
  FUNCTION  $('#buttonlogin').click(function ())
@@ -20,7 +21,9 @@ $('#buttonlogin').click(function () {//function validate() {
     //getUser(username, password);
     // Execute the Bar Code and Machine reading
   }); // \FUNCTION  $('#buttonlogin').click(function ())
-
+  /************************************************************************
+  Main Block
+  ***********************************************************************/
 
   //  document.getElementById("loginform").style.display = "block";
   //  document.getElementById("input-ordercode").style.display = "none";

@@ -27,12 +27,13 @@ input.description {
 .loginimput {
   margin-left: 20%;
 }
+
 /* Set a style for all buttons */
 button {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
-    margin: 8px 0;
+    margin: 8px 8px;
     border: none;
     cursor: pointer;
     }

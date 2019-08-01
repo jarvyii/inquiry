@@ -11,17 +11,17 @@ body {
   margin-left: 10%;
 }
 .tracking {
-  margin-top: 5%;
+  margin-top: 2%;
   margin-left: 10%;
   width: 350px;
 }
 .showuser {
-  text-align: center;
+  text-align: left;
 }
 .label-inquiry {
   width:110px;
   margin-right: 1%;
-  text-align: left;
+  text-align: right;
 }
 .label-tracking {
   width:110px;
@@ -38,14 +38,23 @@ body {
     padding: 14px 20px;
     margin-left: 2%;
 }
+.button-reset {
+  background-color: #8e2938;
+  color: #fff;
+}
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    margin: 8px 8px;
+    background-color: #f44336;
+}
 .button-tracking {
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
   margin-left: 10%;
-  margin-top: 1px;
-}
+  }
 /* Small media movil */
 @media ( min-width:358px ){
 

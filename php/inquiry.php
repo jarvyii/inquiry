@@ -31,7 +31,7 @@ function TrackingDisplayHead( $OrderNumber, $LineNumber ){
   ?>
   <h3>Tracking Inquiry Display</h3><br>
   <div class="row">
-       <div id="tracking-label" class="col-2"></div>
+       <div id="tracking-label" class="col-2 "></div>
        <div id="tracking-value" class="col-10"></div>
   </div>
   <label>Item:</label><br>

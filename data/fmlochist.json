@@ -1,92 +1,20 @@
-{
+[
     {
-        'LHORD'  : '658666',                                /* Order Number */
-        'LHLIN'  : '1',                                     /* Line Number */
-        'LHMACH' : 'MACH01',                                /* Machine */
-        'LHOPER' : 'CINDY',                                 /* Operator */
-        'LHQTY'  : '1',                                     /* Qty */
-        'LHSTRDTTIM'  : '2019-07-22-08.01.00.000000',       /* Start Date/Time */
-        'LHSTPDTTIM'  : '2019-07-22-08.15.00.000000',       /* Stop Date/Time */
+        "LHORD"  : "658666",
+        "LHLIN"  : "1",
+        "LHMACH" : "MACH01",
+        "LHOPER" : "CINDY",
+        "LHQTY"  : "1",
+        "LHSTRDTTIM"  : "2019-07-22-08.01.00.000000",
+        "LHSTPDTTIM"  : "2019-07-22-08.15.00.000000"
     },
     {
-        'LHORD'  : '658666',                                /* Order Number */
-        'LHLIN'  : '1',                                     /* Line Number */
-        'LHMACH' : 'MACH02',                                /* Machine */
-        'LHOPER' : 'FRED',                                  /* Operator */
-        'LHQTY'  : '1',                                     /* Qty */
-        'LHSTRDTTIM'  : '2019-07-22-08.20.00.000000',       /* Start Date/Time */
-        'LHSTPDTTIM'  : '2019-07-22-08.45.00.000000',       /* Stop Date/Time */
-    },
-    {
-        'LHORD'  : '658666',                                /* Order Number */
-        'LHLIN'  : '1',                                     /* Line Number */
-        'LHMACH' : 'MACH03',                                /* Machine */
-        'LHOPER' : 'SUSIE',                                 /* Operator */
-        'LHQTY'  : '1',                                     /* Qty */
-        'LHSTRDTTIM'  : '2019-07-22-08.50.00.000000',       /* Start Date/Time */
-        'LHSTPDTTIM'  : '2019-07-22-09.30.00.000000',       /* Stop Date/Time */
-    },
-    {
-        'LHORD'  : '658666',                                /* Order Number */
-        'LHLIN'  : '1',                                     /* Line Number */
-        'LHMACH' : 'MACH04',                                /* Machine */
-        'LHOPER' : 'MARK',                                  /* Operator */
-        'LHQTY'  : '1',                                     /* Qty */
-        'LHSTRDTTIM'  : '2019-07-22-09.35.00.000000',       /* Start Date/Time */
-        'LHSTPDTTIM'  : '2019-07-22-09.57.00.000000',       /* Stop Date/Time */
-    },
-    {
-        'LHORD'  : '658666',                                /* Order Number */
-        'LHLIN'  : '1',                                     /* Line Number */
-        'LHMACH' : 'MACH05',                                /* Machine */
-        'LHOPER' : 'MARY',                                  /* Operator */
-        'LHQTY'  : '1',                                     /* Qty */
-        'LHSTRDTTIM'  : '2019-07-22-10.00.00.000000',       /* Start Date/Time */
-        'LHSTPDTTIM'  : '2019-07-22-10.20.00.000000',       /* Stop Date/Time */
-    },
-    {
-        'LHORD'  : '658666',                                /* Order Number */
-        'LHLIN'  : '1',                                     /* Line Number */
-        'LHMACH' : 'MACH06',                                /* Machine */
-        'LHOPER' : 'TOM',                                   /* Operator */
-        'LHQTY'  : '1',                                     /* Qty */
-        'LHSTRDTTIM'  : '2019-07-22-10.30.00.000000',       /* Start Date/Time */
-        'LHSTPDTTIM'  : '2019-07-22-10.45.00.000000',       /* Stop Date/Time */
-    },
-    {
-        'LHORD'  : '658666',                                /* Order Number */
-        'LHLIN'  : '1',                                     /* Line Number */
-        'LHMACH' : 'MACH07',                                /* Machine */
-        'LHOPER' : 'GEORGE',                                /* Operator */
-        'LHQTY'  : '1',                                     /* Qty */
-        'LHSTRDTTIM'  : '2019-07-22-10.50.00.000000',       /* Start Date/Time */
-        'LHSTPDTTIM'  : '2019-07-22-11.00.00.000000',       /* Stop Date/Time */
-    },
-    {
-        'LHORD'  : '658666',                                /* Order Number */
-        'LHLIN'  : '1',                                     /* Line Number */
-        'LHMACH' : 'MACH08',                                /* Machine */
-        'LHOPER' : 'LUCY',                                  /* Operator */
-        'LHQTY'  : '1',                                     /* Qty */
-        'LHSTRDTTIM'  : '2019-07-22-11.05.00.000000',       /* Start Date/Time */
-        'LHSTPDTTIM'  : '2019-07-22-11.55.00.000000',       /* Stop Date/Time */
-    },
-    {
-        'LHORD'  : '658666',                                /* Order Number */
-        'LHLIN'  : '1',                                     /* Line Number */
-        'LHMACH' : 'MACH09',                                /* Machine */
-        'LHOPER' : 'DOUG',                                  /* Operator */
-        'LHQTY'  : '1',                                     /* Qty */
-        'LHSTRDTTIM'  : '2019-07-22-13.00.00.000000',       /* Start Date/Time */
-        'LHSTPDTTIM'  : '2019-07-22-13.45.00.000000',       /* Stop Date/Time */
-    },
-    {
-        'LHORD'  : '658666',                                /* Order Number */
-        'LHLIN'  : '1',                                     /* Line Number */
-        'LHMACH' : 'MACH10',                                /* Machine */
-        'LHOPER' : 'TERRY',                                 /* Operator */
-        'LHQTY'  : '1',                                     /* Qty */
-        'LHSTRDTTIM'  : '2019-07-22-13.55.00.000000',       /* Start Date/Time */
-        'LHSTPDTTIM'  : '2019-07-22-14.15.00.000000',       /* Stop Date/Time */
-    },
-}
+        "LHORD"  : "658666",
+        "LHLIN"  : "1",
+        "LHMACH" : "MACH02",
+        "LHOPER" : "FRED",
+        "LHQTY"  : "1",
+        "LHSTRDTTIM"  : "2019-07-22-08.20.00.000000",
+        "LHSTPDTTIM"  : "2019-07-22-08.45.00.000000"
+    }
+  ]

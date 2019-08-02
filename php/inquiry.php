@@ -29,6 +29,8 @@ Display the Header of the Tracking and the Column Header for the INformation
 **************************************************/
 function TrackingDisplayHead( $OrderNumber, $LineNumber ){
   ?>
+  <input type="hidden" name="ordernumber" id = "ordernumber" value="<?php echo $OrderNumber?>"/>
+  <input type="hidden" name="linenumber" id = "linenumber" value="<?php echo $LineNumber?>"/>
   <h3>Tracking Inquiry Display</h3><br>
   <div class="row">
        <div id="tracking-label" class="col-2 "></div>
@@ -47,7 +49,6 @@ function TrackingDisplayHead( $OrderNumber, $LineNumber ){
     </div>
     <div id="startdate" class="col-2">
       <label>Sart Date/Time</label><br>
-      <input type="datetime" value="<?php echo date("m-d-Y h:ia")?>" readonly>
     </div>
     <div id="stopdate" class="col-2">
       <label>Stop Date/Time</label>

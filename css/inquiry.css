@@ -2,6 +2,7 @@ body {
   /*  background-image: url("../img/clockgreen.png");
     background-repeat:round;  preview: background-color:lightblue; */
     background-color: white;
+    font-size: 16px;
   }
 .jumbotron {
     height: 145px;
@@ -12,7 +13,7 @@ body {
 }
 .tracking {
   margin-top: 2%;
-  margin-left: 10%;
+  margin-left: 30%;
   width: 350px;
 }
 .showuser {
@@ -38,9 +39,13 @@ body {
     padding: 14px 20px;
     margin-left: 2%;
 }
+.button-next,
 .button-reset {
   background-color: #8e2938;
-  color: #fff;
+  color:#051233;
+}
+.button-info{
+  padding: 0px 8px;
 }
 .cancelbtn {
     width: auto;
@@ -55,13 +60,48 @@ body {
   cursor: pointer;
   margin-left: 10%;
   }
+  .trackinginformation{
+    margin-left: 8%;
+  }
+  .quantity{
+    margin-left: 10px;
+  }
+  .label-information{
+    width: 151px;
+  }
+  .label-display{
+    width: 95px;
+  }
+  #pdftraveler{
+    color:#051233;
+  }
+  .label-historic{
+    background-color:	#2E406E;
+  }
+  .label-content{
+      background-color:	white;
+  }
+  .displaycolumn{
+    text-decoration: underline;
+  }
+  .datecolumn{
+    display:inline-block;
+  }
 /* Small media movil */
 @media ( min-width:358px ){
+  #button-main {
+  margin-top:1em;
+}
+body {
+  font-size: 10px;
+}
 
 }
 /* Small media movil */
 @media ( min-width:576px ){
-
+  body {
+    font-size: 12px;
+  }
 
 }
 /* ++++++++++++++++++++++++++++++++++++++++++
@@ -69,16 +109,22 @@ body {
 ++++++++++++++++++++++++++++++++++++++++++++*/
 /* Layout  for 3 columns and 3 Rows in case of medium screen */
 @media ( min-width: 768px ) {
-
+  body {
+    font-size: 12px;
+  }
 }
 
 @media (min-width:992px) {
-
+  body {
+    font-size: 16px;
+  }
   }
 
 /* Layout  for 9 columns in case of big screen */
 
 @media (min-width:1025px) {
-
+  body {
+    font-size: 16px;
+  }
   }
 }

@@ -1,40 +1,42 @@
-{
-    'EISTC'  : 'A',                                     /* STATUS CODE 1 */
-    'EIORD'  : '658666',                                /* ORDER NUMBER */
-    'EILIN'  : '1',                                     /* LINE NUMBER */
-    'EIPN'   : '251.MK5000122',                         /* ITEM NUMBER */
-    'EIOCQ'  : '10800',                                 /* ORIGINAL ORDER QUANTITY 1 */
-    'EICCQ'  : '10800',                                 /* CUR ORDER QTY */
-    'EISCQ'  : '0',                                     /* QUANTITY SHIPPED */
-    'EIICQ'  : '0',                                     /* QUANTITY INVOICED */
-    'EIPRIC' : '0.3900',                                /* PRICE AT 9,4 */
-    'EIODDT' : '1180525',                               /* ORIGINAL DUE DATE */
-    'EICDDT' : '1180525',                               /* CURRENT DUE DATE */
-    'EIOSDT' : '1180525',                               /* ORIGINAL SHIP DATE */
-    'EICSDT' : '1180525',                               /* CURRENT SHIP DATE */
-    'EITXC'  : 'Y',                                     /* TAX CODE */
-    'EIHLD'  : '',                                      /* HOLD CODE - CUSTOMER ORDER */
-    'EILIC'  : 'S',                                     /* LINE ITEM CODE */
-    'EILID'  : 'PINE POND PRFLX 3-1/4" X 900\'',       /* LINE ITEM DESCRIPTION */
-    'EICUM'  : '0.0000',                                /* UNIT COST */
-    'EIPLT'  : '3',                                     /* PLANT CODE */
-    'EISR'   : '',                                      /* STOCKROOM CODE */
-    'EIBIN'  : '',                                      /* BIN CODE */
-    'EIQTTR' : '0',                                     /* QUANTITY THIS RUN */
-    'EICO#'  : '1',                                     /* COMPANY NUMBER */
-    'EIGL#'  : '310000',                                /* GENERAL LEDGER NUMBER */
-    'EIPOV'  : '1',                                     /* PRICE OVERRIDE */
-    'EIPNT'  : '',                                      /* PRODUCTION NOTE */
-    'EIFGD'  : '',                                      /* FACE GRADE */
-    'EIBGD'  : '',                                      /* BACK GRADE */
-    'EIFVC'  : '0.0000',                                /* FACE COST */
-    'EIFYLD' : '0',                                     /* FACE YIELD */
-    'EIBVC'  : '0.0000',                                /* BACK COST */
-    'EIBYLD' : '0',                                     /* BACK YIELD */
-    'EICORE' : '0.0000',                                /* CORE COST */
-    'EILABR' : '0.0000',                                /* LABOR */
-    'EIOVRH' : '0.0000',                                /* OVERHEAD */
-    'EICLAS' : '02',                                    /* ITEM CLASS CODE */
-    'EIWGT'  : '0.00',                                  /* WEIGHT */
-    'EIUMST' : 'LF'                                     /* STOCK UNIT OF MEASURE */
+[
+  {
+    "EISTC"  : "A",
+    "EIORD"  : "658666",
+    "EILIN"  : "1",
+    "EIPN"   : "251.MK5000122",
+    "EIOCQ"  : "10800",
+    "EICCQ"  : "10800",
+    "EISCQ"  : "0",
+    "EIICQ"  : "0",
+    "EIPRIC" : "0.3900",
+    "EIODDT" : "1180525",
+    "EICDDT" : "1180525",
+    "EIOSDT" : "1180525",
+    "EICSDT" : "1180525",
+    "EITXC"  : "Y",
+    "EIHLD"  : "",
+    "EILIC"  : "S",
+    "EILID"  : "PINE POND PRFLX 3-1/4\" X 900\"",
+    "EICUM"  : "0.0000",
+    "EIPLT"  : "3",
+    "EISR"   : "",
+    "EIBIN"  : "",
+    "EIQTTR" : "0",
+    "EICO#"  : "1",
+    "EIGL#"  : "310000",
+    "EIPOV"  : "1",
+    "EIPNT"  : "",
+    "EIFGD"  : "",
+    "EIBGD"  : "",
+    "EIFVC"  : "0.0000",
+    "EIFYLD" : "0",
+    "EIBVC"  : "0.0000",
+    "EIBYLD" : "0",
+    "EICORE" : "0.0000",
+    "EILABR" : "0.0000",
+    "EIOVRH" : "0.0000",
+    "EICLAS" : "02",
+    "EIWGT"  : "0.00",
+    "EIUMST" : "LF"
 }
+]

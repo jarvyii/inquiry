@@ -19,7 +19,7 @@ function Head()
      <!-- Main jumbotron for a  Logo Image about the Company-->
      <div class="container">
        <div class="jumbotron bg-white" id="jumbotron">
-           <img class="img-responsive img-fluid" width="60%" height="52" src="../img/flexiblematerial-bl.png"  alt="Flexible Material">
+           <img class="img-responsive  img-fluid mx-auto d-block" width="60%" height="52" src="../img/flexiblematerial-bl.png"  alt="Flexible Material">
        </div> <!-- /jumbotron -->
      </div> <!-- /Container-->
 <?php
@@ -32,31 +32,50 @@ function TrackingDisplayHead( $OrderNumber, $LineNumber ){
   <input type="hidden" name="ordernumber" id = "ordernumber" value="<?php echo $OrderNumber?>"/>
   <input type="hidden" name="linenumber" id = "linenumber" value="<?php echo $LineNumber?>"/>
   <h3>Tracking Inquiry Display</h3><br>
-  <div class="row">
-       <div id="tracking-label" class="col-2 "></div>
-       <div id="tracking-value" class="col-10"></div>
-  </div>
-  <label>Item:</label><br>
-  <div class="row">
-    <div id="machine" class="col-2">
-      <label>Machine</label>
-    </div>
-    <div id="operator" class="col-2">
-      <label>Operator</label>
-    </div>
-    <div id="qty" class="col-2">
-      <label>Qty</label>
-    </div>
-    <div id="startdate" class="col-2">
-      <label>Sart Date/Time</label><br>
-    </div>
-    <div id="stopdate" class="col-2">
-      <label>Stop Date/Time</label>
-    </div>
-    <div id="elapsedtime" class="col-2">
-      <label>Elapsed Time</label>
-    </div>
-  </div>
+  <label class="label-display flex">Order:</label>
+  <input class="quantity" type="text" disabled value="<?php echo $OrderNumber?>"><br>
+  <label class="label-display flex">Line Number:</label>
+  <input class="quantity" type="text" disabled value="<?php echo $LineNumber?>"><br>
+  <label class="label-display flex">Customer:</label>
+  <input class="quantity"type="text" id="customer" disabled><br>
+  <label class="label-display flex">Order Date:</label>
+  <input class="quantity"type="text" id="orderdate" disabled><br>
+  <label class="label-display flex">Quantity:</label>
+  <input class="quantity"type="text" id="quantity" disabled><br>
+  <label class="label-display flex">Item:</label>
+  <input class="quantity"type="text" id="item" disabled><br>
+  <div class="container row text-center">
+       <div class="col-md-4">
+         <div class="row">
+             <div  id="machine" class="col-6">
+                 <label class="displaycolumn">Machine</label><br>
+              </div>
+            <div id="operator" class="col-6">
+                <label class="displaycolumn">Operator</label><br>
+            </div>
+         </div>
+       </div>
+       <div class="col-md-4">
+         <div class="row">
+            <div id="qty" class="col-6">
+                <label class="displaycolumn">Quantity</label><br>
+            </div>
+            <div id="startdate" class="col-6">
+                 <label class="displaycolumn">Sart Date/Time</label><br>
+            </div>
+          </div>
+        </div>
+     <div class="col-md-4">
+        <div class="row">
+           <div id="stopdate" class="col-6">
+               <label class="displaycolumn">Stop Date/Time</label><br>
+           </div>
+           <div id="elapsedtime" class="col-6">
+               <label class="displaycolumn">Elapsed Time</label><br>
+           </div>
+         </div>
+       </div>
+ </div>
   <label></label><br>
   <script src="../js/inquirydisplay.js"></script>
 </body>
@@ -71,7 +90,82 @@ function TrackingDisplay($OrderNumber, $LineNumber) {
     Head();
     TrackingDisplayHead($OrderNumber, $LineNumber);
 
-}
+} //TrackingDisplay
+
+/**************************************
+Display the Tracking Information
+***************************************/
+function TrackingInformation ($OrderNumber, $LineNumber, $Machine, $Operator) {
+   Head();
+   ?>
+   <div class="trackinginformation">
+      <form name="trackinginformation"  action="inquiry.php" method="post" autocomplete="on">
+        <input type="hidden" name="inquiry" value="TrackingInformation"/>
+        <input type="hidden" name="ordernumber" id = "ordernumber" value="<?php echo $OrderNumber?>"/>
+        <input type="hidden" name="linenumber" id = "linenumber" value="<?php echo $LineNumber?>"/>
+        <h3>Tracking Information</h3><br>
+        <label class="label-information flex">Order/Line Number:</label>
+        <input class="quantity" type="text" disabled value="<?php echo $OrderNumber, " / ", $LineNumber?>"><br>
+        <label class="label-information flex">Machine:</label>
+        <input class="quantity"type="text" disabled value="<?php echo $Machine ?>"><br>
+        <label class="label-information flex">Operator:</label>
+        <input class="quantity" type="text" disabled value="<?php echo $Operator?>"><br>
+        <label class="label-information flex">Customer:</label>
+        <input class="quantity" type="text" id="input-customer" disabled><br>
+        <label class="label-information flex">Order date:</label>
+        <input class="quantity" type="text" id="input-orderdate" disabled><br>
+        <div class="datecolumn">
+            <label class="label-information flex">Order Qty:</label>
+            <input class="quantity" type="text" id="input-orderqty" disabled>
+        </div>
+        <div class="datecolumn">
+             <label class="label-information flex" for="input-ordercmpted" >Qty Completed:</label>
+            <input class="quantity" type="text" id="input-ordercmpted" disabled>
+        </div>
+        <div class="datecolumn">
+            <label class="label-information flex">Qty Needed:</label>
+            <input class="quantity" type="text" id="input-orderneeded" disabled>
+        </div>
+        <br>
+        <label class="label-information flex">Item:</label>
+        <input class="quantity" type="text" id="input-item" disabled><br>
+        <label class="label-information flex">Line Item Comments:</label>
+        <input class="quantity" type="text"  id="icomments" size="30" disabled><br>
+        <label class="label-information flex">Order Comments:</label>
+        <input class="quantity" type="text"  id="ocomments" size="30" disabled><br>
+        <div  class="button-tracking " id="button-main">
+             <button id="submmit" type="button" class="btn button-info button-next">Start <br> Production</button>
+             <button              type="button" class="btn button-info button-next">Enter Qty <br> Produced</button>
+             <button              type="submit" class="btn button-info button-next">Display <br> Tracking</button>
+            <button               type="button" class="btn button-info button-next"><a id="pdftraveler" href="..\pdf\658666.pdf" target="_blank">Display <br> Traveler</a></button>
+
+        </div>
+    </form>
+        <!--
+        <div class="button-tracking row">
+           <div class ="col">
+              <button type="submit" class="btn btn-success ">Start <br> Production</button>
+           </div>
+            <div class ="col">
+              <button type="submit" class="btn button-reset">Enter Qty <br> Produced</button>
+            </div>
+            <div class ="col">
+              <button type="button"  class="btn button-reset">
+                  <a id="pdftraveler" href="..\pdf\658666.pdf" target="_blank">Display <br> Traveler</a></button>
+            </div>
+        </div>
+      -->
+    <?php
+    // tiBody();
+   ?>
+
+  </div>
+   <script src="../js/inquiryinformation.js"></script>
+ </body>
+ </html>
+  <?php
+}//TrackingInformation ()
+
 /*******************************************************
 Get this Variable  $BarCode, $Machine, $Operator from Operator to be use
 ********************************************************/
@@ -80,15 +174,17 @@ function TrackingInquiry( $BarCode, $Machine, $Operator){
   ?>
   <form name="trackinginquiry"  action="inquiry.php" method="post" autocomplete="on">
         <input type="hidden" name="inquiry" value="TrackingInquiry"/>
+        <input type="hidden" name="machine" id = "machine" value="<?php echo $Machine?>"/>
+        <input type="hidden" name="operator" id = "operator" value="<?php echo $Operator?>"/>
         <div class="tracking">
           <h3>Tracking Inquiry</h3><br>
           <label class="label-inquiry" for="ordernumber">Order Number:</label>
-          <input class="input-tracking" type="text" name= "ordernumber"  id="ordernumber" size = "15" placeholder="Enter Order Number" autofocus><br>
+          <input class="input-tracking" type="text" name= "ordernumber"  id="ordernumber" placeholder="Enter Order Number" autofocus><br>
           <label class="label-inquiry" for="linenumber">Line Number:</label>
           <input class="input-tracking" type="number" name = "linenumber" id="linenumber"  placeholder="Enter Line Number" required><br>
           <div class="button-tracking row">
              <div class ="col">
-                <button type="submit" class="btn btn-success ">Submit</button>
+                <button type="submit" class="btn button-next">Next</button>
              </div>
               <div class ="col">
                 <button type="reset" class="btn button-reset">Reset</button>
@@ -117,7 +213,7 @@ function Tracking($UserName) {
           <input class="input-tracking" type="text" name = "operator" id="operator" size ="15" placeholder="Operator" required><br>
           <div class="row button-tracking">
             <div class="col">
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button type="submit" class="btn button-next">Next</button>
             </div>
             <div class="col">
               <button type="reset" class="btn button-reset">Reset</button>
@@ -148,6 +244,7 @@ function InquiryControl() {
 </div>
   <?php
 }
+
 if (isset($_POST['inquiry'])) {
   switch($_POST['inquiry']){
     case 'Login': tracking($_POST['username']);
@@ -157,8 +254,17 @@ if (isset($_POST['inquiry'])) {
     case 'TrackingInquiry': if(isset($_POST['ordernumber']) and isset($_POST['linenumber'])){
                               $OrderNumber = $_POST['ordernumber'];
                               $LineNumber = $_POST['linenumber'];
-                              TrackingDisplay( $OrderNumber,$LineNumber);
+                              $Machine = $_POST['machine'];
+                              $Operator = $_POST['operator'];
+                              TrackingInformation( $OrderNumber,$LineNumber, $Machine, $Operator);
+                              //TrackingDisplay( $OrderNumber,$LineNumber);
                             }
+                            break;
+    case 'TrackingInformation':if(isset($_POST['ordernumber']) and isset($_POST['linenumber'])){
+                              $OrderNumber = $_POST['ordernumber'];
+                              $LineNumber = $_POST['linenumber'];
+                              TrackingDisplay( $OrderNumber,$LineNumber);
+                             }
                             break;
   }
 }

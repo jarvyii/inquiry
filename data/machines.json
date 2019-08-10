@@ -1,0 +1,38 @@
+[
+ {
+   "machineid": "01",
+   "machname" : "End Trim"
+ },
+ {
+    "machineid": "02",
+    "machname" : "Glue Spreader"   
+ },
+ {
+    "machineid": "03",
+    "machname" : "Itale Press"   
+ },
+ {
+    "machineid": "04",
+    "machname" : "Glue Spreader"  
+ },
+ {
+    "machineid": "05",
+    "machname" : "Sennerskov Press" 
+ },
+ {
+    "machineid": "06",
+    "machname" : "Side Trim"   
+ },
+ {
+    "machineid": "08",
+    "machname" : "Splicer 1"   
+ },
+ {
+    "machineid": "09",
+    "machname" : "Splicer 2"   
+ },
+ {
+    "machineid": "10",
+    "machname" : "Splicer 3"   
+ }
+]

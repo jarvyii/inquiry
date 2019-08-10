@@ -1,4 +1,27 @@
 $(document).ready(function(){
+  // Add Value to the Machine Input in the Tracking Form
+ function AddMachines(){
+       var jsonURL ="../data/machines.json";
+      var usersFormat ={
+                        format: "json"
+                       };
+        // /FUNCTION getHead()
+       function getHead(Data) {
+            $.each(Data,function(i, Order) {
+                $('#machine').append($('<option>',
+                  {
+                     value: Order["machname"],
+                     text : Order["machname"]
+                 }));
+
+                
+              })
+          }  //  \FUNCTION getHead()
+       $.getJSON(jsonURL, usersFormat,  getHead );
+ 
+      return false;
+    
+  } //function AddMachines()
   
 /**********************************************************************************
  Check valid the User and password introduced in Login Form. And setup all INFO in the System.
@@ -20,12 +43,13 @@ $('#buttonlogin').click(function () {//function validate() {
     /* This code is to validate the User INformation*/
     //getUser(username, password);
     // Execute the Bar Code and Machine reading
-  }); // \FUNCTION  $('#buttonlogin').click(function ())
+  }) // \FUNCTION  $('#buttonlogin').click(function ())
+  
   /************************************************************************
   Main Block
   ***********************************************************************/
 
   //  document.getElementById("loginform").style.display = "block";
   //  document.getElementById("input-ordercode").style.display = "none";
-
-})
+  AddMachines(); // Add value element to the SELECT Machine
+});

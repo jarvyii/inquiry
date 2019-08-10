@@ -42,7 +42,7 @@ body {
 .button-next,
 .button-reset {
   background-color: #8e2938;
-  color:#051233;
+  color: white;
 }
 .button-info{
   padding: 0px 8px;
@@ -73,7 +73,7 @@ body {
     width: 95px;
   }
   #pdftraveler{
-    color:#051233;
+    color:white;
   }
   .label-historic{
     background-color:	#2E406E;
@@ -88,13 +88,22 @@ body {
     display:inline-block;
   }
 /* Small media movil */
+@media ( min-width:320px ){
+  #button-main {
+  margin-top:1em;
+   }
+   body {
+  font-size: 10px;
+   }
+
+}
 @media ( min-width:358px ){
   #button-main {
   margin-top:1em;
-}
-body {
+   }
+   body {
   font-size: 10px;
-}
+   }
 
 }
 /* Small media movil */
@@ -127,4 +136,4 @@ body {
     font-size: 16px;
   }
   }
-}
+

@@ -8,13 +8,15 @@ function Head()
    <title>Inquiry System</title>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <script src="//printjs-4de6.kxcdn.com/print.min.js"></script>
+   <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css"> 
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
    <link rel="stylesheet" href="../css/inquiry.css">
-
-   </head>
+  
+    </head>
    <body id="home">
      <!-- Main jumbotron for a  Logo Image about the Company-->
      <div class="container">
@@ -134,11 +136,11 @@ function TrackingInformation ($OrderNumber, $LineNumber, $Machine, $Operator) {
         <label class="label-information flex">Order Comments:</label>
         <input class="quantity" type="text"  id="ocomments" size="30" disabled><br>
         <div  class="button-tracking " id="button-main">
-             <button id="submmit" type="button" class="btn button-info button-next">Start <br> Production</button>
-             <button              type="button" class="btn button-info button-next">Enter Qty <br> Produced</button>
-             <button              type="submit" class="btn button-info button-next">Display <br> Tracking</button>
-            <button               type="button" class="btn button-info button-next"><a id="pdftraveler" href="..\pdf\658666.pdf" target="_blank">Display <br> Traveler</a></button>
-
+             <button id="submmit"  type="button" class="btn button-info button-next">Start <br> Production</button>
+             <button               type="button" class="btn button-info button-next">Enter Qty <br> Produced</button>
+             <button               type="submit" class="btn button-info button-next">Display <br> Tracking</button>
+             <button               type="button" class="btn button-info button-next"><a id="pdftraveler" href="" target="_blank">Display <br> Traveler</a></button>
+             <button id="printpdf" type="button" class="btn button-info button-next">Print <br>Traveler</button>
         </div>
     </form>
         <!--
@@ -208,7 +210,8 @@ function Tracking($UserName) {
           <label class="label-tracking" for="barcode">Scan Bar Code:</label>
           <input class="input-tracking" type="text" name= "barcode"  id="barcode" size = "15" placeholder="Bar Code" autofocus><br>
           <label class="label-tracking" for="machine">Machine:</label>
-          <input class="input-tracking" type="text" name="machine"  id="machine" size="15" placeholder="Machine"><br>
+          <select name="machine" id="machine" required>
+          </select><br> 
           <label class="label-tracking" for="operator">Operator:</label>
           <input class="input-tracking" type="text" name = "operator" id="operator" size ="15" placeholder="Operator" required><br>
           <div class="row button-tracking">
@@ -221,6 +224,7 @@ function Tracking($UserName) {
           </div>
         </div>
   </form>
+  <script src="../js/inquiry.js"></script>
 </body>
 </html>
   <?php

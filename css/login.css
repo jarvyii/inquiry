@@ -84,4 +84,33 @@ span.psw {
     .cancelbtn {
         width: 100%;
     }
+    .logininput {
+        margin-left: 3%;
+      }
 }
+@media ( min-width:320px ){
+    .logininput {
+        margin-left: 10%;
+      }
+    #loginform {
+        width:80%;
+        margin-left: 10%;
+    }
+      
+}
+@media (min-width:700px) {
+       #loginform {
+            width:30%;
+            margin-left: 35%;
+        }
+}
+      
+      /* Layout  for 9 columns in case of big screen */
+      
+ @media (min-width:2000px) {
+        #loginform {
+            width:20%;
+            margin-left: 40%;
+        }
+}
+

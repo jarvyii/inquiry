@@ -79,6 +79,11 @@ function TrackingDisplayHead( $OrderNumber, $LineNumber ){
        </div>
  </div>
   <label></label><br>
+  <div class="footer">
+           <!-- Copyright -->
+            &copy; 2019 Inquiry Sysemt 1.0 <a id="user-nav" href="//www.minimaxinfo.com" target="_blank"> &amp; <bold>mini-MAX Information Systems, Inc.</bold></a>
+           <!-- Copyright -->
+      </footer>
   <script src="../js/inquirydisplay.js"></script>
 </body>
 </html>
@@ -143,25 +148,17 @@ function TrackingInformation ($OrderNumber, $LineNumber, $Machine, $Operator) {
              <button id="printpdf" type="button" class="btn button-info button-next">Print <br>Traveler</button>
         </div>
     </form>
-        <!--
-        <div class="button-tracking row">
-           <div class ="col">
-              <button type="submit" class="btn btn-success ">Start <br> Production</button>
-           </div>
-            <div class ="col">
-              <button type="submit" class="btn button-reset">Enter Qty <br> Produced</button>
-            </div>
-            <div class ="col">
-              <button type="button"  class="btn button-reset">
-                  <a id="pdftraveler" href="..\pdf\658666.pdf" target="_blank">Display <br> Traveler</a></button>
-            </div>
-        </div>
-      -->
+       
     <?php
     // tiBody();
    ?>
 
   </div>
+  <div class="footer">
+           <!-- Copyright -->
+            &copy; 2019 Inquiry Sysemt 1.0 <a id="user-nav" href="//www.minimaxinfo.com" target="_blank"> &amp; <bold>mini-MAX Information Systems, Inc.</bold></a>
+           <!-- Copyright -->
+  </footer>
    <script src="../js/inquiryinformation.js"></script>
  </body>
  </html>
@@ -193,7 +190,13 @@ function TrackingInquiry( $BarCode, $Machine, $Operator){
               </div>
           </div>
         </div>
-  </form>
+  </form> 
+  <div class="footer">
+       <!-- Copyright -->
+      &copy; 2019 Inquiry Sysemt 1.0 <a id="user-nav" href="//www.minimaxinfo.com" target="_blank"> &amp; <bold>mini-MAX Information Systems, Inc.</bold></a>
+      <!-- Copyright -->
+  </footer>
+
   <script src="../js/inquiry.js"></script>
 </body>
 </html>
@@ -224,6 +227,11 @@ function Tracking($UserName) {
           </div>
         </div>
   </form>
+  <div class="footer">
+           <!-- Copyright -->
+            &copy; 2019 Inquiry Sysemt 1.0 <a id="user-nav" href="//www.minimaxinfo.com" target="_blank"> &amp; <bold>mini-MAX Information Systems, Inc.</bold></a>
+           <!-- Copyright -->
+      </footer>
   <script src="../js/inquiry.js"></script>
 </body>
 </html>

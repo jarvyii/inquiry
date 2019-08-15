@@ -3,6 +3,11 @@ body {
     background-repeat:round;  preview: background-color:lightblue; */
     background-color: white;
     font-size: 16px;
+    height:100%;
+    width:100%;
+  }
+  html{
+    height:100%;
   }
 .jumbotron {
     height: 145px;
@@ -87,6 +92,18 @@ body {
   .datecolumn{
     display:inline-block;
   }
+  .footer {
+    background-color: #8e2938;
+    color: white;
+    text-align: center;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+  }
+  a {
+    color: white;
+  }
 /* Small media movil */
 @media ( min-width:320px ){
   #button-main {
@@ -135,5 +152,5 @@ body {
   body {
     font-size: 16px;
   }
-  }
+}
 

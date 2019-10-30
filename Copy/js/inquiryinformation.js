@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
   /********************************
-      Set the Header  Content of the Tracking Information screen
+      Set the Body  Content of the Tracking Information screen
       seTIBody()
   ************************************/
   function setOrderHeader( ){
@@ -26,10 +26,7 @@ $(document).ready(function(){
 
         return false;
      }   // \FUNCTION setOrderHeader()
-  /***********************************
-         function setOrderItem( )
-  ***********************************/
-  function setOrderItem( ){
+     function setOrderItem( ){
          var jsonURL ="../data/eim.json";
          var usersFormat ={
                            format: "json"
@@ -67,21 +64,9 @@ $(document).ready(function(){
      nameTraveler = document.getElementById("ordernumber").value;
      document.getElementById("pdftraveler").href = "../pdf/"+nameTraveler+".pdf";
   } // \FUNCTION TrackingInformation()
-
-   /**********************
-   * Print the PDF to the default Printer
-   */
-  $('#printpdf').click(function () {
-     var pdfName = document.getElementById("ordernumber").value+'.pdf';
-    printJS({printable:'/pdf/'+pdfName, type:'pdf', showModal:true})
-  })// /('#printpdf').click(function())
-
   /************************************************************************
   Main Block
 ***********************************************************************/
 
 TrackingInformation();
-//Asign the physical URL of the specific pdf Traveler to the Button
-var pdfNameLink = '../pdf/'+document.getElementById("ordernumber").value+'.pdf';
-document.getElementById("pdftraveler").href = pdfNameLink;
 }); // End ready

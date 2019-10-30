@@ -23,7 +23,7 @@
       </div>
       <div class="container">
             <!-- Login form. It validate the User and password with the file USERS.JSON -->
-            <form id="loginform" method="post" action="php/inquiry.php" runat="server">
+            <form id="loginform" method="post" action="php/login.php" runat="server">
                   <input type="hidden" name="inquiry" value="Login"/>
                   <div class="imgcontainer">
                       <img src="img\login.jpg" alt="Login now" class="avatar">
@@ -47,9 +47,9 @@
       </div>      
       <div class="footer">
            <!-- Copyright -->
-            &copy; 2019 Inquiry Sysemt 1.0 <a id="user-nav" href="//www.minimaxinfo.com" target="_blank"> &amp; <bold>mini-MAX Information Systems, Inc.</bold></a>
+            &copy; 2019 Inquiry System 1.0 &amp; <a id="user-nav" href="//www.minimaxinfo.com" target="_blank">mini-MAX Information Systems, Inc.</a>
            <!-- Copyright -->
-      </footer>
+      </div>
     <script src="js/inquiry.js"></script>
   </body>
 </html>

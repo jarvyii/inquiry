@@ -1,5 +1,29 @@
 <?php
-require_once 'Views/ViewInquiry.php';
+function Head()
+ { ?>
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+   <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+   <title>Inquiry System</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="../css/inquiry.css">
+
+   </head>
+   <body id="home">
+     <!-- Main jumbotron for a  Logo Image about the Company-->
+     <div class="container">
+       <div class="jumbotron bg-white" id="jumbotron">
+           <img class="img-responsive  img-fluid mx-auto d-block" width="60%" height="52" src="../img/flexiblematerial-bl.png"  alt="Flexible Material">
+       </div> <!-- /jumbotron -->
+     </div> <!-- /Container-->
+<?php
+}
 /*************************************************
 Display the Header of the Tracking and the Column Header for the INformation
 **************************************************/
@@ -53,9 +77,11 @@ function TrackingDisplayHead( $OrderNumber, $LineNumber ){
        </div>
  </div>
   <label></label><br>
-   <?php
-  Foot();
- }
+  <script src="../js/inquirydisplay.js"></script>
+</body>
+</html>
+ <?php
+}
 /******************************************************
 Display all info using the Variable:
 $BarCode, $OrderCode, $LineNumber
@@ -73,7 +99,7 @@ function TrackingInformation ($OrderNumber, $LineNumber, $Machine, $Operator) {
    Head();
    ?>
    <div class="trackinginformation">
-      <form name="trackinginformation"  action="ControllerInquiry.php" method="post" autocomplete="on">
+      <form name="trackinginformation"  action="inquiry.php" method="post" autocomplete="on">
         <input type="hidden" name="inquiry" value="TrackingInformation"/>
         <input type="hidden" name="ordernumber" id = "ordernumber" value="<?php echo $OrderNumber?>"/>
         <input type="hidden" name="linenumber" id = "linenumber" value="<?php echo $LineNumber?>"/>
@@ -108,22 +134,36 @@ function TrackingInformation ($OrderNumber, $LineNumber, $Machine, $Operator) {
         <label class="label-information flex">Order Comments:</label>
         <input class="quantity" type="text"  id="ocomments" size="30" disabled><br>
         <div  class="button-tracking " id="button-main">
-             <button id="submmit"  type="button" class="btn button-info button-next">Start <br> Production</button>
-             <button               type="button" class="btn button-info button-next">Enter Qty <br> Produced</button>
-             <button               type="submit" class="btn button-info button-next">Display <br> Tracking</button>
-             <button               type="button" class="btn button-info button-next"><a id="pdftraveler" href="" target="_blank">Display <br> Traveler</a></button>
-             <button id="printpdf" type="button" class="btn button-info button-next">Print <br>Traveler</button>
+             <button id="submmit" type="button" class="btn button-info button-next">Start <br> Production</button>
+             <button              type="button" class="btn button-info button-next">Enter Qty <br> Produced</button>
+             <button              type="submit" class="btn button-info button-next">Display <br> Tracking</button>
+            <button               type="button" class="btn button-info button-next"><a id="pdftraveler" href="..\pdf\658666.pdf" target="_blank">Display <br> Traveler</a></button>
+
         </div>
     </form>
-       
+        <!--
+        <div class="button-tracking row">
+           <div class ="col">
+              <button type="submit" class="btn btn-success ">Start <br> Production</button>
+           </div>
+            <div class ="col">
+              <button type="submit" class="btn button-reset">Enter Qty <br> Produced</button>
+            </div>
+            <div class ="col">
+              <button type="button"  class="btn button-reset">
+                  <a id="pdftraveler" href="..\pdf\658666.pdf" target="_blank">Display <br> Traveler</a></button>
+            </div>
+        </div>
+      -->
     <?php
     // tiBody();
    ?>
 
   </div>
-  <script src="../js/inquiryinformation.js"></script>
-   <?php
-  Foot();
+   <script src="../js/inquiryinformation.js"></script>
+ </body>
+ </html>
+  <?php
 }//TrackingInformation ()
 
 /*******************************************************
@@ -132,7 +172,7 @@ Get this Variable  $BarCode, $Machine, $Operator from Operator to be use
 function TrackingInquiry( $BarCode, $Machine, $Operator){
   Head();
   ?>
-  <form name="trackinginquiry"  action="ControllerInquiry.php" method="post" autocomplete="on">
+  <form name="trackinginquiry"  action="inquiry.php" method="post" autocomplete="on">
         <input type="hidden" name="inquiry" value="TrackingInquiry"/>
         <input type="hidden" name="machine" id = "machine" value="<?php echo $Machine?>"/>
         <input type="hidden" name="operator" id = "operator" value="<?php echo $Operator?>"/>
@@ -151,16 +191,16 @@ function TrackingInquiry( $BarCode, $Machine, $Operator){
               </div>
           </div>
         </div>
-  </form><?php
-  Foot();
+  </form>
+  <script src="../js/inquiry.js"></script>
+</body>
+</html>
+<?php
 }
-/**************************************
-       function Tracking($UserName)
-***************************************/
 function Tracking($UserName) {
   Head();
   ?>
-  <form name="tracking"  action="ControllerInquiry.php" method="post" autocomplete="on">
+  <form name="tracking"  action="inquiry.php" method="post" autocomplete="on">
         <input type="hidden" name="inquiry" value="Tracking"/>
         <div class="tracking">
           <h5 class="showuser">User: <?php echo $UserName?></h5><br>
@@ -168,8 +208,7 @@ function Tracking($UserName) {
           <label class="label-tracking" for="barcode">Scan Bar Code:</label>
           <input class="input-tracking" type="text" name= "barcode"  id="barcode" size = "15" placeholder="Bar Code" autofocus><br>
           <label class="label-tracking" for="machine">Machine:</label>
-          <select name="machine" id="machine" required>
-          </select><br> 
+          <input class="input-tracking" type="text" name="machine"  id="machine" size="15" placeholder="Machine"><br>
           <label class="label-tracking" for="operator">Operator:</label>
           <input class="input-tracking" type="text" name = "operator" id="operator" size ="15" placeholder="Operator" required><br>
           <div class="row button-tracking">
@@ -182,12 +221,10 @@ function Tracking($UserName) {
           </div>
         </div>
   </form>
+</body>
+</html>
   <?php
-  Foot();
 }
-/**********************************
-         function InquiryControl()
-**********************************/
 function InquiryControl() {
   ?>
   <div class="inquiry">
@@ -208,10 +245,6 @@ function InquiryControl() {
   <?php
 }
 
-/********************************
-     Main Block
-*********************************/
-/*
 if (isset($_POST['inquiry'])) {
   switch($_POST['inquiry']){
     case 'Login': tracking($_POST['username']);
@@ -235,5 +268,5 @@ if (isset($_POST['inquiry'])) {
                             break;
   }
 }
-*/
+
 ?>

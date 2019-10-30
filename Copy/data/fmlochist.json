@@ -1,0 +1,92 @@
+[
+    {
+        "LHORD"  : "658666",
+        "LHLIN"  : "1",
+        "LHMACH" : "MACH01",
+        "LHOPER" : "CINDY",
+        "LHQTY"  : "1",
+        "LHSTRDTTIM"  : "2019-07-22-08.01.00.000000",
+        "LHSTPDTTIM"  : "2019-07-22-08.15.00.000000"
+    },
+    {
+        "LHORD"  : "658666",
+        "LHLIN"  : "1",
+        "LHMACH" : "MACH02",
+        "LHOPER" : "FRED",
+        "LHQTY"  : "1",
+        "LHSTRDTTIM"  : "2019-07-22-08.20.00.000000",
+        "LHSTPDTTIM"  : "2019-07-22-08.45.00.000000"
+    },
+    {
+        "LHORD"  : "658666",
+        "LHLIN"  : "1",
+        "LHMACH" : "MACH03",
+        "LHOPER" : "SUSIE",
+        "LHQTY"  : "1",
+        "LHSTRDTTIM"  : "2019-07-22-08.50.00.000000",
+        "LHSTPDTTIM"  : "2019-07-22-09.30.00.000000"
+    },
+    {
+        "LHORD"  : "658666",
+        "LHLIN"  : "1",
+        "LHMACH" : "MACH04",
+        "LHOPER" : "MARK",
+        "LHQTY"  : "1",
+        "LHSTRDTTIM"  : "2019-07-22-09.35.00.000000",
+        "LHSTPDTTIM"  : "2019-07-22-09.57.00.000000"
+    },
+    {
+        "LHORD"  : "658666",
+        "LHLIN"  : "1",
+        "LHMACH" : "MACH05",
+        "LHOPER" : "MARY",
+        "LHQTY"  : "1",
+        "LHSTRDTTIM"  : "2019-07-22-10.00.00.000000",
+        "LHSTPDTTIM"  : "2019-07-22-10.20.00.000000"
+    },
+    {
+        "LHORD"  : "658666",
+        "LHLIN"  : "1",
+        "LHMACH" : "MACH06",
+        "LHOPER" : "TOM",
+        "LHQTY"  : "1",
+        "LHSTRDTTIM"  : "2019-07-22-10.30.00.000000",
+        "LHSTPDTTIM"  : "2019-07-22-10.45.00.000000"
+    },
+    {
+        "LHORD"  : "658666",
+        "LHLIN"  : "1",
+        "LHMACH" : "MACH07",
+        "LHOPER" : "GEORGE",
+        "LHQTY"  : "1",
+        "LHSTRDTTIM"  : "2019-07-22-10.50.00.000000",
+        "LHSTPDTTIM"  : "2019-07-22-11.00.00.000000"
+    },
+    {
+        "LHORD"  : "658666",
+        "LHLIN"  : "1",
+        "LHMACH" : "MACH08",
+        "LHOPER" : "LUCY",
+        "LHQTY"  : "1",
+        "LHSTRDTTIM"  : "2019-07-22-11.05.00.000000",
+        "LHSTPDTTIM"  : "2019-07-22-11.55.00.000000"
+    },
+    {
+        "LHORD"  : "658666",
+        "LHLIN"  : "1",
+        "LHMACH" : "MACH09",
+        "LHOPER" : "DOUG",
+        "LHQTY"  : "1",
+        "LHSTRDTTIM"  : "2019-07-22-13.00.00.000000",
+        "LHSTPDTTIM"  : "2019-07-22-13.45.00.000000"
+    },
+    {
+        "LHORD"  : "658666",
+        "LHLIN"  : "1",
+        "LHMACH" : "MACH10",
+        "LHOPER" : "TERRY",
+        "LHQTY"  : "1",
+        "LHSTRDTTIM"  : "2019-07-22-13.55.00.000000",
+        "LHSTPDTTIM"  : "2019-07-22-14.15.00.000000"
+    }
+  ]

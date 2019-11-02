@@ -1,38 +1,34 @@
 [
  {
-   "machineid": "01",
-   "machname" : "End Trim"
+   "machineid": "MACH01",
+   "machdesc" : "End Trim"
  },
  {
-    "machineid": "02",
-    "machname" : "Glue Spreader"   
+    "machineid": "MACH02",
+    "machdesc" : "Glue Spreader"   
  },
  {
-    "machineid": "03",
-    "machname" : "Itale Press"   
+    "machineid": "MACH03",
+    "machdesc" : "Itale Press"   
+ },
+  {
+    "machineid": "MACH04",
+    "machdesc" : "Sennerskov Press" 
  },
  {
-    "machineid": "04",
-    "machname" : "Glue Spreader"  
+    "machineid": "MACH05",
+    "machdesc" : "Side Trim"   
  },
  {
-    "machineid": "05",
-    "machname" : "Sennerskov Press" 
+    "machineid": "MACH06",
+    "machdesc" : "Splicer 1"   
  },
  {
-    "machineid": "06",
-    "machname" : "Side Trim"   
+    "machineid": "MACH07",
+    "machdesc" : "Splicer 2"   
  },
  {
-    "machineid": "08",
-    "machname" : "Splicer 1"   
- },
- {
-    "machineid": "09",
-    "machname" : "Splicer 2"   
- },
- {
-    "machineid": "10",
-    "machname" : "Splicer 3"   
+    "machineid": "MACH08",
+    "machdesc" : "Splicer 3"   
  }
 ]

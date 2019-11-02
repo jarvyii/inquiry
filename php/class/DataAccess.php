@@ -6,8 +6,9 @@ class DataAccess {
 	private $user_password = "";
 	private $os = "i5";
 	protected $user, $registered, $server, $FileHandler;
-	private $pass, $hash, $tkitConn, $conn, $config;
-	
+	private $pass, $hash, $tkitConn, $config;
+  
+  private $conn;  //Database connector	
 
 	function __construct( $user=false, $pass=false ) {
 		$this->user 	= ( isset( $user ) && $user != '' && $user != false ? $user: false );
@@ -15,6 +16,7 @@ class DataAccess {
 		$this->server	= 'C702B9F0'; // Change this based of AS400 System value
 		$this->debug 	= array();
 		$this->error 	= false;
+		$this->connect();
 	}
 
 	/************************************************
@@ -22,71 +24,60 @@ class DataAccess {
 	************************************************/
 	function connect()
 	{ 	
-	  $config =  array(   'dbname'   => '*LOCAL',
-				                      'username' => '',
-				                      'password' => '',
-				                      'os'=>'i5',
-				                      'driver_options'=> array( 
-				                      													"i5_commit" =>DB2_I5_TXN_READ_UNCOMMITTED,
-				                                                "autocommit"=>DB2_AUTOCOMMIT_OFF,
-				                                              ) );
+	   $config = $_config = array(
+                                  'dbname' => null,
+                                  'username' => null,
+                                  'password' => null,
+                                  'host' => 'localhost',
+                                  'port' => '50000',
+                                  'protocol' => 'TCPIP',
+                                  'persistent' => false,
+                                  'os' => 'i5',
+                                  'schema' => 'FLEXWEB' 
+                                  ) ;
+    $this -> conn = new Zend_Db_Adapter_Db2( $config );
 
-  	$conn = new Zend_Db_Adapter_Db2( $config );
+		if ( !$this ->conn)  {
+			   echo "Connecting error";
+			  return false;
+			 }
+		//echo "<br>Thx God. We are connected<br>";
 
-		if ( !$conn)  return false;
-		echo "<br>Thx God. We are connected<br>";
-		$this->openTKitConnect();
-		    
+    //Only to Test
+   /* $data = $this ->conn->listTables();
+    var_dump($data);
+    print($data);
+    $size = count($data);
+    echo $size;
+    for( $i=0; $i<$size; $i++)
+       echo "<BR>", $data[$i];
+    $db->query("select * from EIM;");
+    $Data = $this ->conn ->query('SELECT * FROM FLEXWEB.EIM');
+    var_dump($Data);
+    $row = $this ->conn->fetchRow('SELECT EIORD FROM FLEXWEB.EIM');
+    var_dump($row);
+   
+   $db = new DataAccess($user, $pass);
+   $db->connect();
+
+	tracking($user);
+		 */   
 	} 
 
-	/**************************************************
-		   private function openTKitConnect()
-	**************************************************/
-	private function openTKitConnect()
-	{ 
-		
-	   /************************* DB Connection *******************************/ 
-	   //       Setup Database Connection to Login to AS/400 
-		$db = db2_connect( $this->server, $this->user, $this->pass, array( 'i5_naming' => DB2_I5_NAMING_ON ) );  
+ function getOrderHeader($OrderNumber, $LineNumber, $Machine, $Operator) {
+   // $Data = $this ->conn->query('SELECT 'EHCT#', EHORDT FROM FLEXWEB.EHM');
+    //var_dump($Data);
+    $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM FLEXWEB.EHM WHERE EHORD=?', $OrderNumber);
+    return $Data;
 
-		var_dump($db);
-		$prop = get_object_vars($db);
-		print_r($prop);
-		/*
-		foreach ($db as $field){
-			print "<br>".$field;
-		}
-*/
+ }
+ function getOrderItem($OrderNumber, $LineNumber, $Machine, $Operator) {
+   // $Data = $this ->conn->query('SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM FLEXWEB.EIM');
+    //var_dump($Data);
+    $Data = $this->conn->fetchRow('SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM FLEXWEB.EIM WHERE EIORD=?', $OrderNumber);
+    return $Data;
 
-		try 
-		{
-       // Connect to toolkit using existing DB2 conn
-      $this->tkitConn = ToolkitService::getInstance( $db, DB2_I5_NAMING_ON );
-		} 
-		catch (Exception $e) 
-		{
-	    switch ( $e->getCode() ) 
-	    {
-            // "Authorization failure on distributed database connection attempt"
-	        case 8001: // Usually means a wrong DB2 user or password		            
-	            $this->debug['ERROR'][] = 'Could not connect due to wrong user or password.';
-	            break;
-	        case 42705:
-	            $this->debug['ERROR'][] = 'Database not found. Please check your connection to DB.';
-	            break; 
-	        default:
-	            $this->debug['ERROR'][] = 'Could not connect. Error: ' . $e->getCode() . ' ' . $e->getMessage();
-	            break;
-	    }
-			$this->catchError( 'log', $e, $this, false );
-		}
-		if ( !$this->tkitConn )
-		{ 
-			$this->error = true;
-			$this->debug['ERROR'][] = "Connection to main database could be established. Toolkit Services was not instantiated. Please check dependencies";
-			return false;
-		}		
-		return true;
-	} 
+ }
+	
 }
 ?>

@@ -4,7 +4,7 @@ $(document).ready(function(){
       Set the Header  Content of the Tracking Information screen
       seTIBody()
   ************************************/
-  function setOrderHeader( ){
+  function setOrderHeader( ){ 
       var jsonURL ="../data/ehm.json";
       var usersFormat ={
                         format: "json"
@@ -24,7 +24,7 @@ $(document).ready(function(){
 
         $.getJSON(jsonURL, usersFormat,  getHead );
 
-        return false;
+        return false; 
      }   // \FUNCTION setOrderHeader()
   /***********************************
          function setOrderItem( )
@@ -62,8 +62,8 @@ $(document).ready(function(){
   FUNCTION TrackingInformation()().
   *********************************************************************************/
   function TrackingInformation(){
-     setOrderHeader();
-     setOrderItem();
+     //setOrderHeader();
+     //setOrderItem();
      nameTraveler = document.getElementById("ordernumber").value;
      document.getElementById("pdftraveler").href = "../pdf/"+nameTraveler+".pdf";
   } // \FUNCTION TrackingInformation()

@@ -10,8 +10,8 @@ $(document).ready(function(){
             $.each(Data,function(i, Order) {
                 $('#machine').append($('<option>',
                   {
-                     value: Order["machname"],
-                     text : Order["machname"]
+                     value: Order["machineid"],
+                     text : Order["machdesc"]
                  }));
 
                 

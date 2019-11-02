@@ -40,53 +40,11 @@ if ( !$Login->error )
 	    echo "<br>Going";
 	*****************************************/
 
-   echo "Solo para probar";
-  // $db = db2_pconnect('', $user, $pass, array('i5_naming' => DB2_I5_NAMING_ON));
-
-    $config =  array(   'dbname'   => "flexweb",
-                              'username' => "jareynaldo",
-                              'password' => "Catalijo3",
-                              'os'=>'i5',
-                              'driver_options'=> array( 
-                                                        "i5_commit" =>DB2_I5_TXN_READ_UNCOMMITTED,
-                                                        "autocommit"=>DB2_AUTOCOMMIT_OFF,
-                                                      ) );
-    $config = $_config = array(
-                                  'dbname' => null,
-                                  'username' => null,
-                                  'password' => null,
-                                  'host' => 'localhost',
-                                  'port' => '50000',
-                                  'protocol' => 'TCPIP',
-                                  'persistent' => false,
-                                  'os' => 'i5',
-                                  'schema' => 'FLEXWEB' 
-                                  ) ;
-    $db = new Zend_Db_Adapter_Db2( $config );
-   // $db = db2_connect("FLEXWEB", "jareynaldo", "Catalijo3");
-
-   if ($db) {
-     echo "Connected";
-     //var_dump($db);
-     $data = $db->listTables();
-     var_dump($data);
-     //print($data);
-     $size = count($data);
-     echo $size;
-     for( $i=0; $i<$size; $i++)
-       echo "<BR>", $data[$i];
-     //$db->query("select * from EIM;");
-     $Data = $db ->query('SELECT * FROM FLEXWEB.EIM');
-     //var_dump($Data);
-     $row = $db->fetchRow('SELECT EIORD FROM FLEXWEB.EIM');
-     var_dump($row);
-   }
-    else
-      echo "Connecting error";
+   
    //$db = new DataAccess($user, $pass);
    //$db->connect();
 
-	//tracking($user);
+	tracking($user);
 
 }// end connection test
 else{

@@ -5,26 +5,53 @@ $(document).ready(function(){
  FUNCTION setOrderHeader()
 ***************************************************************/
 function setOrderHeader( ){
-    var jsonURL ="../data/ehm.json";
-    var usersFormat ={
-                      format: "json"
-                     };
-      // /FUNCTION getHead()
-     function getHead(Data) {
-          $.each(Data,function(i, Order) {
-               if (document.getElementById("ordernumber").value !=Order["EHORD"]){
-                  // Return until find the correct order number
-                 return false;
-                }
-               document.getElementById("customer").value =Order["EHCT#"];
-               document.getElementById("orderdate").value =Order["EHORDT"];
-               return false;
-            })
-        }  //  \FUNCTION getHead()
+  /********************************************************  
 
-            $.getJSON(jsonURL, usersFormat,  getHead );
+    =====>  This is for JavaScript
 
-      return false;
+              Query to access the data in JSON Format
+                var jsonURL ="../data/ehm.json";
+                var usersFormat ={
+                                  format: "json"
+                                 };
+                  // /FUNCTION getHead()
+                 function getHead(Data) {
+                      $.each(Data,function(i, Order) {
+                           if (document.getElementById("ordernumber").value !=Order["EHORD"]){
+                              // Return until find the correct order number
+                             return false;
+                            }
+                           document.getElementById("customer").value =Order["EHCT#"];
+                           document.getElementById("orderdate").value =Order["EHORDT"];
+                           return false;
+                        })
+                    }  //  \FUNCTION getHead()
+
+                        $.getJSON(jsonURL, usersFormat,  getHead );
+     ******************************************/
+
+     /*************************************
+
+       ====> This is for PHP
+
+         
+      if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET","getuser.php?q="+str,true);
+        xmlhttp.send();
+
+             return false;
+       ****************************************************/
    }   // \FUNCTION setOrderHeader()
 
    /**************************************************************

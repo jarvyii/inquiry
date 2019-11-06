@@ -21,7 +21,21 @@ if (isset($_POST['inquiry'])) {
                               TrackingDisplay( $OrderNumber,$LineNumber);
                              }
                             break;
+    case 'Display': return ( getLocHistory());                      
+
+     }
+  } else {
+    
+         if (isset($_GET['q'])) {
+           return getLocHistory($_GET['order']);
+
+          //return ( getLocHistory($_GET['order']));
+
+         }
+       //echo "Voyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy";
+      // var_dump($_GET);
   }
-}
+
+
 
 ?>

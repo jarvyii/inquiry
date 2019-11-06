@@ -64,6 +64,10 @@ class DataAccess {
 		 */   
 	} 
 
+  /**********************************************
+      function getOrderHeader()
+      Return the  row value for an specific Order from the Table FLEXWEB.EHM
+  **********************************************/
  function getOrderHeader($OrderNumber, $LineNumber, $Machine, $Operator) {
    // $Data = $this ->conn->query('SELECT 'EHCT#', EHORDT FROM FLEXWEB.EHM');
     //var_dump($Data);
@@ -71,13 +75,27 @@ class DataAccess {
     return $Data;
 
  }
+
+ /**********************************************
+      function getOrderItem()
+      Return the row value for an specific Order from the Table FLEXWEB.EIM
+  **********************************************/
  function getOrderItem($OrderNumber, $LineNumber, $Machine, $Operator) {
-   // $Data = $this ->conn->query('SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM FLEXWEB.EIM');
-    //var_dump($Data);
-    $Data = $this->conn->fetchRow('SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM FLEXWEB.EIM WHERE EIORD=?', $OrderNumber);
+       $Data = $this->conn->fetchRow('SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM FLEXWEB.EIM WHERE EIORD=?', $OrderNumber);
     return $Data;
 
  }
-	
+
+ /**********************************************
+      function getTrackLocHistory()
+      Return all rows value from the historic of one specific Order from the Table FLEXWEB.FMLOCHIST
+  **********************************************/
+ function getTrackLocHistory($OrderNumber){
+   $Data = $this ->conn->query('SELECT LHLIN, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM, MACHDESC FROM FLEXWEB.FMLOCHIST INNER JOIN FLEXWEB.MACHLIST ON  FLEXWEB.FMLOCHIST.LHMACH = FLEXWEB.MACHLIST.MACHINEID WHERE LHORD=?', $OrderNumber);
+
+     $Rows = $Data->fetchAll();
+     return $Rows; 
+ }
+
 }
 ?>

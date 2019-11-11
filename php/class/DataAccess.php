@@ -68,7 +68,7 @@ class DataAccess {
       function getOrderHeader()
       Return the  row value for an specific Order from the Table FLEXWEB.EHM
   **********************************************/
- function getOrderHeader($OrderNumber, $LineNumber, $Machine, $Operator) {
+ function getOrderHeader($OrderNumber, $LineNumber, $Operator) {
    // $Data = $this ->conn->query('SELECT 'EHCT#', EHORDT FROM FLEXWEB.EHM');
     //var_dump($Data);
     $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM FLEXWEB.EHM WHERE EHORD=?', $OrderNumber);
@@ -80,7 +80,7 @@ class DataAccess {
       function getOrderItem()
       Return the row value for an specific Order from the Table FLEXWEB.EIM
   **********************************************/
- function getOrderItem($OrderNumber, $LineNumber, $Machine, $Operator) {
+ function getOrderItem($OrderNumber, $LineNumber, $Operator) {
        $Data = $this->conn->fetchRow('SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM FLEXWEB.EIM WHERE EIORD=?', $OrderNumber);
     return $Data;
 
@@ -95,6 +95,23 @@ class DataAccess {
 
      $Rows = $Data->fetchAll();
      return $Rows; 
+ }
+ /**********************************************
+      function insertHistoric()
+      Inserts rows in the Table FMLOCHIST
+ ***********************************************/
+ function insertHistoric($OrderNumber, $LineNumber, $Machine, $Operator,$startTime, $stopTime, $Qtty){
+
+        $startTime = date("Y-m-d H:i:s.u", time($startTime));
+        $stopTime = date("Y-m-d H:i:s.u", time($stopTime));
+        $row = array( 'LHORD'=> $OrderNumber, 'LHLIN'=>$LineNumber, 'LHMACH'=>$Machine, 'LHOPER'=>$Operator,
+         'LHQTY'=>$Qtty,'LHSTRDTTIM'=>$startTime, 'LHSTPDTTIM'=>$stopTime);
+       /*
+        $sqlQuery = 'INSERT INTO FLEXWEB.MACHLIST (LHORD, LHLIN, LHMACH, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM) values  ('..','. .','. .','. .','. .','. .','. .')'; */
+        $Data = $this ->conn->insert( 'FLEXWEB.FMLOCHIST',$row);
+       // $stmt = $this->query($sql, $bind);
+        //$result = $stmt->rowCount();
+
  }
 
 }

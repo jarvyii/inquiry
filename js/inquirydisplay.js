@@ -152,7 +152,7 @@ function setOrderHeader( ){
       return false;
   } // / function setOrderBody()
 
-function  setOrderBodyTEST(){
+function  showHistoric(){
                
           if (window.XMLHttpRequest) {
                xmlhttp = new XMLHttpRequest();
@@ -212,7 +212,7 @@ function  setOrderBodyTEST(){
    //  setOrderHeader();
     // setOrderHeader2();
      //setOrderBody();
-     setOrderBodyTEST();
+     showHistoric();
       //addOrderValue(Value);
     // Value.forEach(addOrderHeader);
   } // \FUNCTION setOrderHeader()

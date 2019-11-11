@@ -43,8 +43,14 @@ if ( !$Login->error )
    
    //$db = new DataAccess($user, $pass);
    //$db->connect();
-
+if ($_POST["typeuser"] == "operator") {
 	Tracking($user);
+	} else 	{
+		TrackingInquiry($user);
+	}
+
+  
+	
 
 }// end connection test
 else{

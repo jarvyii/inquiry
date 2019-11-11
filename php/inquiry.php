@@ -1,10 +1,12 @@
 <?php 
+require_once 'class/DataAccess.php';
+require_once 'Views/viewProduction.php';
 require_once 'Views/viewInquiry.php';
 require_once 'Views/ViewTracking.php';
+require_once 'Views/viewTrackingDisplay.php';
 require_once 'Views/viewTrackingInquiry.php'; 
 require_once 'Views/viewTrackingInformation.php';
-require_once 'Views/viewTrackingDisplay.php';
-require_once 'class/DataAccess.php';
+
 
 
 function getLocHistory($Order){
@@ -35,13 +37,13 @@ function TrackingDisplay($OrderNumber, $LineNumber) {
 Display the Tracking Information
 ***************************************/
 
-function TrackingInformation ($OrderNumber, $LineNumber, $Machine, $Operator) {
+function TrackingInformation ($OrderNumber, $LineNumber, $Operator) {
    
    $Order = new DataAccess(); 
-   $headOrder = $Order -> getOrderHeader($OrderNumber, $LineNumber, $Machine, $Operator);
+   $headOrder = $Order -> getOrderHeader($OrderNumber, $LineNumber, $Operator);
    //Order Item info.
-   $headOI = $Order ->getOrderItem($OrderNumber, $LineNumber, $Machine, $Operator);
-   viewTrackingInformation($OrderNumber, $LineNumber, $Machine, $Operator, $headOrder, $headOI);
+   $headOI = $Order ->getOrderItem($OrderNumber, $LineNumber, $Operator);
+   viewTrackingInformation($OrderNumber, $LineNumber, $Operator, $headOrder, $headOI);
       
       
 }//TrackingInformation ()
@@ -50,9 +52,10 @@ function TrackingInformation ($OrderNumber, $LineNumber, $Machine, $Operator) {
 Get this Variable  $BarCode, $Machine, $Operator from Operator to be use
 ********************************************************/
 
-function TrackingInquiry( $BarCode, $Machine, $Operator){
+function TrackingInquiry( $Operator){
+   //( $BarCode, $Machine, $Operator)
  
-  viewTrackingInquiry($BarCode, $Machine, $Operator); 
+  viewTrackingInquiry( $Operator); //($BarCode, $Machine, $Operator); 
 }
 
 
@@ -62,5 +65,16 @@ function TrackingInquiry( $BarCode, $Machine, $Operator){
 function Tracking($UserName) {
    viewTracking($UserName);
   
+}
+function Production($BarCode, $Machine, $Operator) {
+   viewProduction($BarCode, $Machine, $Operator);
+  
+}
+function endProduction($Operator, $Barcode, $Machine, $startTime, $stopTime){
+   $Pos = strpos($Barcode, "/");
+   $OrderNumber = substr($Barcode,0, $Pos);
+   $LineNumber =  substr($Barcode, $Pos+1);
+   $Order  = new DataAccess(); 
+   $Order -> insertHistoric($OrderNumber, $LineNumber, $Machine, $Operator,$startTime, $stopTime, 1);
 }
 ?>

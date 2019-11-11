@@ -2,7 +2,7 @@
 /**************************************
 Display the Tracking Information
 ***************************************/
-function viewTrackingInformation($OrderNumber, $LineNumber, $Machine, $Operator, $headOrder, $headOI) {
+function viewTrackingInformation($OrderNumber, $LineNumber, $Operator, $headOrder, $headOI) {
    Head(); 
    ?>
    <div class="trackinginformation">
@@ -13,8 +13,6 @@ function viewTrackingInformation($OrderNumber, $LineNumber, $Machine, $Operator,
         <h3>Tracking Information</h3><br>
         <label class="label-information flex">Order/Line Number:</label>
         <input class="quantity" type="text" disabled value="<?php echo $OrderNumber, " / ", $LineNumber?>"><br>
-        <label class="label-information flex">Machine:</label>
-        <input class="quantity"type="text" disabled value="<?php echo $Machine ?>"><br>
         <label class="label-information flex">Operator:</label>
         <input class="quantity" type="text" disabled value="<?php echo $Operator?>"><br>
         <label class="label-information flex">Customer:</label>
@@ -41,10 +39,9 @@ function viewTrackingInformation($OrderNumber, $LineNumber, $Machine, $Operator,
         <label class="label-information flex">Order Comments:</label>
         <input class="quantity" type="text"  id="ocomments" size="30" disabled value="<?php echo $headOI['EIPNT']?>"><br>
         <div  class="button-tracking " id="button-main">
-             <button id="submmit"  type="button" class="btn button-info button-next">Start <br> Production</button>
-             <button               type="button" class="btn button-info button-next">Enter Qty <br> Produced</button>
-             <button               type="submit" class="btn button-info button-next">Display <br> Tracking</button>
-             <button               type="button" class="btn button-info button-next"><a id="pdftraveler" href="" target="_blank">Display <br> Traveler</a></button>
+              <button type="button" class="btn button-info button-next">Enter Qty <br> Produced</button>
+              <button type="submit" class="btn button-info button-next">Display <br> Tracking</button>
+              <button type="button" class="btn button-info button-next"><a id="pdftraveler" href="" target="_blank">Display <br> Traveler</a></button>
              <button id="printpdf" type="button" class="btn button-info button-next">Print <br>Traveler</button>
         </div>
     </form>

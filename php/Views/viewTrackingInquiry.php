@@ -3,12 +3,14 @@
    View
    Get this Variable  $BarCode, $Machine, $Operator from Operator to be use
 ********************************************************/
-function viewTrackingInquiry( $BarCode, $Machine, $Operator){
+function viewTrackingInquiry( $Operator){
+   // arguments ( $BarCode, $Machine, $Operator)
   Head();
   ?>
   <form name="trackinginquiry"  action="ControllerInquiry.php" method="post" autocomplete="on">
         <input type="hidden" name="inquiry" value="TrackingInquiry"/>
-        <input type="hidden" name="machine" id = "machine" value="<?php echo $Machine?>"/>
+        <!-- <input type="hidden" name="machine" id = "machine" value="<?php echo $Machine?>"/>
+        -->
         <input type="hidden" name="operator" id = "operator" value="<?php echo $Operator?>"/>
         <div class="tracking">
           <h3>Tracking Inquiry</h3><br>

@@ -25,7 +25,7 @@
             <!-- Login form. It validate the User and password with the file USERS.JSON -->
             <form id="loginform" method="post" action="php/login.php" runat="server">
                   <input type="hidden" name="inquiry" value="Login"/>
-                  <input type="hidden" name="typeuser" value="operator"/>
+                  <input type="hidden" name="typeuser" value="supervisor"/>
                   <div class="imgcontainer">
                       <img src="img\login.jpg" alt="Login now" class="avatar">
                   </div>

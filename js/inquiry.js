@@ -1,4 +1,10 @@
 $(document).ready(function(){
+
+  // Blinking TEXT
+  function blinker(){
+    $('.blinking').fadeOut(500);
+    $('.blinking').fadeIn(500);
+  }
   // Add Value to the Machine Input in the Tracking Form
  function AddMachines(){
        var jsonURL ="../data/machines.json";
@@ -44,7 +50,49 @@ $('#buttonlogin').click(function () {//function validate() {
     //getUser(username, password);
     // Execute the Bar Code and Machine reading
   }) // \FUNCTION  $('#buttonlogin').click(function ())
-  
+
+/************************************************
+ Add one cero at the beginning for number with one digit
+*************************************************/
+function twoChars( Value){
+      return  (Value < 10 ) ?  "0"+Value.toString() : Value.toString();
+}
+/***********************************
+   Initiate the Production process
+***********************************/
+//function startProd() 
+$('#startprod').click(function (){
+  setInterval(blinker,1000);
+  document.getElementById("startprod").style.display = "none";
+  document.getElementById("stopprod").style.display = "block";
+  //var start = Date.now();
+  var start = new Date();
+  document.getElementById("starttime").value = start;
+  setInterval(function() {
+          
+      //var delta = Date.now() - start; // milliseconds elapsed since start
+      var delta = new Date() - start; // milliseconds elapsed since start
+      //intTime= Math.floor(delta / 1000);
+      intTime= Math.round(delta / 1000); // Seconds
+      txtSec =  twoChars(intTime % 60);
+      txtMin =  twoChars(Math.trunc(intTime/60));
+      txtHours = twoChars(Math.trunc(intTime/(60*60)));
+      txtTime = txtHours.toString()+"h:"+txtMin.toString() +"m:"+ txtSec+"s"
+      document.getElementById("processedtime").value = txtTime;
+      //txtDays.toString()+"d:"+txtHours.toString()+"h:"; // in seconds
+      // alternatively just show wall clock time:
+      //alert(new Date().toUTCString());
+      }, 1000); // update about every seconds
+})
+/***********************************
+   Stop the Production process
+***********************************/
+$('#stopprod').click(function (){
+ // alert(Date.now());
+   document.getElementById("endtime").value = Date.now();
+   document.getElementById("startprod").style.display = "block";
+  document.getElementById("stopprod").style.display = "none";
+})
   /************************************************************************
   Main Block
   ***********************************************************************/
@@ -52,4 +100,5 @@ $('#buttonlogin').click(function () {//function validate() {
   //  document.getElementById("loginform").style.display = "block";
   //  document.getElementById("input-ordercode").style.display = "none";
   AddMachines(); // Add value element to the SELECT Machine
-});
+  //setInterval(blinker,1000);
+ });

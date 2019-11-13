@@ -20,6 +20,7 @@ $user = $_POST['username'];
 $pass = $_POST['psw'];
 //echo "<br>User:". $user;
 //echo "<br>Pass:". $pass;
+
 $Login = new Login( $user, $pass );
 
 

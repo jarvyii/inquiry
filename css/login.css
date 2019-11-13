@@ -100,9 +100,23 @@ span.psw {
 }
 @media (min-width:700px) {
        #loginform {
-            width:30%;
-            margin-left: 35%;
+            width:60%;
+            margin-left: 20%;
         }
+        .logininput {
+            width:90%;
+            margin-left: 5%;
+      }
+}
+@media (min-width:768px) {
+       #loginform {
+            width:60%;
+            margin-left: 20%;
+        }
+        .logininput {
+            width:90%;
+            margin-left: 5%;
+      }
 }
       
       /* Layout  for 9 columns in case of big screen */
@@ -112,5 +126,8 @@ span.psw {
             width:20%;
             margin-left: 40%;
         }
+        .logininput {
+            width:40%;
+            margin-left: 30%;
 }
 

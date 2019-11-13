@@ -10,6 +10,7 @@ Display the Header of the Tracking and the Column Header for the INformation
 function viewHead($OrderNumber, $LineNumber, $headOrder, $headOI) { ?>
       <input type="hidden" name="ordernumber" id = "ordernumber" value="<?php echo $OrderNumber?>"/>
       <input type="hidden" name="linenumber" id = "linenumber" value="<?php echo $LineNumber?>"/>
+      <input type="hidden" id="typeuser" name="typeuser" value="supervisor"/>
       <h3>Tracking Inquiry Display</h3><br>
       <label class="label-display flex">Order:</label>
       <input class="quantity" type="text" disabled value="<?php echo $OrderNumber?>"><br>
@@ -37,20 +38,20 @@ function viewHead($OrderNumber, $LineNumber, $headOrder, $headOI) { ?>
        </div>
        <div class="col-md-4">
          <div class="row">
-            <div id="qty" class="col-6">
+            <div id="qty" class="col-4">
                 <label class="displaycolumn">Quantity</label><br>
             </div>
-            <div id="startdate" class="col-6">
+            <div id="startdate" class="col-8">
                  <label class="displaycolumn">Start Date/Time</label><br>
             </div>
           </div>
         </div>
      <div class="col-md-4">
         <div class="row">
-           <div id="stopdate" class="col-6">
+           <div id="stopdate" class="col-8">
                <label class="displaycolumn">Stop Date/Time</label><br>
            </div>
-           <div id="elapsedtime" class="col-6">
+           <div id="elapsedtime" class="col-4">
                <label class="displaycolumn">Elapsed Time</label><br>
            </div>
          </div>

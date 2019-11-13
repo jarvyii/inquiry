@@ -10,6 +10,7 @@ function viewTrackingInformation($OrderNumber, $LineNumber, $Operator, $headOrde
         <input type="hidden" name="inquiry" value="TrackingInformation">
         <input type="hidden" name="ordernumber" id = "ordernumber" value="<?php echo $OrderNumber?>">
         <input type="hidden" name="linenumber" id = "linenumber" value="<?php echo $LineNumber?>">
+        <input type="hidden" id="typeuser" name="typeuser" value="supervisor"/>
         <h3>Tracking Information</h3><br>
         <label class="label-information flex">Order/Line Number:</label>
         <input class="quantity" type="text" disabled value="<?php echo $OrderNumber, " / ", $LineNumber?>"><br>

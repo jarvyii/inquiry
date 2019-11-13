@@ -66,8 +66,10 @@ function Tracking($UserName) {
    viewTracking($UserName);
   
 }
-function Production($BarCode, $Machine, $Operator) {
-   viewProduction($BarCode, $Machine, $Operator);
+function Production($BarCode, $idMachine, $Operator) {
+   $objMachines = new DataAccess();
+   $descMachine = $objMachines->getMachineDesc($idMachine);
+   viewProduction($BarCode, $idMachine, $descMachine,$Operator);
   
 }
 function endProduction($Operator, $Barcode, $Machine, $startTime, $stopTime){

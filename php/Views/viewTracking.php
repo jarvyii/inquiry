@@ -10,6 +10,7 @@ function  viewTracking($UserName){
   <form name="tracking"  action="ControllerInquiry.php" method="post" autocomplete="on">
         <input type="hidden" name="inquiry" value="Tracking"/>
         <input type="hidden" name="operator" id = "operator" value="<?php echo $UserName?>"/>
+         <input type="hidden" id="typeuser" name="typeuser" value="operator"/>
         <div class="tracking">
           <div class="trackingheader">
               <h5 class="showuser">User: <?php echo $UserName?></h5><br>

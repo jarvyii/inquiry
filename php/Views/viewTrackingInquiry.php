@@ -12,6 +12,7 @@ function viewTrackingInquiry( $Operator){
         <!-- <input type="hidden" name="machine" id = "machine" value="<?php echo $Machine?>"/>
         -->
         <input type="hidden" name="operator" id = "operator" value="<?php echo $Operator?>"/>
+        <input type="hidden" id="typeuser" name="typeuser" value="supervisor"/>
         <div class="tracking">
           <h3>Tracking Inquiry</h3><br>
           <!-- Order Number-->

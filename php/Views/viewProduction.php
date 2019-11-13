@@ -3,7 +3,7 @@
 /**************************************************************
     function  viewProduction($UserName)
 **************************************************************/
-function  viewProduction($BarCode, $Machine, $Operator){ 
+function  viewProduction($BarCode, $idMachine, $descMachine,$Operator){ 
    Head();
    //$Yestarday = 
    //echo date("Y-m-d",$t);
@@ -16,7 +16,8 @@ function  viewProduction($BarCode, $Machine, $Operator){
         <input type="hidden" name="inquiry" value="Production"/>
         <input type="hidden" name="operator" id = "operator" value="<?php echo $Operator?>"/>
         <input type="hidden" name="barcode" id = "barcode" value="<?php echo $BarCode?>"/>
-        <input type="hidden" name="machine" id = "machine" value="<?php echo $Machine?>"/>
+        <input type="hidden" name="machine" id = "machine" value="<?php echo $idMachine?>"/>
+         <input type="hidden" id="typeuser" name="typeuser" value="operator"/>
         <input type="hidden" name="starttime" id = "starttime"/>
         <input type="hidden" name="endtime" id = "endtime"/>
         <div class="tracking">
@@ -26,7 +27,7 @@ function  viewProduction($BarCode, $Machine, $Operator){
           <label class="label-tracking" for="barcode">Bar Code:</label>
           <label class="input-tracking"><?php echo $BarCode?></label>
           <label class="label-tracking">Machine:</label>
-          <label class="input-tracking"><?php echo $Machine ?></label><br><br><br>
+          <label class="input-tracking"><?php echo $descMachine ?></label><br><br><br>
         </div>
         <div class="processing container justify-content-center">
               <label  for="processtime">Processing:</label>

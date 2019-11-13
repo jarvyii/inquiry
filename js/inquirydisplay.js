@@ -168,18 +168,19 @@ function  showHistoric(){
                       txtLHMACH += myObj[x].MACHDESC + "<br>";
                       txtLHOPER += myObj[x].LHOPER+ "<br>";
                       txtLHQTY += myObj[x].LHQTY+ "<br>";
-                      txtLHSTRDTTIM += myObj[x].LHSTRDTTIM.substr(0,16)+ "<br>";
-                      txtLHSTPDTTIM += myObj[x].LHSTPDTTIM.substr(0,16)+ "<br>";
+                      txtLHSTRDTTIM += myObj[x].LHSTRDTTIM.substr(0,19)+ "<br>";
+                      txtLHSTPDTTIM += myObj[x].LHSTPDTTIM.substr(0,19)+ "<br>";
                       s= myObj[x].LHSTRDTTIM;
                       var startDate = new Date(s.substr(0,10)+" "+s.substr(11,2)+":"+s.substr(14,2)+":"+s.substr(17,2));
                       s= myObj[x].LHSTPDTTIM;
                       var stopDate = new Date(s.substr(0,10)+" "+s.substr(11,2)+":"+s.substr(14,2)+":"+s.substr(17,2));
                      // var elapsedtime = (stopDate.getTime() - startDate.getTime())/(1000*60*60*24);
-                     var Days = Math.round(((stopDate.getTime() - startDate.getTime())/1000)/60/60/24);
+                     //var Days = Math.round(((stopDate.getTime() - startDate.getTime())/1000)/60/60/24);
                      var Hours = Math.round(((stopDate.getTime() - startDate.getTime())/1000)/60/60);
                      var Minutes = Math.round(((stopDate.getTime() - startDate.getTime())/1000)/60);
-                      var elapsedtime = Days+"d:"+Hours+"h:"+Minutes+"m";
-                      txtElapsedTime += elapsedtime+ "<br>";
+                     var Seconds = Math.trunc( Math.round(((stopDate.getTime() - startDate.getTime())/1000)) % 60);
+                     var elapsedtime = Hours+"h:"+Minutes+"m:"+Seconds+"s";
+                     txtElapsedTime += elapsedtime+ "<br>";
 
                       
                   }

@@ -7,6 +7,7 @@ class DataAccess {
 	private $os = "i5";
 	protected $user, $registered, $server, $FileHandler;
 	private $pass, $hash, $tkitConn, $config;
+  //$DB_NAME = "CATPACDBF";
   
   private $conn;  //Database connector	
 
@@ -33,7 +34,7 @@ class DataAccess {
                                   'protocol' => 'TCPIP',
                                   'persistent' => false,
                                   'os' => 'i5',
-                                  'schema' => 'FLEXWEB' 
+                                  'schema' => 'CATPACDBF' 
                                   ) ;
     $this -> conn = new Zend_Db_Adapter_Db2( $config );
 
@@ -63,6 +64,15 @@ class DataAccess {
 	tracking($user);
 		 */   
 	} 
+/**********************************************
+      getMachineName($OrderNumber, $LineNumber, $Operator)
+  Return the Description of the one machine with specific Id Code
+**********************************************/
+  function getMachineDesc($idMachine) {
+    $Data = $this->conn->fetchRow('SELECT MACHDESC FROM CATPACDBF.MACHLIST WHERE MACHINEID=?', $idMachine);
+    return $Data['MACHDESC'];
+
+ }
 
   /**********************************************
       function getOrderHeader()
@@ -71,7 +81,7 @@ class DataAccess {
  function getOrderHeader($OrderNumber, $LineNumber, $Operator) {
    // $Data = $this ->conn->query('SELECT 'EHCT#', EHORDT FROM FLEXWEB.EHM');
     //var_dump($Data);
-    $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM FLEXWEB.EHM WHERE EHORD=?', $OrderNumber);
+    $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=?', $OrderNumber);
     return $Data;
 
  }
@@ -81,7 +91,7 @@ class DataAccess {
       Return the row value for an specific Order from the Table FLEXWEB.EIM
   **********************************************/
  function getOrderItem($OrderNumber, $LineNumber, $Operator) {
-       $Data = $this->conn->fetchRow('SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM FLEXWEB.EIM WHERE EIORD=?', $OrderNumber);
+       $Data = $this->conn->fetchRow('SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM CATPACDBF.EIM WHERE EIORD=?', $OrderNumber);
     return $Data;
 
  }
@@ -91,7 +101,7 @@ class DataAccess {
       Return all rows value from the historic of one specific Order from the Table FLEXWEB.FMLOCHIST
   **********************************************/
  function getTrackLocHistory($OrderNumber){
-   $Data = $this ->conn->query('SELECT LHLIN, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM, MACHDESC FROM FLEXWEB.FMLOCHIST INNER JOIN FLEXWEB.MACHLIST ON  FLEXWEB.FMLOCHIST.LHMACH = FLEXWEB.MACHLIST.MACHINEID WHERE LHORD=?', $OrderNumber);
+   $Data = $this ->conn->query('SELECT LHLIN, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM, MACHDESC FROM CATPACDBF.FMLOCHIST INNER JOIN CATPACDBF.MACHLIST ON  CATPACDBF.FMLOCHIST.LHMACH = CATPACDBF.MACHLIST.MACHINEID WHERE LHORD=?', $OrderNumber);
 
      $Rows = $Data->fetchAll();
      return $Rows; 
@@ -102,13 +112,13 @@ class DataAccess {
  ***********************************************/
  function insertHistoric($OrderNumber, $LineNumber, $Machine, $Operator,$startTime, $stopTime, $Qtty){
 
-        $startTime = date("Y-m-d H:i:s.u", time($startTime));
-        $stopTime = date("Y-m-d H:i:s.u", time($stopTime));
+      //  $startTime = date("Y-m-d H:i:s.u", time($startTime));
+      //  $stopTime = date("Y-m-d H:i:s.u", time($stopTime));
         $row = array( 'LHORD'=> $OrderNumber, 'LHLIN'=>$LineNumber, 'LHMACH'=>$Machine, 'LHOPER'=>$Operator,
          'LHQTY'=>$Qtty,'LHSTRDTTIM'=>$startTime, 'LHSTPDTTIM'=>$stopTime);
        /*
         $sqlQuery = 'INSERT INTO FLEXWEB.MACHLIST (LHORD, LHLIN, LHMACH, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM) values  ('..','. .','. .','. .','. .','. .','. .')'; */
-        $Data = $this ->conn->insert( 'FLEXWEB.FMLOCHIST',$row);
+        $Data = $this ->conn->insert( 'CATPACDBF.FMLOCHIST',$row);
        // $stmt = $this->query($sql, $bind);
         //$result = $stmt->rowCount();
 

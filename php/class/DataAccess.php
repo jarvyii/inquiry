@@ -73,7 +73,13 @@ class DataAccess {
     return $Data['MACHDESC'];
 
  }
+ /****************************************
 
+ ****************************************/
+function checkOrder($Order){
+    $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=?', $Order);
+    return $Data;
+}
   /**********************************************
       function getOrderHeader()
       Return the  row value for an specific Order from the Table FLEXWEB.EHM

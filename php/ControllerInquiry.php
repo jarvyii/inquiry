@@ -1,6 +1,6 @@
 <?php
 require_once 'inquiry.php';
-if (isset($_POST['inquiry'])) {
+if (isset($_POST['inquiry']) && ! isset($_GET['q'])) {
   switch($_POST['inquiry']){
     case 'Login': tracking($_POST['username']);
                   break;
@@ -22,7 +22,8 @@ if (isset($_POST['inquiry'])) {
                               TrackingDisplay( $OrderNumber,$LineNumber);
                              }
                             break;
-    case 'Display': return ( getLocHistory());    
+    case 'Display': return ( getLocHistory());  
+    case 'Checkorder': return(checkOrder());  
     case 'Production': if(isset($_POST['operator'])) {
                           endProduction($_POST['operator'], $_POST['barcode'], $_POST['machine'],  
                                          $_POST['starttime'], $_POST['endtime']);  
@@ -33,16 +34,17 @@ if (isset($_POST['inquiry'])) {
 
      }
   } else {
-    
-         if (isset($_GET['q'])) {
-           return getLocHistory($_GET['order']);
-
-          //return ( getLocHistory($_GET['order']));
-
-         }
-       //echo "Voyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy";
-      // var_dump($_GET);
-  }
+      switch($_GET['q']) {
+          case 'Display'   :  return getLocHistory($_GET['order']);
+          case 'Checkorder':  if (isset($_GET['barcode'])) {
+                                 $Barcode = $_GET['barcode'];
+                                 $Pos = strpos($Barcode, "/");
+                                 $Order= substr($Barcode,0, $Pos);
+                                 return checkOrder($Order);
+                                } 
+          }
+        
+      }
 
 
 

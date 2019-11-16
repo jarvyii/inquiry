@@ -7,8 +7,10 @@ require_once 'Views/viewTrackingDisplay.php';
 require_once 'Views/viewTrackingInquiry.php'; 
 require_once 'Views/viewTrackingInformation.php';
 
-
-
+/*************************************************
+       getLocHistory($Order)
+    Return the historic of one order from the table FMLOCHIST
+**************************************************/
 function getLocHistory($Order){
    $db_conn = new DataAccess(); 
    $tracksLoc = $db_conn ->getTrackLocHistory($Order);
@@ -16,6 +18,24 @@ function getLocHistory($Order){
    //return $tracksLoc; 
 
 }
+
+/********************************************
+     checkOrder($Order)
+    Return if the one specific order exist the Database.
+*********************************************/
+function checkOrder($Order){
+   $db_conn = new DataAccess(); 
+   $tracksLoc = $db_conn ->checkOrder($Order);
+   if( $tracksLoc) {
+      echo json_encode($tracksLoc);
+   } else {
+     echo "";
+   }
+
+   //return $tracksLoc; 
+
+}
+
 
 /******************************************************
 Display all info using the Variable:

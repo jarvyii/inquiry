@@ -36,7 +36,7 @@ function Head()
 /*****************************************
    Foot function Foot()
 *****************************************/
-function Foot()
+function Foot( $newScript="")
 {
   ?>
   <div class="footer">
@@ -54,7 +54,8 @@ function Foot()
              </div>
            </div>
       </div>
-  <script src="../js/inquiry.js"></script>
+  <script src="../js/inquiry.js"></script> <?php
+   echo $newScript; ?>
 </body>
 </html> <?php
 } 

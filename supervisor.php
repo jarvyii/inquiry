@@ -32,7 +32,7 @@
                   <div class="row logininput">
                       <div class="logininput">
                         <label for="user-name"><b>User name:</b></label>
-                        <input id="user-name"  autocomplete="username" type="text" placeholder="Enter User Name" name="username" required>
+                        <input id="user-name"  autocomplete="username" type="text" placeholder="Enter User Name" name="username" autofocus required>
                       </div>
                       <div class="logininput">
                         <label for="user-password"><b>Password:</b></label>

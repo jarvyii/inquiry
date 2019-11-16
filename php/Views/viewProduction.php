@@ -1,14 +1,26 @@
 <?php
+require_once 'class/DataAccess.php';
 //require_once 'Views/viewInquiry.php';
 /**************************************************************
     function  viewProduction($UserName)
 **************************************************************/
 function  viewProduction($BarCode, $idMachine, $descMachine,$Operator){ 
    Head();
+   $Pos = strpos($BarCode, "/");
+   $Order= substr($BarCode,0, $Pos);
+   $LineNumber = substr($BarCode,$Pos+1);
+   $objOrder = new DataAccess(); 
+   $headOrder = $objOrder -> getOrderHeader($Order, $LineNumber, $Operator);
+   //Order Item info.
+   $headOI = $objOrder ->getOrderItem($Order, $LineNumber, $Operator);
    //$Yestarday = 
    //echo date("Y-m-d",$t);
   // $rightNow = date_create("2013-03-15"); //time();
+   $d =$headOrder['EHORDT'];
+   $Date = substr($d, 3,2)."/".substr($d, 5,2)."/".substr($d, 1,2);
+   
    $processTime = 5;
+   $qtyNeeded = (int)$headOI['EIOCQ'] - (int)$headOI['EICCQ'];
    //$elapsedTime =  date_add($rightNow,date_interval_create_from_date_string("11 days"));
     ?>
 
@@ -24,10 +36,15 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator){
           <h5 class="showuser">Operator: <?php echo $Operator?></h5><br>
           <h3 class= "titlecenter">Production Process</h3><br>
           <!--  Bar Code -->
-          <label class="label-tracking" for="barcode">Bar Code:</label>
-          <label class="input-tracking"><?php echo $BarCode?></label>
-          <label class="label-tracking">Machine:</label>
-          <label class="input-tracking"><?php echo $descMachine ?></label><br><br><br>
+          <label class="label-tracking" for="barcode">Bar Code: <span class="label-content"><?php echo $BarCode?></span></label>
+          <label class="label-tracking">Machine: <span class="label-content"><?php echo $descMachine?></span></label>
+          <label class="label-tracking">Customer: <span class="label-content"><?php echo $headOrder['EHCT#']?></span></label>
+          <label class="label-tracking">Order date: <span class="label-content"><?php echo $Date?></span></label>
+          <label class="label-tracking">Order Qty: <span class="label-content"><?php echo $headOI['EIOCQ']?></span></label>
+          <label class="label-tracking">Qty Completed: <span class="label-content"><?php echo $headOI['EICCQ']?></span></label>
+          <label class="label-tracking">Qty Needed: <span class="label-content"><?php echo $qtyNeeded?></span></label>
+          <label class="label-tracking">Item: <span class="label-content"><?php echo $headOI['EIPN']?>"</span></label>
+          <label class="label-tracking">Line Item Comments: <span class="label-content"><?php echo $headOI['EILID']?></span></label><br><br>
         </div>
         <div class="processing container justify-content-center">
               <label  for="processtime">Processing:</label>

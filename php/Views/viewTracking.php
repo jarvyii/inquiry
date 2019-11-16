@@ -17,7 +17,7 @@ function  viewTracking($UserName){
               <h3>Tracking</h3><br>
               <!--  Bar Code -->
               <label class="label-tracking" for="barcode">Scan Bar Code:</label>
-              <input class="input-tracking" type="text" name= "barcode"  id="barcode" size = "15" placeholder="Bar Code" autofocus><br>
+              <input class="input-tracking" type="text" name= "barcode"  id="barcode" size = "15" placeholder="Bar Code" autofocus ><br>
               <!-- Dynamic List of Machine -->
               <label class="label-tracking" for="machine">Machine:</label>
               <select name="machine" id="machine" required>
@@ -29,14 +29,15 @@ function  viewTracking($UserName){
         -->
           <div class="container row button-tracking">
             <div class="col">
-                <button type="submit" class="btn button-next">Next</button>
+                <button type="submit" id="produce" class="btn button-next"> Produce </button>
+                 <button type="button" id="travelerbutton"class="btn button-info button-next"><a id="pdftraveler" href="" target="_blank">Display <br> Traveler</a></button>
+                 <button type="reset" class="btn button-reset">Reset</button>
             </div>
-            <div class="col">
-                <button type="reset" class="btn button-reset">Reset</button>
-            </div>
+            
           </div>
         </div>
   </form>
   <?php
-  Foot();
+  $newScript = '<script src="../js/production.js"></script>';
+  Foot($newScript);
 }

@@ -22,7 +22,7 @@ function  viewTracking($UserName){
               <label class="label-tracking" for="machine">Machine:</label>
               <select name="machine" id="machine" required>
               </select><br> 
-          </div>
+        </div> 
           <!-- To Introduce Operator Info
           <label class="label-tracking" for="operator">Operator:</label>
           <input class="input-tracking" type="text" name = "operator" id="operator" size ="15" placeholder="Operator" required><br>

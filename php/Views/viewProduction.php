@@ -32,9 +32,9 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator){
          <input type="hidden" id="typeuser" name="typeuser" value="operator"/>
         <input type="hidden" name="starttime" id = "starttime"/>
         <input type="hidden" name="endtime" id = "endtime"/>
-        <div class="tracking">
+        <div class="production-info">
           <h5 class="showuser">Operator: <?php echo $Operator?></h5><br>
-          <h3 class= "titlecenter">Production Process</h3><br>
+          <h3 class= "titlecenter">Production Process</h3>
           <!--  Bar Code -->
           <label class="label-tracking" for="barcode">Bar Code: <span class="label-content"><?php echo $BarCode?></span></label>
           <label class="label-tracking">Machine: <span class="label-content"><?php echo $descMachine?></span></label>
@@ -48,11 +48,13 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator){
         </div>
 
         <div class="processing container justify-content-center">
+            <div class="col">
               <label  for="processtime">Processing:</label>
-              <input class="processing_color titlecenter blinking" name="processtime" id="processedtime" size="10" type="text" disabled value="<?php echo "00h:00m:00s" ?>"><br><br>
+              <input class="processing_color titlecenter blinking" name="processtime" id="processedtime" size="10" type="text" disabled value="<?php echo "00h:00m:00s" ?>">
               <label  for="qtyproduced">Quantity Produced:</label>
               <input class="quantity" type="number" name="qtyproduced" id="qtyproduced" size="5"  value="<?php echo $qtyNeeded?>">
               <br><br>
+            </div>
           <div class="row">
             <div class="col-4"></div>
             <div class="col-4">

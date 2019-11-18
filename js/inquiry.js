@@ -65,6 +65,7 @@ $('#startprod').click(function (){
       setInterval(blinker,1000);
       document.getElementById("startprod").style.display = "none";
       document.getElementById("stopprod").style.display = "block";
+      document.getElementById("qtyproduced").disabled = false;
       var startDate = new Date();
       document.getElementById("starttime").value = startDate.format("Y-m-d H:i:s.u");
       setInterval(function() {
@@ -92,6 +93,7 @@ $('#stopprod').click(function (){
       document.getElementById("endtime").value = nDate.format("Y-m-d H:i:s.u");
       document.getElementById("startprod").style.display = "block";
       document.getElementById("stopprod").style.display = "none";
+     // document.getElementById("qtyproduced").disabled = true;
 })
   /************************************************************************
   Main Block
@@ -103,7 +105,10 @@ $('#stopprod').click(function (){
   //setInterval(blinker,1000);
   if (document.getElementById("typeuser").value == "operator"){
       document.getElementById("exit-nav").href = "../index.php";
+      document.getElementById("qtyproduced").disabled = true;
+
   } else {
       document.getElementById("exit-nav").href = "../supervisor.php";
   }
+
  });

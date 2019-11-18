@@ -92,11 +92,12 @@ function Production($BarCode, $idMachine, $Operator) {
    viewProduction($BarCode, $idMachine, $descMachine,$Operator);
   
 }
-function endProduction($Operator, $Barcode, $Machine, $startTime, $stopTime){
+function endProduction($Operator, $Barcode, $Machine, $startTime, $stopTime, $Qtty){
+  var_dump($Qtty);
    $Pos = strpos($Barcode, "/");
    $OrderNumber = substr($Barcode,0, $Pos);
    $LineNumber =  substr($Barcode, $Pos+1);
    $Order  = new DataAccess(); 
-   $Order -> insertHistoric($OrderNumber, $LineNumber, $Machine, $Operator,$startTime, $stopTime, 1);
+   $Order -> insertHistoric($OrderNumber, $LineNumber, $Machine, $Operator,$startTime, $stopTime, $Qtty);
 }
 ?>

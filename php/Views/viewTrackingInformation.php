@@ -40,7 +40,6 @@ function viewTrackingInformation($OrderNumber, $LineNumber, $Operator, $headOrde
         <label class="label-information flex">Order Comments:</label>
         <input class="quantity" type="text"  id="ocomments" size="30" disabled value="<?php echo $headOI['EIPNT']?>"><br>
         <div  class="button-tracking " id="button-main">
-              <button type="button" class="btn button-info button-next">Enter Qty <br> Produced</button>
               <button type="submit" class="btn button-info button-next">Display <br> Tracking</button>
               <button type="button" class="btn button-info button-next"><a id="pdftraveler" href="" target="_blank">Display <br> Traveler</a></button>
              <button id="printpdf" type="button" class="btn button-info button-next">Print <br>Traveler</button>

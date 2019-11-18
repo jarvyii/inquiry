@@ -25,8 +25,9 @@ if (isset($_POST['inquiry']) && ! isset($_GET['q'])) {
     case 'Display': return ( getLocHistory());  
     case 'Checkorder': return(checkOrder());  
     case 'Production': if(isset($_POST['operator'])) {
+                          var_dump($_POST['qtyproduced']);
                           endProduction($_POST['operator'], $_POST['barcode'], $_POST['machine'],  
-                                         $_POST['starttime'], $_POST['endtime']);  
+                                         $_POST['starttime'], $_POST['endtime'], (int)$_POST['qtyproduced']);  
                           tracking($_POST['operator']);
                         }
                         

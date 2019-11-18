@@ -46,9 +46,13 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator){
           <label class="label-tracking">Item: <span class="label-content"><?php echo $headOI['EIPN']?>"</span></label>
           <label class="label-tracking">Line Item Comments: <span class="label-content"><?php echo $headOI['EILID']?></span></label><br><br>
         </div>
+
         <div class="processing container justify-content-center">
               <label  for="processtime">Processing:</label>
               <input class="processing_color titlecenter blinking" name="processtime" id="processedtime" size="10" type="text" disabled value="<?php echo "00h:00m:00s" ?>"><br><br>
+              <label  for="qtyproduced">Quantity Produced:</label>
+              <input class="quantity" type="number" name="qtyproduced" id="qtyproduced" size="5"  value="<?php echo $qtyNeeded?>">
+              <br><br>
           <div class="row">
             <div class="col-4"></div>
             <div class="col-4">

@@ -96,6 +96,7 @@ body {
   }
   .quantity{
     margin-left: 10px;
+    width:30%;
   }
   .label-information{
     width: 151px;
@@ -236,8 +237,8 @@ body {
     }
  .processing {
     font-size: 40px;
-    margin-left: 25%;
-    width: 50%;
+    margin-right: 21%;
+    width: 58%;
   }
   .logininput {
       width:40%;

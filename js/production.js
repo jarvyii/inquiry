@@ -1,7 +1,7 @@
 $(document).ready(function(){
 $('#barcode').click(function (){
    document.getElementById("produce").disabled =false;
-	 document.getElementById("travelerbutton").disabled =false;
+   document.getElementById("travelerbutton").disabled =false;
 
 })
 /**************************************************************
@@ -27,7 +27,7 @@ $('#barcode').click(function (){
 		          	alert("Sorry. The order number: "+ document.getElementById("barcode").value+ " is not in the registry.");
 		          } else {
 		          	 	document.getElementById("produce").disabled =false;
-		          		document.getElementById("travelerbutton").disabled =false;
+		          	 	document.getElementById("travelerbutton").disabled =false;
 		          		var barCode = document.getElementById("barcode").value;
 		          		var Pos = barCode.indexOf("/");
 		          		var Order= barCode.substr(0, Pos);

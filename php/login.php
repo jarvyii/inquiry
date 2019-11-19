@@ -45,9 +45,9 @@ if ( !$Login->error )
    //$db = new DataAccess($user, $pass);
    //$db->connect();
 if ($_POST["typeuser"] == "operator") {
-	Tracking($user);
+	  Tracking($user);
 	} else 	{
-		TrackingInquiry($user);
+	  TrackingInquiry($user);
 	}
 
   

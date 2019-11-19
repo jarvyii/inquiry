@@ -73,8 +73,19 @@ class DataAccess {
     return $Data['MACHDESC'];
 
  }
- /****************************************
+ /******************************************
+    
+    return the Description of one specific Item from the table   
+    CATPACDBF.PMMM -> Inventory Item Master
+ ********************************************/
 
+function getItemDesc( $codeItem){
+  $Data = $this->conn->fetchRow('SELECT PMDESC FROM CATPACDBF.PMMM WHERE PMPN=?', $codeItem);
+    return $Data['PMDESC'];
+}    
+ /****************************************
+        checkOrder($Order)
+   Check if the order exist in the table  CATPACDBF.EHM
  ****************************************/
 function checkOrder($Order){
     $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=?', $Order);
@@ -84,7 +95,7 @@ function checkOrder($Order){
       function getOrderHeader()
       Return the  row value for an specific Order from the Table FLEXWEB.EHM
   **********************************************/
- function getOrderHeader($OrderNumber, $LineNumber, $Operator) {
+ function getOrderHeader($OrderNumber, $LineNumber) {
    // $Data = $this ->conn->query('SELECT 'EHCT#', EHORDT FROM FLEXWEB.EHM');
     //var_dump($Data);
     $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=?', $OrderNumber);
@@ -96,7 +107,7 @@ function checkOrder($Order){
       function getOrderItem()
       Return the row value for an specific Order from the Table FLEXWEB.EIM
   **********************************************/
- function getOrderItem($OrderNumber, $LineNumber, $Operator) {
+ function getOrderItem($OrderNumber, $LineNumber) {
        $Data = $this->conn->fetchRow('SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM CATPACDBF.EIM WHERE EIORD=?', $OrderNumber);
     return $Data;
 

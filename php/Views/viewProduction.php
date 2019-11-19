@@ -22,6 +22,8 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator){
    $processTime = 5;
    $qtyNeeded = (int)$headOI['EIOCQ'] - (int)$headOI['EICCQ'];
    //$elapsedTime =  date_add($rightNow,date_interval_create_from_date_string("11 days"));
+   $codeItem = $headOI['EIPN'];
+   $itemDesc = $objOrder ->getItemDesc( $codeItem);
     ?>
 
   <form name="production"  action="ControllerInquiry.php" method="post" autocomplete="on">
@@ -36,15 +38,15 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator){
           <h5 class="showuser">Operator: <?php echo $Operator?></h5><br>
           <h3 class= "titlecenter">Production Process</h3>
           <!--  Bar Code -->
-          <label class="label-tracking" for="barcode">Bar Code: <span class="label-content"><?php echo $BarCode?></span></label>
+          <label class="label-tracking" for="barcode">Order No.: <span class="label-content"><?php echo $BarCode?></span></label>
           <label class="label-tracking">Machine: <span class="label-content"><?php echo $descMachine?></span></label>
           <label class="label-tracking">Customer: <span class="label-content"><?php echo $headOrder['EHCT#']?></span></label>
           <label class="label-tracking">Order date: <span class="label-content"><?php echo $Date?></span></label>
           <label class="label-tracking">Order Qty: <span class="label-content"><?php echo $headOI['EIOCQ']?></span></label>
           <label class="label-tracking">Qty Completed: <span class="label-content"><?php echo $headOI['EICCQ']?></span></label>
           <label class="label-tracking">Qty Needed: <span class="label-content"><?php echo $qtyNeeded?></span></label>
-          <label class="label-tracking">Item: <span class="label-content"><?php echo $headOI['EIPN']?>"</span></label>
-          <label class="label-tracking">Line Item Comments: <span class="label-content"><?php echo $headOI['EILID']?></span></label><br><br>
+          <label class="label-tracking">Item: <span class="label-content"><?php echo $codeItem?></span></label>
+          <label class="label-tracking">Item Desc.: <span class="label-content"><?php echo $itemDesc?></span></label><br><br>
         </div>
 
         <div class="processing container justify-content-center">

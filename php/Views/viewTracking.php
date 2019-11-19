@@ -16,8 +16,8 @@ function  viewTracking($UserName){
               <h5 class="showuser">User: <?php echo $UserName?></h5><br>
               <h3>Tracking</h3><br>
               <!--  Bar Code -->
-              <label class="label-tracking" for="barcode">Scan Bar Code:</label>
-              <input class="input-tracking" type="text" name= "barcode"  id="barcode" size = "15" placeholder="Bar Code" autofocus ><br>
+              <label class="label-tracking" for="barcode">Order No.:</label>
+              <input class="input-tracking" type="text" name= "barcode"  id="barcode" size = "15" placeholder="Scan Bar Code" autofocus ><br>
               <!-- Dynamic List of Machine -->
               <label class="label-tracking" for="machine">Machine:</label>
               <select name="machine" id="machine" required>

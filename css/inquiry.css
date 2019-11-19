@@ -21,6 +21,18 @@ body {
   margin-left: 15%;
   width: 60%;
  }
+ .trackinginquiry {
+      margin-top: 2%;
+      margin-left: 15%;
+      width: 60%;
+ }
+ .trackingdisplay {
+    margin-left: 10%;
+ }
+ .trackinfo-right {
+     margin-right: 3%;
+     width:50%;
+ }
  .production-info {
       margin-top: 2%;
       margin-left: 20%;
@@ -97,14 +109,15 @@ body {
     display: none;
   }
   .trackinginformation{
-    margin-left: 8%;
+    margin-left: 25%;
+    width: 50%;
   }
   .label-content{
     font-weight: bold;
   }
   .quantity{
     margin-left: 10px;
-    width:30%;
+    width:270px;
   }
   .label-information{
     width: 151px;
@@ -173,6 +186,19 @@ body {
    body {
       font-size: 14px;
    }
+    .trackinginquiry {
+      margin-top: 2%;
+      margin-left: 15%;
+      width: 60%;
+ }
+ .button-trackinginquiry {
+      margin-left: 25%;
+      width:80%;
+  }
+  .button-trackinginformation {
+      margin-left: 0%;
+      width:100%;
+  }
    .processing {
       font-size: 22px;
       margin-left: 10%;
@@ -194,6 +220,19 @@ body {
 @media ( min-width:576px ){
   body {
     font-size: 14px;
+  }
+  .trackinginquiry {
+      margin-top: 2%;
+      margin-left: 25%;
+      width: 50%;
+ }
+ .button-trackinginquiry {
+      margin-left: 25%;
+      width:80%;
+  }
+  .button-trackinginformation {
+      margin-left: 10%;
+      width:80%;
   }
   .processing {
     font-size: 30px;
@@ -223,6 +262,19 @@ body {
       margin-left: 20%;
       width: 60%;
  }
+ .trackinginquiry {
+      margin-top: 2%;
+      margin-left: 25%;
+      width: 50%;
+ }
+ .button-trackinginquiry {
+      margin-left: 25%;
+      width:60%;
+  }
+  .button-trackinginformation {
+      margin-left: 15%;
+      width:70%;
+  }
 .processing {
     font-size: 40px;
     margin-left: 10%;
@@ -247,6 +299,15 @@ body {
       margin-left: 25%;
       width: 50%;
  }
+ .trackinginquiry {
+      margin-top: 2%;
+      margin-left: 31%;
+      width: 38%;
+ }
+ .button-trackinginquiry {
+      margin-left: 25%;
+      width:60%;
+  }
   .processing {
     font-size: 40px;
     margin-left: 20%;
@@ -277,6 +338,15 @@ body {
       margin-left: 20%;
       width: 60%;
     }
+.trackinginquiry {
+      margin-top: 2%;
+      margin-left: 31%;
+      width: 38%;
+ }
+ .button-trackinginquiry {
+      margin-left: 24%;
+      width:50%;
+  }
  .processing {
     font-size: 40px;
     margin-right: 21%;
@@ -290,6 +360,7 @@ body {
       margin-left: 25%;
       width:50%;
   }
+
   .trackingheader {
     margin-left: 25%;
     width: 50%;

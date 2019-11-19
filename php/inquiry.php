@@ -41,14 +41,14 @@ function checkOrder($Order){
 Display all info using the Variable:
 $BarCode, $OrderCode, $LineNumber
 *******************************************************/
-function TrackingDisplay($OrderNumber, $LineNumber) {
+function TrackingDisplay($OrderNumber, $LineNumber, $Customer, $orderDate, $orderQtty, $Item) {
 
     viewTrackingDisplay($OrderNumber, $LineNumber);
     $Order = new DataAccess(); 
-    $headOrder = $Order -> getOrderHeader($OrderNumber, $LineNumber, $Machine, $Operator);
-    $headOI = $Order ->getOrderItem($OrderNumber, $LineNumber, $Machine, $Operator);
+    //$headOrder = $Order -> getOrderHeader($OrderNumber, $LineNumber, $Machine);
+   // $headOI = $Order ->getOrderItem($OrderNumber, $LineNumber);
     $tracksLoc = $Order ->getTrackLocHistory($OrderNumber);
-    viewHead( $OrderNumber, $LineNumber, $headOrder, $headOI);
+    viewHead( $OrderNumber, $LineNumber, $Customer, $orderDate, $orderQtty, $Item);//$headOI);//$headOrder, $headOI);
    
 
 } //TrackingDisplay
@@ -60,9 +60,9 @@ Display the Tracking Information
 function TrackingInformation ($OrderNumber, $LineNumber, $Operator) {
    
    $Order = new DataAccess(); 
-   $headOrder = $Order -> getOrderHeader($OrderNumber, $LineNumber, $Operator);
+   $headOrder = $Order -> getOrderHeader($OrderNumber, $LineNumber);
    //Order Item info.
-   $headOI = $Order ->getOrderItem($OrderNumber, $LineNumber, $Operator);
+   $headOI = $Order ->getOrderItem($OrderNumber, $LineNumber);
    viewTrackingInformation($OrderNumber, $LineNumber, $Operator, $headOrder, $headOI);
       
       

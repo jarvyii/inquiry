@@ -13,16 +13,16 @@ function viewTrackingInquiry( $Operator){
         -->
         <input type="hidden" name="operator" id = "operator" value="<?php echo $Operator?>"/>
         <input type="hidden" id="typeuser" name="typeuser" value="supervisor"/>
-        <div class="tracking">
+        <div class="trackinginquiry">
           <h3>Tracking Inquiry</h3><br>
           <!-- Order Number-->
           <label class="label-inquiry" for="ordernumber">Order Number:</label>
           <input class="input-tracking" type="text" name= "ordernumber"  id="ordernumber" placeholder="Enter Order Number" autofocus><br>
           <!-- Line Number-->
           <label class="label-inquiry" for="linenumber">Line Number:</label>
-          <input class="input-tracking" type="number" name = "linenumber" id="linenumber"  placeholder="Enter Line Number" required><br>
+          <input class="input-tracking" type="number" name = "linenumber" id="linenumber"  placeholder="Enter Line Number" required><br><br>
           <!-- Buttons-->
-          <div class="button-tracking row">
+          <div class="button-trackinginquiry row">
              <div class ="col">
                 <button type="submit" class="btn button-next">Next</button>
              </div>

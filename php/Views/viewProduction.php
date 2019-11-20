@@ -50,11 +50,11 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator){
         </div>
 
         <div class="processing container justify-content-center">
-            <div class="col">
+            <div class="producecontent col">
               <label  for="processtime">Processing:</label>
               <input class="processing_color titlecenter blinking" name="processtime" id="processedtime" size="10" type="text" disabled value="<?php echo "00h:00m:00s" ?>">
-              <label  for="qtyproduced">Quantity Produced:</label>
-              <input class="quantity" type="number" name="qtyproduced" id="qtyproduced" size="5"  value="<?php echo $qtyNeeded?>">
+              <label  for="qtyproduced">Qtty Produced:</label>
+              <input class="quantityproduced" type="number" name="qtyproduced" id="qtyproduced"  value="<?php echo $qtyNeeded?>">
               <br><br>
             </div>
           <div class="row">

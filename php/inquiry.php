@@ -59,11 +59,12 @@ Display the Tracking Information
 
 function TrackingInformation ($OrderNumber, $LineNumber, $Operator) {
    
-   $Order = new DataAccess(); 
-   $headOrder = $Order -> getOrderHeader($OrderNumber, $LineNumber);
+   $objData = new DataAccess(); 
+   $headOrder = $objData -> getOrderHeader($OrderNumber);
    //Order Item info.
-   $headOI = $Order ->getOrderItem($OrderNumber, $LineNumber);
-   viewTrackingInformation($OrderNumber, $LineNumber, $Operator, $headOrder, $headOI);
+   $headOI = $objData ->getOrderItem($OrderNumber);
+   $qtyCmpted = $objData->qtyCompleted($OrderNumber);
+   viewTrackingInformation($OrderNumber, $LineNumber, $Operator,$qtyCmpted, $headOrder, $headOI);
       
       
 }//TrackingInformation ()
@@ -87,17 +88,24 @@ function Tracking($UserName) {
   
 }
 function Production($BarCode, $idMachine, $Operator) {
-   $objMachines = new DataAccess();
-   $descMachine = $objMachines->getMachineDesc($idMachine);
-   viewProduction($BarCode, $idMachine, $descMachine,$Operator);
+   $Pos = strpos($BarCode, "/");
+   $Order= substr($BarCode,0, $Pos);
+   $objData = new DataAccess();
+   $descMachine = $objData->getMachineDesc($idMachine);
+   $qtyCmpted = $objData->qtyCompleted($Order);
+   $headOrder = $objData->getOrderHeader($Order);
+   //Order Item info.
+   $headOI = $objData ->getOrderItem($Order);
+   viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpted, $headOrder, $headOI);
   
 }
-function endProduction($Operator, $Barcode, $Machine, $startTime, $stopTime, $Qtty){
-  var_dump($Qtty);
-   $Pos = strpos($Barcode, "/");
-   $OrderNumber = substr($Barcode,0, $Pos);
-   $LineNumber =  substr($Barcode, $Pos+1);
-   $Order  = new DataAccess(); 
-   $Order -> insertHistoric($OrderNumber, $LineNumber, $Machine, $Operator,$startTime, $stopTime, $Qtty);
-}
+function endProduction($Param /*$Operator, $Barcode, $Machine, $startTime, $stopTime, $Qtty*/){
+   $Pos = strpos($Param["barcode"], "/");;//strpos($Barcode, "/");
+   $Order = substr($Param["barcode"],0, $Pos);
+   $LineNumber =  substr($Param["barcode"], $Pos+1);
+   $Param["order"] =  $Order;
+   $Param["line"] = $LineNumber;
+   $objData  = new DataAccess(); 
+   $objData -> insertHistoric($Param);
+  }
 ?>

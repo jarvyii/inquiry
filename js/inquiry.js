@@ -65,6 +65,7 @@ $('#startprod').click(function (){
       setInterval(blinker,1000);
       document.getElementById("startprod").style.display = "none";
       document.getElementById("stopprod").style.display = "block";
+      document.getElementById("qtyproduced").value = document.getElementById("orderqty").value;
       document.getElementById("qtyproduced").disabled = false;
       var startDate = new Date();
       document.getElementById("starttime").value = startDate.format("Y-m-d H:i:s.u");
@@ -93,6 +94,10 @@ $('#stopprod').click(function (){
       document.getElementById("endtime").value = nDate.format("Y-m-d H:i:s.u");
       document.getElementById("startprod").style.display = "block";
       document.getElementById("stopprod").style.display = "none";
+      if (document.getElementById("qtyproduced").value = document.getElementById("orderqty").value){
+        alert("Insuficient production");
+         $("#myModal").modal("show");
+      }
      // document.getElementById("qtyproduced").disabled = true;
 })
   /************************************************************************

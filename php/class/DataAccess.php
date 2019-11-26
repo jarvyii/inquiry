@@ -95,7 +95,7 @@ function checkOrder($Order){
       function getOrderHeader()
       Return the  row value for an specific Order from the Table FLEXWEB.EHM
   **********************************************/
- function getOrderHeader($OrderNumber, $LineNumber) {
+ function getOrderHeader($OrderNumber) {
    // $Data = $this ->conn->query('SELECT 'EHCT#', EHORDT FROM FLEXWEB.EHM');
     //var_dump($Data);
     $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=?', $OrderNumber);
@@ -107,7 +107,7 @@ function checkOrder($Order){
       function getOrderItem()
       Return the row value for an specific Order from the Table FLEXWEB.EIM
   **********************************************/
- function getOrderItem($OrderNumber, $LineNumber) {
+ function getOrderItem($OrderNumber) {
        $Data = $this->conn->fetchRow('SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM CATPACDBF.EIM WHERE EIORD=?', $OrderNumber);
     return $Data;
 
@@ -124,21 +124,35 @@ function checkOrder($Order){
      return $Rows; 
  }
  /**********************************************
-      function insertHistoric()
+      function insertHistoric($Param)
       Inserts rows in the Table FMLOCHIST
  ***********************************************/
- function insertHistoric($OrderNumber, $LineNumber, $Machine, $Operator,$startTime, $stopTime, $Qtty){
+ function insertHistoric($Param){
+       $row = array( 'LHORD'=> $Param['order'], 'LHLIN'=>$Param['line'], 'LHMACH'=>$Param['machine'], 
+                     'LHOPER'=>$Param['operator'], 'LHQTY'=>$Param['qty'],'LHSTRDTTIM'=>$Param['starttime'],
+                     'LHSTPDTTIM'=>$Param['endtime'], 'LHCOMM'=>$Param['comment'], 
+                     'LHSOVR'=>$Param['override']
+                   );
 
       //  $startTime = date("Y-m-d H:i:s.u", time($startTime));
       //  $stopTime = date("Y-m-d H:i:s.u", time($stopTime));
-        $row = array( 'LHORD'=> $OrderNumber, 'LHLIN'=>$LineNumber, 'LHMACH'=>$Machine, 'LHOPER'=>$Operator,
-         'LHQTY'=>$Qtty,'LHSTRDTTIM'=>$startTime, 'LHSTPDTTIM'=>$stopTime);
-       /*
-        $sqlQuery = 'INSERT INTO FLEXWEB.MACHLIST (LHORD, LHLIN, LHMACH, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM) values  ('..','. .','. .','. .','. .','. .','. .')'; */
-        $Data = $this ->conn->insert( 'CATPACDBF.FMLOCHIST',$row);
+      /*  $row = array( 'LHORD'=> $OrderNumber, 'LHLIN'=>$LineNumber, 'LHMACH'=>$Machine, 'LHOPER'=>$Operator,
+         'LHQTY'=>$Qtty,'LHSTRDTTIM'=>$startTime, 'LHSTPDTTIM'=>$stopTime);*/
+       $Data = $this ->conn->insert( 'CATPACDBF.FMLOCHIST',$row);
        // $stmt = $this->query($sql, $bind);
         //$result = $stmt->rowCount();
 
+ }
+ /***********************************************
+          function qtyCompleted($OrderNumber)
+    Rteurn how many quantity has beeen completed for one specific order.      
+ ************************************************/
+ function qtyCompleted($Order){
+    $Data = $this ->conn->query('SELECT SUM(LHQTY) FROM CATPACDBF.FMLOCHIST WHERE LHORD=?', $Order);
+    $Rows = $Data->fetch();
+     foreach( $Rows as $index=>$content) {
+      return $content;
+     }
  }
 
 }

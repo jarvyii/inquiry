@@ -30,10 +30,17 @@ if (isset($_POST['inquiry']) && ! isset($_GET['q'])) {
     case 'Display': return ( getLocHistory());  
     case 'Checkorder': return(checkOrder());  
     case 'Production': if(isset($_POST['operator'])) {
-                          var_dump($_POST['qtyproduced']);
-                          endProduction($_POST['operator'], $_POST['barcode'], $_POST['machine'],  
-                                         $_POST['starttime'], $_POST['endtime'], (int)$_POST['qtyproduced']);  
-                          tracking($_POST['operator']);
+                          $Param = array("operator"=> $_POST['operator'],
+                                         "barcode"=>$_POST['barcode'],
+                                         "machine" => $_POST['machine'],
+                                         "starttime"=> $_POST['starttime'],
+                                         "endtime"=>$_POST['endtime'],
+                                         "qty"=>(int)$_POST['qtyproduced'],
+                                         "comment" => $_POST['comment'],
+                                         "override"=> "miniMAX"
+                                       );
+                           endProduction( $Param);
+                           tracking($_POST['operator']);
                         }
                         
                        break;

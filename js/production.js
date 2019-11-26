@@ -44,6 +44,12 @@ $('#barcode').click(function (){
       xmlhttp.open("GET","../php/ControllerInquiry.php?q="+str,true);
       xmlhttp.send();
   }
+  function checkProduction(){
+  	if (document.getElementById("qtyproduced").value != document.getElementById("orderqty").value){
+        alert("The quantity produced is less than the quantity in the order.");
+      }
+  }
 	//Begining of the JavaScript body
 	document.getElementById("barcode").onblur=checkOrder;
+	document.getElementById("qtyproduced").onblur=checkProduction;
 	})

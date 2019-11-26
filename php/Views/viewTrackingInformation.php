@@ -2,14 +2,13 @@
 /**************************************
 Display the Tracking Information
 ***************************************/
-function viewTrackingInformation($OrderNumber, $LineNumber, $Operator, $headOrder, $headOI) {
+function viewTrackingInformation($OrderNumber, $LineNumber, $Operator, $qtyCmpted,$headOrder, $headOI) {
    Head(); 
    $d =$headOrder['EHORDT'];
    $orderDate = substr($d, 3,2)."/".substr($d, 5,2)."/".substr($d, 1,2);
    $Customer = $headOrder['EHCT#'];
    $Item = $headOI['EIPN'];
    $orderQty = (int)$headOI['EIOCQ'];
-   $qtyNeeded = $orderQty - (int)$headOI['EICCQ'];
    ?>
     <form name="trackinginformation"  action="ControllerInquiry.php" method="post" autocomplete="on">
       <div class="trackinginformation">
@@ -26,23 +25,12 @@ function viewTrackingInformation($OrderNumber, $LineNumber, $Operator, $headOrde
           <label class="label-tracking">Customer: <span class="label-content"><?php echo $Customer?></span></label>
           <label class="label-tracking">Order date: <span class="label-content"><?php echo $orderDate?></span></label>
           <label class="label-tracking">Order Qty: <span class="label-content"><?php echo $orderQty?></span></label>
-          <label class="label-tracking">Qty Completed: <span class="label-content"><?php echo $headOI['EICCQ']?></span></label>
-          <label class="label-tracking">Qty Needed: <span class="label-content"><?php echo $qtyNeeded?></span></label>
+          <label class="label-tracking">Qty Needed: <span class="label-content"><?php echo $headOI['EICCQ']?></span></label>
+          <label class="label-tracking">Qty Completed: <span class="label-content"><?php echo $qtyCmpted?></span></label>
           <label class="label-tracking">Item: <span class="label-content"><?php echo $Item?></span></label>
           <label class="label-tracking">Item Desc.: <span class="label-content"><?php echo $headOI['EILID']?></span></label>
           <label class="label-tracking">Order Comments: <span class="label-content"><?php echo $headOI['EIPNT']?></span></label>
-        <!--
-        <label class="flex">Order No.: <input  type="text" disabled value="<?php echo $OrderNumber, " / ", $LineNumber?>"></label>
-        <label class="flex">Customer: <input type="text" disabled value="<?php echo $Customer?>"></label><br>
-        <label class="flex">Order date: <input  type="text" disabled value="<?php echo $orderDate?>"></label>
-        <label class="flex">Order Qty: <input  type="text" id="input-orderqty" disabled value="<?php echo $orderQty?>"></label><br>
-        <label class="flex" for="input-ordercmpted" >Qty Completed: <input  type="text" id="input-ordercmpted" disabled value="<?php echo $headOI['EICCQ']?>"></label>
-        <label class="flex">Qty Needed: <input type="text" id="input-orderneeded" disabled value="<?php echo $qtyNeeded?>"></label> <br>
-        <label class="flex">Item: <input type="text" id="input-item" disabled value="<?php echo $Item?>"></label>
-        <label class="flex">Item Desc.: <input type="text"  id="icomments" size="30" disabled value="<?php echo $headOI['EILID']?>"></label>
-        <label class="flex">Order Comments: <input type="text"  id="ocomments" size="30" disabled value="<?php echo $headOI['EIPNT']?>"></label><br>
-      -->
-        <div  class="button-trackinginformation" id="button-main">
+          <div  class="button-trackinginformation" id="button-main">
               <button type="submit" class="btn button-info button-next">Display <br> Tracking</button>
               <button type="button" class="btn button-info button-next"><a id="pdftraveler" href="" target="_blank">Display <br> Traveler</a></button>
              <button id="printpdf" type="button" class="btn button-info button-next">Print <br>Traveler</button>

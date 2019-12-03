@@ -162,14 +162,28 @@ function  showHistoric(){
             xmlhttp.onreadystatechange = function() {
                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                  // document.getElementById("output").innerHTML = xmlhttp.responseText;
+                 sLabel = "<span class="; // beginning of the span
+                 sTitle ="'displaycolumn'>"; //Name of the class for the column Title
+                 gContent ="'grillecolumn'>"; // Name of the Class for grille conetnt
+                 eLabel = "<br></span>";  // closing SPAN Tag
                  myObj = JSON.parse(this.responseText);
-                 txtLHMACH=txtLHOPER = txtLHQTY=txtLHSTRDTTIM=txtElapsedTime= txtLHSTPDTTIM="";
+                 txtLHMACH=sLabel+ sTitle+"Machine"+eLabel+sLabel+gContent;
+                 txtLHOPER = sLabel+sTitle+"Operator"+eLabel+sLabel+gContent;
+                 txtLHQTY=sLabel+sTitle+"Qty."+eLabel+sLabel+gContent;
+                 //"<span class="+"'displaycolumn'"+">Quantity</span><br>"; 
+                 txtLHSTRDTTIM=sLabel+sTitle+"Start Time"+eLabel+sLabel+gContent;
+                 txtElapsedTime= sLabel+sTitle+"E. Time"+eLabel+sLabel+gContent;
+                 txtLHSTPDTTIM=sLabel+sTitle+"Stop Time"+eLabel+sLabel+gContent;
+                 txtLHSOVR =sLabel+sTitle+"Override"+eLabel+sLabel+gContent;
+                txtLHCOMM = sLabel+sTitle+"Comments"+eLabel+sLabel+gContent;
                  for (x in myObj) {
                       txtLHMACH += myObj[x].MACHDESC + "<br>";
                       txtLHOPER += myObj[x].LHOPER+ "<br>";
                       txtLHQTY += myObj[x].LHQTY+ "<br>";
                       txtLHSTRDTTIM += myObj[x].LHSTRDTTIM.substr(0,19)+ "<br>";
                       txtLHSTPDTTIM += myObj[x].LHSTPDTTIM.substr(0,19)+ "<br>";
+                      txtLHSOVR += myObj[x].LHSOVR+ "<br>";
+                      txtLHCOMM += myObj[x].LHCOMM+ "<br>";
                       s= myObj[x].LHSTRDTTIM;
                       var startDate = new Date(s.substr(0,10)+" "+s.substr(11,2)+":"+s.substr(14,2)+":"+s.substr(17,2));
                       s= myObj[x].LHSTPDTTIM;
@@ -184,12 +198,14 @@ function  showHistoric(){
 
                       
                   }
-                 document.getElementById("machinecolumn").innerHTML += txtLHMACH;
-                document.getElementById("operator").innerHTML += txtLHOPER;
-                document.getElementById("qty").innerHTML += txtLHQTY;
-                document.getElementById("startdate").innerHTML += txtLHSTRDTTIM;
-                document.getElementById("stopdate").innerHTML += txtLHSTPDTTIM;
-                document.getElementById("elapsedtime").innerHTML += txtElapsedTime;
+                 document.getElementById("machinecolumn").innerHTML += txtLHMACH+ eLabel;
+                document.getElementById("operator").innerHTML += txtLHOPER+ eLabel;
+                document.getElementById("qty").innerHTML += txtLHQTY+ eLabel;
+                document.getElementById("startdate").innerHTML += txtLHSTRDTTIM+ eLabel;
+                document.getElementById("stopdate").innerHTML += txtLHSTPDTTIM+ eLabel;
+                document.getElementById("elapsedtime").innerHTML += txtElapsedTime+ eLabel;
+                document.getElementById("override").innerHTML += txtLHSOVR+ eLabel;
+                document.getElementById("comment").innerHTML += txtLHCOMM+ eLabel;
                 // alert( myObj);
                  /*
                  console.log('My object : ' + Values);

@@ -30,14 +30,14 @@ if (isset($_POST['inquiry']) && ! isset($_GET['q'])) {
     case 'Display': return ( getLocHistory());  
     case 'Checkorder': return(checkOrder());  
     case 'Production': if(isset($_POST['operator'])) {
-                          $Param = array("operator"=> $_POST['operator'],
-                                         "barcode"=>$_POST['barcode'],
-                                         "machine" => $_POST['machine'],
+                          $Param = array("operator" => $_POST['operator'],
+                                         "barcode"  => $_POST['barcode'],
+                                         "machine"  => $_POST['machine'],
                                          "starttime"=> $_POST['starttime'],
-                                         "endtime"=>$_POST['endtime'],
-                                         "qty"=>(int)$_POST['qtyproduced'],
-                                         "comment" => $_POST['comment'],
-                                         "override"=> "miniMAX"
+                                         "endtime"  => $_POST['endtime'],
+                                         "qty"      =>(int)$_POST['qtyproduced'],
+                                         "comment"  => $_POST['comment'],
+                                         "override" => $_POST['supervisor']
                                        );
                            endProduction( $Param);
                            tracking($_POST['operator']);
@@ -47,14 +47,19 @@ if (isset($_POST['inquiry']) && ! isset($_GET['q'])) {
 
      }
   } else {
-      switch($_GET['q']) {
+        switch($_GET['q']) {
           case 'Display'   :  return getLocHistory($_GET['order']);
           case 'Checkorder':  if (isset($_GET['barcode'])) {
                                  $Barcode = $_GET['barcode'];
                                  $Pos = strpos($Barcode, "/");
                                  $Order= substr($Barcode,0, $Pos);
                                  return checkOrder($Order);
-                                } 
+                                }
+                                break;
+           case 'Override' : if (! isset($_GET['code'])) {
+                                 return "";
+                              }
+                             return checkOverrideCode($_GET['code']);                   
           }
         
       }

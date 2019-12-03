@@ -35,7 +35,20 @@ function checkOrder($Order){
    //return $tracksLoc; 
 
 }
-
+/****************************************
+        checkOverrideCode($Code)
+ Access the Database to validate the Code to override the production
+ Its called from ControllerInquiry.php
+******************************************/
+function checkOverrideCode($Code){
+   $db_conn = new DataAccess(); 
+   $Supervisor = $db_conn ->checkOverrideCode($Code); // Return True if the name of supervisor.
+   if( $Supervisor) {
+      echo json_encode($Supervisor);
+   } else {
+     echo "";
+   }
+}
 
 /******************************************************
 Display all info using the Variable:

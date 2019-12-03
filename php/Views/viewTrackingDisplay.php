@@ -29,34 +29,24 @@ function viewHead($OrderNumber, $LineNumber,  $Customer, $orderDate, $orderQtty,
       <div class="container row text-center">
        <div class="col-md-4">
          <div class="row">
-             <div  id="machinecolumn" class="col-6">
-                 <label class="displaycolumn">Machine</label><br>
-              </div>
-            <div id="operator" class="col-6">
-                <label class="displaycolumn">Operator</label><br>
-            </div>
+            <div  id="machinecolumn" class="col-5"></div>
+            <div id="operator" class="col-4"> </div>
+            <div id="elapsedtime" class="col-3"></div>
          </div>
        </div>
        <div class="col-md-4">
          <div class="row">
-            <div id="qty" class="col-4">
-                <label class="displaycolumn">Quantity</label><br>
-            </div>
-            <div id="startdate" class="col-8">
-                 <label class="displaycolumn">Start Date/Time</label><br>
-            </div>
-          </div>
-        </div>
-     <div class="col-md-4">
-        <div class="row">
-           <div id="stopdate" class="col-8">
-               <label class="displaycolumn">Stop Date/Time</label><br>
-           </div>
-           <div id="elapsedtime" class="col-4">
-               <label class="displaycolumn">Elapsed Time</label><br>
-           </div>
+            <div id="qty" class="col-2"></div>
+            <div id="startdate" class="col-5"></div>
+           <div id="stopdate" class="col-5"></div>
          </div>
-       </div>
+        </div>
+       <div class="col-md-4">
+        <div class="row">
+           <div id="override" class="col-3"></div>
+           <div id="comment" class="col-9"></div>
+         </div>
+      </div>
     </div>
     <label></label><br><br><br>
     <?php

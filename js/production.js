@@ -4,6 +4,37 @@ $('#barcode').click(function (){
    document.getElementById("travelerbutton").disabled =false;
 
 })
+/*************************************************
+         overrideCode()
+   To check the Supervisor Overrride Code. Its used in the view_production(), modal form.
+**************************************************/
+function overrideCode(){
+     if (window.XMLHttpRequest) {
+               xmlhttp = new XMLHttpRequest();
+      }else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                // document.getElementById("output").innerHTML = xmlhttp.responseText;
+              // myObj = //JSON.parse(this.responseText);
+              if (this.responseText === "") {
+                 alert("Sorry. Wrong CODE");
+                document.getElementById("stopprod").disabled = true;
+              } else {
+                 myObj = JSON.parse(this.responseText);
+                 document.getElementById("code").value = myObj['CODE'];
+                 document.getElementById("supervisor").value = myObj['SUPERVISOR'];
+                 document.getElementById("stopprod").disabled = false;
+                 //alert("Gooooooood:"+this.responseText);
+              }
+          }
+      }
+      str = "Override&code="+document.getElementById("override").value;
+      xmlhttp.open("GET","../php/ControllerInquiry.php?q="+str,true);
+      xmlhttp.send();  
+
+}
 /**************************************************************
       checkOrder()
       if the order don't exist don't allow to produce the ITEM.
@@ -46,10 +77,14 @@ $('#barcode').click(function (){
   }
   function checkProduction(){
   	if (document.getElementById("qtyproduced").value != document.getElementById("orderqty").value){
-        alert("The quantity produced is less than the quantity in the order.");
+        //alert("The quantity produced is less than the quantity in the order.");
+        document.getElementById("stopprod").disabled = true;
+        $("#myModal").modal("show");
+
       }
   }
 	//Begining of the JavaScript body
 	document.getElementById("barcode").onblur=checkOrder;
 	document.getElementById("qtyproduced").onblur=checkProduction;
+  document.getElementById("override").onblur= overrideCode;
 	})

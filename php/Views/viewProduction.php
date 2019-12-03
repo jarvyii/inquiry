@@ -25,6 +25,8 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpte
         <input type="hidden" name="barcode" id = "barcode" value="<?php echo $BarCode?>"/>
         <input type="hidden" name="machine" id = "machine" value="<?php echo $idMachine?>"/>
         <input type="hidden" name="orderqty" id = "orderqty" value="<?php echo $orderQty?>"/>
+        <input type="hidden" name="code" id = "code"/>
+        <input type="hidden" name="supervisor" id = "supervisor"/>
         <input type="hidden" id="typeuser" name="typeuser" value="operator"/>
         <input type="hidden" name="starttime" id = "starttime"/>
         <input type="hidden" name="endtime" id = "endtime"/>
@@ -50,7 +52,7 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpte
               <input class="processing_color titlecenter blinking" name="processtime" id="processedtime" size="10" type="text" disabled value="<?php echo "00h:00m:00s" ?>">
               <label  for="qtyproduced">Qty Produced:</label>
               <input class="quantityproduced" type="number" name="qtyproduced" id="qtyproduced"  min="0" max="<?php echo $orderQty?>" value="<?php echo "0"?>">
-              <label  class="comment" for="comment">Comment: 
+              <label  for="comment">Comment: 
                 <input  class="comment" type="text" name="comment" size= "50" id="comment" placeholder="Write comments if order incomplete."></label>
               <br>
             </div>
@@ -58,16 +60,16 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpte
             <div class="col-4"></div>
             <div class="col-4">
               <button id="startprod" class="btn_lg startbutton"  type="button">Start</button>
-              <button id="stopprod" class="btn_lg button-reset " type="button" onclick="stopprod">Stop</button>
+              <button id="stopprod" class="btn_lg button-reset " type="submit">Stop</button>
             </div>
             <div class="col-4"></div>
           </div>
         </div>
   
+</form>
 
-
-
-<!-- The Modal -->
+<form>
+<!-- The Modal --> 
   <div class="modal fade" id="myModal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -80,19 +82,19 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpte
         
         <!-- Modal body -->
         <div class="modal-body">
-          Spervisor Overrride Code
-           <label  for="">Comment: 
-                <input  class="comment" type="text"  placeholder="Write the code."></label>
+          The quantity produced is less than the quantity in the order.<br>
+             <label>Supervisor CODE: 
+                <input  class="comment" name="override" id="override" autofocus type="password"  required placeholder="Type the code."></label>
         </div>
         
         <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <div class="modal-footer"> 
+          <button type="button" class="btn startbutton" data-dismiss="modal">Submit</button>
         </div>
         
       </div>
     </div>
-  </div>
+  </div>  
 
 </form>
 

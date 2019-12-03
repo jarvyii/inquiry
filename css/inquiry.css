@@ -114,6 +114,7 @@ body {
   }
   .trackinginformation{
     margin-left: 25%;
+    margin-top: 4%;
     width: 50%;
   }
   .label-content{
@@ -145,6 +146,7 @@ body {
   .displaycolumn{
     text-decoration: underline;
     width: 140px;
+    font-weight: bold;
   }
   .datecontent{
     width: 160px;
@@ -163,10 +165,13 @@ body {
   }
   .comment {
     font-size: 16px;
-    color: red;
+    color: #8e2938;
   }
   a {
     /* color: white; */
+  }
+   .container {
+      max-width: 100%;
   }
 /* Small media movil */
 @media ( min-width:320px ){
@@ -280,9 +285,14 @@ body {
   body {
     font-size: 18px;
   }
+   .displaycolumn{
+    font-size: 12px;
+  }
+  .grillecolumn {
+    font-size: 9px;
+  }
   .comment {
     font-size: 16px;
-    color: red;
   }
   .tracking {
       margin-top: 2%;
@@ -325,6 +335,12 @@ body {
   body {
     font-size: 16px;
   }
+  .displaycolumn{
+    font-size: 12px;
+  }
+   .grillecolumn {
+    font-size: 11px;
+  }
   .tracking {
       margin-top: 2%;
       margin-left: 25%;
@@ -346,8 +362,7 @@ body {
   }
   .comment {
     font-size: 16px;
-    color: red;
-  }
+   }
   .logininput {
      width:40%;
      margin-left: 30%;
@@ -367,6 +382,12 @@ body {
 @media (min-width:1025px) {
   body {
     font-size: 18px;
+  }
+  .displaycolumn{
+    font-size: 14px;
+  }
+  .grillecolumn {
+    font-size: 11px;
   }
   .tracking {
       margin-top: 2%;

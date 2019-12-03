@@ -91,6 +91,15 @@ function checkOrder($Order){
     $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=?', $Order);
     return $Data;
 }
+/****************************************
+    checkOverrideCode($Code)
+    Return the Supervisor Name or "" 
+******************************************/
+function checkOverrideCode($Code){
+  // Table Name SUPER   :: Fields  CODE  char(10),  SUPERVISOR CHAR(25)
+  $Data = $this->conn->fetchRow('SELECT CODE, SUPERVISOR FROM CATPACDBF.SUPER  WHERE  CODE=?', $Code);
+   return  $Data;
+}
   /**********************************************
       function getOrderHeader()
       Return the  row value for an specific Order from the Table FLEXWEB.EHM
@@ -118,8 +127,7 @@ function checkOrder($Order){
       Return all rows value from the historic of one specific Order from the Table FLEXWEB.FMLOCHIST
   **********************************************/
  function getTrackLocHistory($OrderNumber){
-   $Data = $this ->conn->query('SELECT LHLIN, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM, MACHDESC FROM CATPACDBF.FMLOCHIST INNER JOIN CATPACDBF.MACHLIST ON  CATPACDBF.FMLOCHIST.LHMACH = CATPACDBF.MACHLIST.MACHINEID WHERE LHORD=?', $OrderNumber);
-
+   $Data = $this ->conn->query('SELECT LHLIN, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM,LHSOVR,LHCOMM, MACHDESC FROM CATPACDBF.FMLOCHIST INNER JOIN CATPACDBF.MACHLIST ON  CATPACDBF.FMLOCHIST.LHMACH = CATPACDBF.MACHLIST.MACHINEID WHERE LHORD=? ORDER BY LHSTRDTTIM, LHMACH, LHOPER', $OrderNumber);
      $Rows = $Data->fetchAll();
      return $Rows; 
  }

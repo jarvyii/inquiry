@@ -7,12 +7,11 @@ if (isset($_POST['inquiry']) && ! isset($_GET['q'])) {
     case 'Tracking':  Production($_POST['barcode'], $_POST['machine'],$_POST['operator']);
                       //TrackingInquiry($_POST['barcode'], $_POST['machine'],$_POST['operator']);
                      break;
-    case 'TrackingInquiry': if(isset($_POST['ordernumber']) and isset($_POST['linenumber'])){
-                              $OrderNumber = $_POST['ordernumber'];
-                              $LineNumber = $_POST['linenumber'];
+    case 'TrackingInquiry': if(isset($_POST['barcode'])){
+                              $OrderNumber = $_POST['barcode'];
                               //$Machine = $_POST['machine'];
                               $Operator = $_POST['operator'];
-                              TrackingInformation( $OrderNumber,$LineNumber, $Operator);
+                              TrackingInformation( $OrderNumber,$Operator);
                               //TrackingDisplay( $OrderNumber,$LineNumber);
                             }
                             break;
@@ -48,12 +47,14 @@ if (isset($_POST['inquiry']) && ! isset($_GET['q'])) {
      }
   } else {
         switch($_GET['q']) {
-          case 'Display'   :  return getLocHistory($_GET['order']);
+          case 'Display'   :  
+                              return getLocHistory($_GET['order'], $_GET['line']);
           case 'Checkorder':  if (isset($_GET['barcode'])) {
                                  $Barcode = $_GET['barcode'];
                                  $Pos = strpos($Barcode, "/");
                                  $Order= substr($Barcode,0, $Pos);
-                                 return checkOrder($Order);
+                                 $LineNumber =  substr($Barcode, $Pos+1);
+                                 return checkOrder($Order, $LineNumber);
                                 }
                                 break;
            case 'Override' : if (! isset($_GET['code'])) {

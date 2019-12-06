@@ -15,6 +15,7 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpte
    $codeItem = $headOI['EIPN'];
    $orderQty = $headOI['EIOCQ'];
    $neededQty = $headOI['EICCQ'];
+   $maxNeeded = $orderQty - $qtyCmpted; // Quantity to produce
    $objOrder = new DataAccess();
    $itemDesc = $objOrder ->getItemDesc( $codeItem);
     ?>
@@ -25,6 +26,7 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpte
         <input type="hidden" name="barcode" id = "barcode" value="<?php echo $BarCode?>"/>
         <input type="hidden" name="machine" id = "machine" value="<?php echo $idMachine?>"/>
         <input type="hidden" name="orderqty" id = "orderqty" value="<?php echo $orderQty?>"/>
+        <input type="hidden" name="qtycmpted" id = "qtycmpted" value="<?php echo $qtyCmpted?>"/>
         <input type="hidden" name="code" id = "code"/>
         <input type="hidden" name="supervisor" id = "supervisor"/>
         <input type="hidden" id="typeuser" name="typeuser" value="operator"/>
@@ -49,9 +51,9 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpte
         <div class="processing container justify-content-center">
             <div class="producecontent col">
               <label  for="processtime">Processing:</label>
-              <input class="processing_color titlecenter blinking" name="processtime" id="processedtime" size="10" type="text" disabled value="<?php echo "00h:00m:00s" ?>">
+              <input class="processing_color titlecenter blinking" name="processtime" id="processedtime" size="10" type="text" disabled value="<?php echo "00h:00m:00s" ?>"><br>
               <label  for="qtyproduced">Qty Produced:</label>
-              <input class="quantityproduced" type="number" name="qtyproduced" id="qtyproduced"  min="0" max="<?php echo $orderQty?>" value="<?php echo "0"?>">
+              <input class="quantityproduced" type="number" name="qtyproduced" id="qtyproduced"  min="0" max="<?php echo $maxNeeded?>" value="<?php echo "0"?>">
               <label  for="comment">Comment: 
                 <input  class="comment" type="text" name="comment" size= "50" id="comment" placeholder="Write comments if order incomplete."></label>
               <br>

@@ -14,17 +14,22 @@ function viewTrackingInquiry( $Operator){
         <input type="hidden" name="operator" id = "operator" value="<?php echo $Operator?>"/>
         <input type="hidden" id="typeuser" name="typeuser" value="supervisor"/>
         <div class="trackinginquiry">
-          <h3>Tracking Inquiry</h3><br>
-          <!-- Order Number-->
+         <br><br><h3>Tracking Inquiry</h3><br>
+          <!-- Order Number--> <!--
           <label class="label-inquiry" for="ordernumber">Order Number:</label>
-          <input class="input-tracking" type="text" name= "ordernumber"  id="ordernumber" placeholder="Enter Order Number" autofocus><br>
-          <!-- Line Number-->
+          <input class="input-tracking" type="text" name= "ordernumber"  id="ordernumber" placeholder="Order Number/Line" autofocus><br> -->
+
+          <!--  Bar Code -->
+          <label class="label-inquiry" for="barcode">Order Number:</label>
+          <input class="input-tracking" type="text" name= "barcode"  id="barcode" size = "20" placeholder="Bar Code/Line number" autofocus required ><br><br>
+
+          <!-- Line Number--> <!--
           <label class="label-inquiry" for="linenumber">Line Number:</label>
-          <input class="input-tracking" type="number" name = "linenumber" id="linenumber"  placeholder="Enter Line Number" required><br><br>
+          <input class="input-tracking" type="number" name = "linenumber" id="linenumber"  placeholder="Enter Line Number" required><br><br> -->
           <!-- Buttons-->
           <div class="button-trackinginquiry row">
              <div class ="col">
-                <button type="submit" class="btn button-next">Next</button>
+                <button id="search"  type="submit" class="btn button-next">Search</button>
              </div>
               <div class ="col">
                 <button type="reset" class="btn button-reset">Reset</button>
@@ -32,5 +37,6 @@ function viewTrackingInquiry( $Operator){
           </div>
         </div>
   </form> <?php
-  Foot();
+  $newScript = '<script src="../js/trackinginquiry.js"></script>';
+  Foot($newScript);
 }

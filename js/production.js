@@ -87,4 +87,9 @@ function overrideCode(){
 	document.getElementById("barcode").onblur=checkOrder;
 	document.getElementById("qtyproduced").onblur=checkProduction;
   document.getElementById("override").onblur= overrideCode;
-	})
+  // Check if qty Produced is equal or  greater than qty Ordered
+  if ( document.getElementById("qtycmpted").value >= document.getElementById("orderqty").value) {
+    document.getElementById("startprod").disabled = true;
+    alert("You can't process this order bcecause the quantity completed is greater than or equal to the quantity ordered.");
+  }
+})

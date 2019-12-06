@@ -11,9 +11,10 @@ require_once 'Views/viewTrackingInformation.php';
        getLocHistory($Order)
     Return the historic of one order from the table FMLOCHIST
 **************************************************/
-function getLocHistory($Order){
+function getLocHistory($OrderNumber, $Line ){
+   
    $db_conn = new DataAccess(); 
-   $tracksLoc = $db_conn ->getTrackLocHistory($Order);
+   $tracksLoc = $db_conn ->getTrackLocHistory($OrderNumber, $Line);
    echo json_encode($tracksLoc);
    //return $tracksLoc; 
 
@@ -23,9 +24,9 @@ function getLocHistory($Order){
      checkOrder($Order)
     Return if the one specific order exist the Database.
 *********************************************/
-function checkOrder($Order){
+function checkOrder($Order, $Line){
    $db_conn = new DataAccess(); 
-   $tracksLoc = $db_conn ->checkOrder($Order);
+   $tracksLoc = $db_conn ->checkOrder($Order, $Line);
    if( $tracksLoc) {
       echo json_encode($tracksLoc);
    } else {
@@ -57,10 +58,10 @@ $BarCode, $OrderCode, $LineNumber
 function TrackingDisplay($OrderNumber, $LineNumber, $Customer, $orderDate, $orderQtty, $Item) {
 
     viewTrackingDisplay($OrderNumber, $LineNumber);
-    $Order = new DataAccess(); 
+   // $objData = new DataAccess(); 
     //$headOrder = $Order -> getOrderHeader($OrderNumber, $LineNumber, $Machine);
    // $headOI = $Order ->getOrderItem($OrderNumber, $LineNumber);
-    $tracksLoc = $Order ->getTrackLocHistory($OrderNumber);
+   // $tracksLoc = $objData ->getTrackLocHistory($OrderNumber);
     viewHead( $OrderNumber, $LineNumber, $Customer, $orderDate, $orderQtty, $Item);//$headOI);//$headOrder, $headOI);
    
 
@@ -70,14 +71,16 @@ function TrackingDisplay($OrderNumber, $LineNumber, $Customer, $orderDate, $orde
 Display the Tracking Information
 ***************************************/
 
-function TrackingInformation ($OrderNumber, $LineNumber, $Operator) {
-   
+function TrackingInformation ($OrderNumber, $Operator) {
+   $Pos = strpos($OrderNumber, "/");;//strpos($Barcode, "/");
+   $Order = substr($OrderNumber,0, $Pos);
+   $LineNumber =  substr($OrderNumber, $Pos+1);
    $objData = new DataAccess(); 
-   $headOrder = $objData -> getOrderHeader($OrderNumber);
+   $headOrder = $objData -> getOrderHeader($Order, $LineNumber);
    //Order Item info.
-   $headOI = $objData ->getOrderItem($OrderNumber);
-   $qtyCmpted = $objData->qtyCompleted($OrderNumber);
-   viewTrackingInformation($OrderNumber, $LineNumber, $Operator,$qtyCmpted, $headOrder, $headOI);
+   $headOI = $objData ->getOrderItem($Order, $LineNumber);
+   $qtyCmpted = $objData->qtyCompleted($Order, $LineNumber );
+   viewTrackingInformation($Order, $LineNumber, $Operator,$qtyCmpted, $headOrder, $headOI);
       
       
 }//TrackingInformation ()
@@ -103,12 +106,15 @@ function Tracking($UserName) {
 function Production($BarCode, $idMachine, $Operator) {
    $Pos = strpos($BarCode, "/");
    $Order= substr($BarCode,0, $Pos);
+   $LineNumber =  substr($BarCode, $Pos+1);
+
+
    $objData = new DataAccess();
    $descMachine = $objData->getMachineDesc($idMachine);
-   $qtyCmpted = $objData->qtyCompleted($Order);
-   $headOrder = $objData->getOrderHeader($Order);
+   $qtyCmpted = $objData->qtyCompleted($Order, $LineNumber);
+   $headOrder = $objData->getOrderHeader($Order, $LineNumber);
    //Order Item info.
-   $headOI = $objData ->getOrderItem($Order);
+   $headOI = $objData ->getOrderItem($Order, $LineNumber);
    viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpted, $headOrder, $headOI);
   
 }

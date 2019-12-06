@@ -216,9 +216,13 @@ function  showHistoric(){
                   alert(output);*/
                }
             }
-            str = "Display&order="+document.getElementById("ordernumber").value;
-            xmlhttp.open("GET","../php/ControllerInquiry.php?q="+str,true);
-            xmlhttp.send();
+            var Order = document.getElementById("ordernumber").value+"&line=1";
+            
+         //  var str = "http:../php/ControllerInquiry.php?q=Display&order="+Order;
+           //var url = new URL(str);
+           xmlhttp.open("GET","../php/ControllerInquiry.php?q=Display&order="+Order,true);
+       //   xmlhttp.open("GET",url,true);
+           xmlhttp.send();
 }
 
   /*********************************************************************************

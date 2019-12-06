@@ -87,8 +87,10 @@ function getItemDesc( $codeItem){
         checkOrder($Order)
    Check if the order exist in the table  CATPACDBF.EHM
  ****************************************/
-function checkOrder($Order){
-    $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=?', $Order);
+function checkOrder($Order, $Line){
+   // $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=?', $Order);
+    $sql = "SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=$Order and EHLLN=$Line";
+    $Data = $this->conn->fetchRow($sql);
     return $Data;
 }
 /****************************************
@@ -104,10 +106,11 @@ function checkOverrideCode($Code){
       function getOrderHeader()
       Return the  row value for an specific Order from the Table FLEXWEB.EHM
   **********************************************/
- function getOrderHeader($OrderNumber) {
+ function getOrderHeader($Order, $Line) {
    // $Data = $this ->conn->query('SELECT 'EHCT#', EHORDT FROM FLEXWEB.EHM');
-    //var_dump($Data);
-    $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=?', $OrderNumber);
+    $sql = "SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=$Order and EHLLN=$Line";
+   // $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=? EHLLN=?', $Order, $Line);
+    $Data = $this->conn->fetchRow($sql);
     return $Data;
 
  }
@@ -116,8 +119,10 @@ function checkOverrideCode($Code){
       function getOrderItem()
       Return the row value for an specific Order from the Table FLEXWEB.EIM
   **********************************************/
- function getOrderItem($OrderNumber) {
-       $Data = $this->conn->fetchRow('SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM CATPACDBF.EIM WHERE EIORD=?', $OrderNumber);
+ function getOrderItem($Order, $Line) {
+     //  $Data = $this->conn->fetchRow('SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM CATPACDBF.EIM WHERE EIORD=?', $OrderNumber);
+    $sql = "SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM CATPACDBF.EIM WHERE EIORD=$Order and EILIN=$Line";
+    $Data = $this->conn->fetchRow($sql);
     return $Data;
 
  }
@@ -126,8 +131,11 @@ function checkOverrideCode($Code){
       function getTrackLocHistory()
       Return all rows value from the historic of one specific Order from the Table FLEXWEB.FMLOCHIST
   **********************************************/
- function getTrackLocHistory($OrderNumber){
-   $Data = $this ->conn->query('SELECT LHLIN, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM,LHSOVR,LHCOMM, MACHDESC FROM CATPACDBF.FMLOCHIST INNER JOIN CATPACDBF.MACHLIST ON  CATPACDBF.FMLOCHIST.LHMACH = CATPACDBF.MACHLIST.MACHINEID WHERE LHORD=? ORDER BY LHSTRDTTIM, LHMACH, LHOPER', $OrderNumber);
+ function getTrackLocHistory($OrderNumber, $Line){
+
+    $sql = "SELECT LHLIN, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM,LHSOVR,LHCOMM, MACHDESC FROM CATPACDBF.FMLOCHIST INNER JOIN CATPACDBF.MACHLIST ON  CATPACDBF.FMLOCHIST.LHMACH = CATPACDBF.MACHLIST.MACHINEID WHERE LHORD=$OrderNumber and LHLIN=$Line ORDER BY LHSTRDTTIM, LHMACH, LHOPER";
+   //$Data = $this ->conn->query('SELECT LHLIN, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM,LHSOVR,LHCOMM, MACHDESC FROM CATPACDBF.FMLOCHIST INNER JOIN CATPACDBF.MACHLIST ON  CATPACDBF.FMLOCHIST.LHMACH = CATPACDBF.MACHLIST.MACHINEID WHERE LHORD=? ORDER BY LHSTRDTTIM, LHMACH, LHOPER', $OrderNumber);
+     $Data = $this ->conn->query($sql);
      $Rows = $Data->fetchAll();
      return $Rows; 
  }
@@ -155,8 +163,10 @@ function checkOverrideCode($Code){
           function qtyCompleted($OrderNumber)
     Rteurn how many quantity has beeen completed for one specific order.      
  ************************************************/
- function qtyCompleted($Order){
-    $Data = $this ->conn->query('SELECT SUM(LHQTY) FROM CATPACDBF.FMLOCHIST WHERE LHORD=?', $Order);
+ function qtyCompleted($Order, $Line){
+   // $Data = $this ->conn->query('SELECT SUM(LHQTY) FROM CATPACDBF.FMLOCHIST WHERE LHORD=?', $Order);
+    $sql = "SELECT SUM(LHQTY) FROM CATPACDBF.FMLOCHIST WHERE LHORD=$Order and LHLIN=$Line";
+    $Data = $this ->conn->query($sql);
     $Rows = $Data->fetch();
      foreach( $Rows as $index=>$content) {
       return $content;

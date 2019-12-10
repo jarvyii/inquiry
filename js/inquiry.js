@@ -5,30 +5,7 @@ $(document).ready(function(){
     $('.blinking').fadeOut(500);
     $('.blinking').fadeIn(500);
   }
-  // Add Value to the Machine Input in the Tracking Form
- function AddMachines(){
-       var jsonURL ="../data/machines.json";
-      var usersFormat ={
-                        format: "json"
-                       };
-        // /FUNCTION getHead()
-       function getHead(Data) {
-            $.each(Data,function(i, Order) {
-                $('#machine').append($('<option>',
-                  {
-                     value: Order["machineid"],
-                     text : Order["machdesc"]
-                 }));
-
-                
-              })
-          }  //  \FUNCTION getHead()
-       $.getJSON(jsonURL, usersFormat,  getHead );
- 
-      return false;
     
-  } //function AddMachines()
-  
 /**********************************************************************************
  Check valid the User and password introduced in Login Form. And setup all INFO in the System.
  FUNCTION  $('#buttonlogin').click(function ())
@@ -108,11 +85,10 @@ $('#stopprod').click(function (){
 
   //  document.getElementById("loginform").style.display = "block";
   //  document.getElementById("input-ordercode").style.display = "none";
-  AddMachines(); // Add value element to the SELECT Machine
-  //setInterval(blinker,1000);
+   //setInterval(blinker,1000);
   if (document.getElementById("typeuser").value == "operator"){
       document.getElementById("exit-nav").href = "../index.php";
-      document.getElementById("qtyproduced").disabled = true;
+      //document.getElementById("qtyproduced").disabled = true;
 
   } else {
       document.getElementById("exit-nav").href = "../supervisor.php";

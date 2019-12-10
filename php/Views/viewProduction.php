@@ -101,13 +101,6 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpte
 </form>
 
 
-
-
-
-
-
-
-
   <?php
    $newScript = '<script src="../js/production.js"></script>';
   Foot($newScript);

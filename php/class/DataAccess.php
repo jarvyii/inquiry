@@ -87,17 +87,23 @@ function getItemDesc( $codeItem){
         checkOrder($Order)
    Check if the order exist in the table  CATPACDBF.EHM
  ****************************************/
-function checkOrder($Order, $Line){
+function checkOrder($Order, $pLine){
+  $Line = (int) $pLine;
+  $Order = $Order;
    // $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=?', $Order);
-    $sql = "SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=$Order and EHLLN=$Line";
-    $Data = $this->conn->fetchRow($sql);
-    return $Data;
-}
+   //$Data = $this->conn->fetchRow($sql);
+   // return $Data;
+    $sql = "SELECT EHCT#, EHORD, EHORDT FROM CATPACDBF.EHM WHERE EHORD='$Order' and EHLLN='$Line'";
+    $Data = $this ->conn->query($sql);
+    $Rows = $Data->fetchAll();
+    return $Rows; 
+ }
 /****************************************
     checkOverrideCode($Code)
     Return the Supervisor Name or "" 
 ******************************************/
 function checkOverrideCode($Code){
+  $Code = trim($Code);
   // Table Name SUPER   :: Fields  CODE  char(10),  SUPERVISOR CHAR(25)
   $Data = $this->conn->fetchRow('SELECT CODE, SUPERVISOR FROM CATPACDBF.SUPER  WHERE  CODE=?', $Code);
    return  $Data;
@@ -107,9 +113,11 @@ function checkOverrideCode($Code){
       Return the  row value for an specific Order from the Table FLEXWEB.EHM
   **********************************************/
  function getOrderHeader($Order, $Line) {
-   // $Data = $this ->conn->query('SELECT 'EHCT#', EHORDT FROM FLEXWEB.EHM');
-    $sql = "SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=$Order and EHLLN=$Line";
-   // $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=? EHLLN=?', $Order, $Line);
+   $Line = (int)$Line;
+   /* $Data = $this ->conn->query('SELECT 'EHCT#', EHORDT FROM FLEXWEB.EHM');
+      $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=? EHLLN=?', $Order, $Line); */
+
+    $sql = "SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD='$Order' and EHLLN='$Line'";
     $Data = $this->conn->fetchRow($sql);
     return $Data;
 
@@ -120,8 +128,9 @@ function checkOverrideCode($Code){
       Return the row value for an specific Order from the Table FLEXWEB.EIM
   **********************************************/
  function getOrderItem($Order, $Line) {
+     $Line = (int)$Line;
      //  $Data = $this->conn->fetchRow('SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM CATPACDBF.EIM WHERE EIORD=?', $OrderNumber);
-    $sql = "SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM CATPACDBF.EIM WHERE EIORD=$Order and EILIN=$Line";
+    $sql = "SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM CATPACDBF.EIM WHERE EIORD='$Order' and EILIN='$Line'";
     $Data = $this->conn->fetchRow($sql);
     return $Data;
 
@@ -132,8 +141,8 @@ function checkOverrideCode($Code){
       Return all rows value from the historic of one specific Order from the Table FLEXWEB.FMLOCHIST
   **********************************************/
  function getTrackLocHistory($OrderNumber, $Line){
-
-    $sql = "SELECT LHLIN, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM,LHSOVR,LHCOMM, MACHDESC FROM CATPACDBF.FMLOCHIST INNER JOIN CATPACDBF.MACHLIST ON  CATPACDBF.FMLOCHIST.LHMACH = CATPACDBF.MACHLIST.MACHINEID WHERE LHORD=$OrderNumber and LHLIN=$Line ORDER BY LHSTRDTTIM, LHMACH, LHOPER";
+    $Line = (int) $Line;
+    $sql = "SELECT LHLIN, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM,LHSOVR,LHCOMM, MACHDESC FROM CATPACDBF.FMLOCHIST INNER JOIN CATPACDBF.MACHLIST ON  CATPACDBF.FMLOCHIST.LHMACH = CATPACDBF.MACHLIST.MACHINEID WHERE LHORD='$OrderNumber' and LHLIN='$Line' ORDER BY LHSTRDTTIM, LHMACH, LHOPER";
    //$Data = $this ->conn->query('SELECT LHLIN, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM,LHSOVR,LHCOMM, MACHDESC FROM CATPACDBF.FMLOCHIST INNER JOIN CATPACDBF.MACHLIST ON  CATPACDBF.FMLOCHIST.LHMACH = CATPACDBF.MACHLIST.MACHINEID WHERE LHORD=? ORDER BY LHSTRDTTIM, LHMACH, LHOPER', $OrderNumber);
      $Data = $this ->conn->query($sql);
      $Rows = $Data->fetchAll();
@@ -144,7 +153,7 @@ function checkOverrideCode($Code){
       Inserts rows in the Table FMLOCHIST
  ***********************************************/
  function insertHistoric($Param){
-       $row = array( 'LHORD'=> $Param['order'], 'LHLIN'=>$Param['line'], 'LHMACH'=>$Param['machine'], 
+       $row = array( 'LHORD'=> $Param['order'], 'LHLIN'=>(int)$Param['line'], 'LHMACH'=>$Param['machine'], 
                      'LHOPER'=>$Param['operator'], 'LHQTY'=>$Param['qty'],'LHSTRDTTIM'=>$Param['starttime'],
                      'LHSTPDTTIM'=>$Param['endtime'], 'LHCOMM'=>$Param['comment'], 
                      'LHSOVR'=>$Param['override']
@@ -164,12 +173,13 @@ function checkOverrideCode($Code){
     Rteurn how many quantity has beeen completed for one specific order.      
  ************************************************/
  function qtyCompleted($Order, $Line){
+    $Line = (int) $Line;
    // $Data = $this ->conn->query('SELECT SUM(LHQTY) FROM CATPACDBF.FMLOCHIST WHERE LHORD=?', $Order);
-    $sql = "SELECT SUM(LHQTY) FROM CATPACDBF.FMLOCHIST WHERE LHORD=$Order and LHLIN=$Line";
+    $sql = "SELECT SUM(LHQTY) FROM CATPACDBF.FMLOCHIST WHERE LHORD=$Order and LHLIN='$Line'";
     $Data = $this ->conn->query($sql);
     $Rows = $Data->fetch();
      foreach( $Rows as $index=>$content) {
-      return $content;
+       return empty($content)? 0: $content;
      }
  }
 

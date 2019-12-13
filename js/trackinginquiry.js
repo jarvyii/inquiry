@@ -13,7 +13,7 @@ $(document).ready(function(){
  function checkOrder(){
      Barcode = document.getElementById("barcode").value;
      if (Barcode == ""){
-         alert("Sorry. The order number can not be empty.");
+        // alert("Sorry. The order number can not be empty.");
       return;
      }
      Pos = Barcode.indexOf("/");

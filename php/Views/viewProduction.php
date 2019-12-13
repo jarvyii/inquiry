@@ -20,7 +20,7 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpte
    $itemDesc = $objOrder ->getItemDesc( $codeItem);
     ?>
 
-  <form name="production"  action="ControllerInquiry.php" method="post" autocomplete="on">
+  <form name="production"  id="productionform"action="ControllerInquiry.php" method="post">
         <input type="hidden" name="inquiry" value="Production"/>
         <input type="hidden" name="operator" id = "operator" value="<?php echo $Operator?>"/>
         <input type="hidden" name="barcode" id = "barcode" value="<?php echo $BarCode?>"/>

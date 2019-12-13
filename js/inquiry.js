@@ -65,6 +65,7 @@ $('#startprod').click(function (){
       // alternatively just show wall clock time:
       //alert(new Date().toUTCString());
       }, 1000); // update about every seconds
+    document.getElementById("qtyproduced").focus();  
 })
 /***********************************
    Stop the Production process

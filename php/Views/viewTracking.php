@@ -17,7 +17,7 @@ function  viewTracking($UserName){
               <h3>Tracking</h3><br>
               <!--  Bar Code -->
               <label class="label-tracking" for="barcode">Order No.:</label>
-              <input class="input-tracking" type="text" name= "barcode"  id="barcode" size = "15" placeholder="Scan Bar Code" autofocus ><br>
+              <input class="input-tracking" type="text" name= "barcode"  id="barcode" size = "15" placeholder="Scan Bar Code" autofocus required><br>
               <!-- Dynamic List of Machine -->
               <label class="label-tracking" for="machine">Machine:</label>
               <select name="machine" id="machine" required>

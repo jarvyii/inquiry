@@ -38,6 +38,9 @@ if (isset($_POST['inquiry']) && ! isset($_GET['q'])) {
                                          "comment"  => $_POST['comment'],
                                          "override" => $_POST['supervisor']
                                        );
+                          // if (($_POST['qtyproduced']+$_POST['qtycmpted'])>$_POST['orderqty']) {
+
+                            // }
                            endProduction( $Param);
                            tracking($_POST['operator']);
                         }

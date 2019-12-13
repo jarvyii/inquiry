@@ -93,7 +93,7 @@ function checkOrder($Order, $pLine){
    // $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=?', $Order);
    //$Data = $this->conn->fetchRow($sql);
    // return $Data;
-    $sql = "SELECT EHCT#, EHORD, EHORDT FROM CATPACDBF.EHM WHERE EHORD='$Order' and EHLLN='$Line'";
+    $sql = "SELECT EIORD FROM CATPACDBF.EIM WHERE EIORD='$Order' and EILIN='$Line'";
     $Data = $this ->conn->query($sql);
     $Rows = $Data->fetchAll();
     return $Rows; 
@@ -117,7 +117,7 @@ function checkOverrideCode($Code){
    /* $Data = $this ->conn->query('SELECT 'EHCT#', EHORDT FROM FLEXWEB.EHM');
       $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=? EHLLN=?', $Order, $Line); */
 
-    $sql = "SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD='$Order' and EHLLN='$Line'";
+    $sql = "SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD='$Order'";
     $Data = $this->conn->fetchRow($sql);
     return $Data;
 

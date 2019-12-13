@@ -21,7 +21,7 @@ function viewTrackingInquiry( $Operator){
 
           <!--  Bar Code -->
           <label class="label-inquiry" for="barcode">Order Number:</label>
-          <input class="input-tracking" type="text" name= "barcode"  id="barcode" size = "20" placeholder="Bar Code/Line number" autofocus required ><br><br>
+          <input class="input-tracking" type="text" name= "barcode"  id="barcode" size = "15" placeholder="Bar Code/Line number" autofocus required ><br><br>
 
           <!-- Line Number--> <!--
           <label class="label-inquiry" for="linenumber">Line Number:</label>

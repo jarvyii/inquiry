@@ -1,7 +1,19 @@
 $(document).ready(function(){
-$('#barcode').click(function (){
-   document.getElementById("produce").disabled =false;
-   document.getElementById("travelerbutton").disabled =false;
+
+$('#qtyproduced').keypress(function (event){
+  var keycode = (event.keyCode ? event.keyCode: event.wich);
+  if( keycode == '13'){
+    //event.stopPropagation();
+    //alert('Enterrrrrrrr:'+document.getElementById("qtyproduced").value);
+    
+    checkProduction();
+  } 
+})
+
+
+$('#qtyproduced').click(function (){
+   document.getElementById("stopprod").disabled =false;
+   //document.getElementById("travelerbutton").disabled =false;
 
 })
 /*************************************************
@@ -51,8 +63,10 @@ function overrideCode(){
         document.getElementById("stopprod").disabled = true;
         $("#myModal").modal("show");
       }
-     document.getElementById("stopprod").disabled = false; 
+    // document.getElementById("stopprod").disabled = false; 
   }
+
+
 	//Begining of the JavaScript body
 	//document.getElementById("barcode").onblur=checkOrder;
 	document.getElementById("qtyproduced").onblur=checkProduction;
@@ -62,5 +76,6 @@ function overrideCode(){
     document.getElementById("startprod").disabled = true;
     alert("You can't process this order bcecause the quantity completed is greater than or equal to the quantity ordered.");
   }
-  document.getElementById("stopprod").disabled = true;
+  //document.getElementById("stopprod").disabled = true;
+  document.getElementById("qtyproduced").disabled = true;
 })

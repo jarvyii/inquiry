@@ -130,7 +130,7 @@ function checkOverrideCode($Code){
  function getOrderItem($Order, $Line) {
      $Line = (int)$Line;
      //  $Data = $this->conn->fetchRow('SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM CATPACDBF.EIM WHERE EIORD=?', $OrderNumber);
-    $sql = "SELECT EIOCQ,EICCQ,EIPN,EILID,EIPNT FROM CATPACDBF.EIM WHERE EIORD='$Order' and EILIN='$Line'";
+    $sql = "SELECT EICCQ,EIPN,EILID,EIPNT FROM CATPACDBF.EIM WHERE EIORD='$Order' and EILIN='$Line'";
     $Data = $this->conn->fetchRow($sql);
     return $Data;
 

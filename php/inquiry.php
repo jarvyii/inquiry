@@ -126,7 +126,8 @@ function Production($BarCode, $idMachine, $Operator) {
              $headOrder = $objData->getOrderHeader($Order, $LineNumber);
              //Order Item info.
              $headOI = $objData ->getOrderItem($Order, $LineNumber);
-                viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpted, $headOrder, $headOI);
+             //var_dump($headOI);
+             viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpted, $headOrder, $headOI);
 
              return;
          }

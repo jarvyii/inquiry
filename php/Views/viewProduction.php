@@ -13,8 +13,8 @@ function  viewProduction($BarCode, $idMachine, $descMachine,$Operator, $qtyCmpte
    $Date = substr($d, 3,2)."/".substr($d, 5,2)."/".substr($d, 1,2);
    $processTime = 5;
    $codeItem = $headOI['EIPN'];
-   $orderQty = $headOI['EIOCQ'];
-   $neededQty = $headOI['EICCQ'];
+   $orderQty = $headOI['EICCQ'];
+   $neededQty = $orderQty - $qtyCmpted;
    $maxNeeded = $orderQty - $qtyCmpted; // Quantity to produce
    $objOrder = new DataAccess();
    $itemDesc = $objOrder ->getItemDesc( $codeItem);

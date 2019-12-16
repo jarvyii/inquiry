@@ -8,7 +8,8 @@ function viewTrackingInformation($OrderNumber, $LineNumber, $Operator, $qtyCmpte
    $orderDate = substr($d, 3,2)."/".substr($d, 5,2)."/".substr($d, 1,2);
    $Customer = $headOrder['EHCT#'];
    $Item = $headOI['EIPN'];
-   $orderQty = (int)$headOI['EIOCQ'];
+   $orderQty = (int)$headOI['EICCQ'];
+   $neededQty = $orderQty - $qtyCmpted;
    ?>
     <form name="trackinginformation"  action="ControllerInquiry.php" method="post" autocomplete="on">
       <div class="trackinginformation">
@@ -25,7 +26,7 @@ function viewTrackingInformation($OrderNumber, $LineNumber, $Operator, $qtyCmpte
           <label class="label-tracking">Customer: <span class="label-content"><?php echo $Customer?></span></label>
           <label class="label-tracking">Order date: <span class="label-content"><?php echo $orderDate?></span></label>
           <label class="label-tracking">Order Qty: <span class="label-content"><?php echo $orderQty?></span></label>
-          <label class="label-tracking">Qty Needed: <span class="label-content"><?php echo $headOI['EICCQ']?></span></label>
+          <label class="label-tracking">Qty Needed: <span class="label-content"><?php echo $neededQty?></span></label>
           <label class="label-tracking">Qty Completed: <span class="label-content"><?php echo $qtyCmpted?></span></label>
           <label class="label-tracking">Item: <span class="label-content"><?php echo $Item?></span></label>
           <label class="label-tracking">Item Desc.: <span class="label-content"><?php echo $headOI['EILID']?></span></label>

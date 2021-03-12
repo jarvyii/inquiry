@@ -46,12 +46,13 @@ if (! isset($_POST['qtyproduced']) or $_POST['qtyproduced'] == "") {
 $isFlitch = isset($_POST['isflitch']) ? htmlspecialchars($_POST['isflitch']): "N";
 $Flitch = "";
 
-if (strtoupper($isFlitch) == "Y") {
+if (strtoupper($isFlitch) == "Y" or strtoupper($isFlitch) == "U" ) {
       if (! isset($_POST['flitch']) or $_POST['flitch'] == "") {
         echo "Error: Missing flitch number";
         return;
       }
      $Flitch =  htmlspecialchars($_POST['flitch']);
+
 } 
                                            
  $Param = array("operator" => $_POST['operator'],
@@ -66,7 +67,8 @@ if (strtoupper($isFlitch) == "Y") {
                 "comment"  => $_POST['comment'],
                 "override" => $_POST['supervisor'],
                 "itemnumber" => $_POST['itemnumber'],
-                "shortageTicket" => $_POST['code'] == ""? false:true
+                "shortageTicket" => $_POST['code'] == ""? false:true,
+                "ïsflitch" => $isFlitch
               );
                          
  endProduction( $Param );

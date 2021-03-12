@@ -69,7 +69,9 @@ function myProduction() {
       var idMachine = document.getElementById("machine").value.substr(1);
     
       para = "Production&idmachine="+idMachine;
+
       xmlhttp.open("GET","../php/ControllerInquiry.php?q="+para,true);
+      
       xmlhttp.send();  
   
 }

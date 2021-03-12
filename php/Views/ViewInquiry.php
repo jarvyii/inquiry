@@ -62,7 +62,7 @@ function Foot( $newScript="")
              </div>
              <div class="col-10">
                <!-- Copyright -->
-                &copy; 2019 Inquiry System 1.0 &amp; <a id="user-nav" href="//www.minimaxinfo.com" target="_blank">mini-MAX Information Systems, Inc.</a>
+                &copy; 2021 Inquiry System 2.0 &amp; <a id="user-nav" href="//www.minimaxinfo.com" target="_blank">mini-MAX Information Systems, Inc.</a>
                <!-- Copyright -->
              </div>
              <div class="col-1">
@@ -76,15 +76,24 @@ function Foot( $newScript="")
  
  <script>
   
-  function myCost( sIdHour, sIdMin, sIdCost, sIdSqf ) {
-     var Minutes = parseInt( document.getElementById(sIdHour).value)*60 + parseInt(document.getElementById(sIdMin).value);
-     var sqfProduce = parseInt( document.getElementById(sIdSqf).value);
+  function myCost( sIdHour, sIdMin,sidHourRate, sIdCost, sIdSqf ) {
+     
+    var Minutes = parseInt( document.getElementById(sIdHour).value)*60 + parseInt(document.getElementById(sIdMin).value);
+    var Rate = parseFloat(document.getElementById(sidHourRate).value.trim().substr(1));
+
+    var Value = Minutes * Rate;
+
+
+     var sqftProduce = parseFloat( document.getElementById(sIdSqf).value);
      var Cost = 0.00;
-     if (( Minutes != 0 ) &&   ( sqfProduce != 0 ) ){
-       Cost = 60 / ( Minutes / sqfProduce );
+
+     if ( sqftProduce != 0 ){
+
+      Cost = ( Value/sqftProduce  ) / 60;
+  
      }
      
-     document.getElementById(sIdCost).innerHTML =  Cost.toFixed(2);
+    document.getElementById(sIdCost).value =  Cost.toFixed(2);
  }
  </script>
  <!-- <script src="https://code.jquery.com/jquery-3.1.0.js"></script> -->

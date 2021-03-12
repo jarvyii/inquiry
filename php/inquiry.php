@@ -7,7 +7,7 @@ require_once 'Views/viewTrackingDisplay.php';
 require_once 'Views/viewTrackingInquiry.php'; 
 require_once 'Views/viewTrackingInformation.php';
 require_once 'PHPMailer/PHPMailerAutoload.php';
-require_once 'topdf.php';
+
 //PHP Mailer Library
 // require_once  'PHPMailer/PHPMailer.php';
 // require_once  'PHPMailer/SMTP.php';
@@ -111,19 +111,6 @@ function producedCost($Produced, $Hours, $Min){
          return round( $Cost, 2); 
 }
 
-function createPDF()
-{ 
-  $pdf = new PDF('P','mm','Letter'); 
-  // Column headings
-  $header = array('Machine', 'QTY', 'HOURS', 'TOTAL COST');
-  $data = $pdf->LoadData();
-  $pdf->AliasNbPages();
-  $pdf->AddPage();
-  $pdf->SetFont('Arial','',12);
-  $pdf->BasicTable($header,$data);
-  
-  $pdf->Output(); 
-}
 /*******************************
 Send Email at the end of the Shift
 ********************************/
@@ -355,16 +342,8 @@ $BarCode, $OrderCode, $LineNumber
 function TrackingDisplay($OrderNumber, $LineNumber, $Customer, $orderDate, $orderQtty, $Item, $Operator) {
 
     viewTrackingDisplay($OrderNumber, $LineNumber);
-   // $objData = new DataAccess(); 
-    //$headOrder = $Order -> getOrderHeader($OrderNumber, $LineNumber, $Machine);
-   // $headOI = $Order ->getOrderItem($OrderNumber, $LineNumber);
-   // $tracksLoc = $objData ->getTrackLocHistory($OrderNumber);
-    viewHead( $OrderNumber, $LineNumber, $Customer, $orderDate, $orderQtty, $Item, $Operator);//$headOI);//$headOrder, $headOI);
    
-//testing
-  //     $objData = new DataAccess(); 
-  //    $objData -> testFMLOCHIST($OrderNumber, $LineNumber);
-
+    viewHead( $OrderNumber, $LineNumber, $Customer, $orderDate, $orderQtty, $Item, $Operator);//$headOI);//$headOrder, $headOI);
 
 } //TrackingDisplay
 
@@ -438,30 +417,22 @@ function shiftsOrder( $Order, $Line){
 function ShiftsHour($idMachine) {
      date_default_timezone_set("America/New_York");
      
-    $hHour = date("H");
-    $hmTime = ""; // date("H:i");
-    $dDate = "";  
-    
-    if ( (trim(  $idMachine ) == "MACH04") || ( trim(  $idMachine ) == "MACH05" ) ) {
-       // Itale Press && Sennersko Press
-            if ( ($hHour >= "07") && ($hmTime < "15:30")  ) {
-                  $dDate = date("Y-m-d-07.00.00") ; //
-               } else { 
-                   if ( ($hmTime >= "15:30") && ($hmTime < "23:45")  ) {
-                      $dDate = date("Y-m-d-15.30.00") ; 
-                     }
-               }
-          
-      } else { 
-       if ( ($hHour >= "07") && ($hHour < "18")  ) {
-           $dDate = date("Y-m-d-07.00.00") ; //
-        } else {
-          if ( ($hHour >= "18") && ($hHour < "24")  ) {
-              $dDate = date("Y-m-d-18.00.00") ; 
-            }
-        }
-      } 
-    Return $dDate;
+   $hHour = date("H");
+    $hmTime = date("H:i");
+    $dDate = ""; 
+  
+
+    if ( ($hHour >= "04") && ($hmTime <= "15:30")  ) {
+
+          $dDate = date("Y-m-d-04.00.00") ; //
+
+    } elseif ( ($hmTime > "15:30") && ($hmTime <= "23:45")  ) {
+
+        $dDate = date("Y-m-d-15.30.00") ; 
+             
+    }
+   
+   return  $dDate;
 }
  /**************************************
  call a PHP Function (DataAccess ), to acces DB2 Database, and return Total of Orders, Total Machine Time and Total Qty Produced 
@@ -472,14 +443,9 @@ function MachinesProd() {
  
  // $dDate = date("Y-m-d-00.00.00");
  $objData = new DataAccess();
-
- // $MachProd = $objData -> getMachProd($dDate); 
-
- // echo json_encode($MachProd); 
-
-
-
-//Testing
+ 
+ $Shift =  $objData->getShift();
+ $startTime =  $objData->startShiftTime( $Shift );
  
   $listMachines = $objData -> getMachines();
 
@@ -490,14 +456,12 @@ function MachinesProd() {
 
   foreach( $listMachines as $Index => $Row ) {
      $dDate =  ShiftsHour($Row['MACHINEID']);
-     $machProduction = $objData -> getMachProd( $Row['MACHINEID'], $dDate );
+     $machProduction = $objData -> getMachProd( $Row['MACHINEID'], $startTime );
      $listMachines[$Index]['QTY'] =  $machProduction['QTY'] === "" ? 0 : $machProduction['QTY'];
      $listMachines[$Index]['ORDERS'] = $machProduction['ORDERS'] === "" ? 0 : $machProduction['ORDERS'];
   }
 
  
- 
- //return $machinesList;
 
  echo json_encode($listMachines);
 
@@ -538,39 +502,106 @@ function calculateOrderQty( $PMCLAS, $EIFGD, $EIBGD, $orderQty ){
     return $orderQty;
 }
 
-function dailyProduction( $objData, $idMachine ) {
+
+ function PanelOrSheet( $db, $Order, $Line) {
+  //  $Sheets = array ( "01", "03", "10", "11", "12", "13", "54", "57" );
+  //  $Panels = array("08", "09");
+
+    $headOI = $db->getOrderItem($Order, $Line );
+
+    $itemNumber = $headOI['EIPN'].trim();
+
+    $product =  $db->getItemDesc($itemNumber); 
+    $pmClas = $product['PMCLAS'].trim(); 
+
+    $Value = ""; 
+
+     if ( in_array( $pmClas, $db->Panels ) ) {
+        $Value = "PANELS";
+     } 
+
+     if ( in_array( $pmClas, $db->Sheets) ) {
+        $Value = "SHEETS";
+     }  
+
+     return $Value; 
+  }
+/***************************************************/
+function dailyProduction( $objData, $idMachine, $Shift ) {
+
+  $shiftsProduction = array();  
+  
+  $startTime = $objData->startShiftTime(  $Shift );
+
+
+
+
  
-  $Orders = $objData -> dailyOrders( $idMachine );
-  if ($Orders == ""){
+  $Orders = $objData -> dailyOrders( $idMachine, $startTime );
+  if ($Orders === ""){
     return 0;
   }
-  $shiftsProduction = 0;
+  $shiftsProduction['Production'] = 0;
+  $shiftsProduction['Qty'] = 0;
+  $shiftsProduction['Boards'] = 0;
+  $shiftsProduction['Sheets'] = 0;
+
   
-  foreach ( $Orders as $Index=> $Order) {
-       $shiftsProduction += $Order['LHQTY'] * $objData -> qttyPMSLU( $Order['LHPN']) ;
+  foreach ( $Orders as $Index => $Order) {
+       $shiftsProduction['Production'] += $Order['LHQTY'] * $objData -> qttyPMSLU( $Order['LHPN']) ;
+       $shiftsProduction['Qty'] +=  $Order['LHQTY'];
+
+       $orderNumber = $Order['LHORD'].trim();
+       $lineNumber = $Order['LHLIN'].trim();
+
+       $valuePanelOrSheet = PanelOrSheet( $objData, $orderNumber, $lineNumber);
+
+       if ( $valuePanelOrSheet == "PANELS") {
+          $shiftsProduction['Boards'] += $Order['LHQTY'];
+       } else if ( $valuePanelOrSheet == "SHEETS") {
+           $shiftsProduction['Sheets'] += $Order['LHQTY'];
+       }
+
      }
  
  return $shiftsProduction;
 }
+
+/***********************************************/
+
 function getdailyOrders( $idMachine ) {
-   $objData = new DataAccess();
+  $objData = new DataAccess();
+
+  $Shift = $objData->getShift();
+  $machineProduction = dailyProduction( $objData, $idMachine, $Shift );
     
-  return dailyProduction( $objData, $idMachine );
+  return $machineProduction['Production'];
 }
+
 
 /**************************************
     Return Daily Production per MAchine
 ****************************************/
-function getdailyProd() {
+function getdailyProd( $Shift ) {
 
  // Enviar();
 
 
   $objData = new DataAccess();
   $listMachines = $objData -> getMachines();
+
+
+
   foreach( $listMachines as $Index => $Row ) {
-    $listMachines[$Index]['PRODUCTION'] =  dailyProduction( $objData, $Row['MACHINEID'] );
+
+    $shiftsProduction =  dailyProduction( $objData, $Row['MACHINEID'], $Shift );
+
+    $listMachines[$Index]['PRODUCTION'] =  $shiftsProduction['Production'];
+    $listMachines[$Index]['QTY'] =  $shiftsProduction['Qty'];
+    $listMachines[$Index]['BOARDS'] = $shiftsProduction['Boards'];
+    $listMachines[$Index]['SHEETS'] = $shiftsProduction['Sheets'];
   }
+  
 
   // echo json_encode($listMachines);
   return $listMachines;
@@ -616,14 +647,28 @@ function Production($BarCode, $idMachine, $Operator, $selectindex, $Panel) {
              $itemDesc = $headDesc['PMDESC'];//$objData ->getItemDesc( $codeItem);
     
              $orderQtyToShow = (int)$headOI['EICCQ'];
-             // To trace and test this Vars.
-            // echo " PMCLAS:". $headDesc['PMCLAS']. " EIFGD:".$headOI['EIFGD']."EIBGD: ".$headOI['EIBGD']. "Qtty:".$orderQty;
+            
              $totalQty = calculateOrderQty( $headDesc['PMCLAS'], $headOI['EIFGD'], $headOI['EIBGD'], $orderQtyToShow);
              $neededQty = $totalQty - $qtyCmpted;
           
-             $Production =  dailyProduction( $objData, $idMachine);
+             $Shift = $objData->getShift();
 
-            viewProduction($BarCode,$Order, $LineNumber,$Date,$idMachine, $descMachine, $isFlitch, $Operator, $qtyCmpted, $headOrder['EHCT#'], $totalQty, $neededQty, $orderQtyToShow, $selectindex, $codeItem, $itemDesc, $typePart, $Panel, $Production );
+             if ( $isFlitch === "Y" )
+             {
+                 $FlitchNumber = $objData -> getFlitchNumber($Order, $LineNumber, $codeItem );
+
+                 
+                 if ( $FlitchNumber != "")
+                 {
+                 
+                     $isFlitch =  $FlitchNumber;
+                 }
+             }
+
+
+             $Production =  dailyProduction( $objData, $idMachine, $Shift );
+
+            viewProduction($BarCode,$Order, $LineNumber,$Date,$idMachine, $descMachine, $isFlitch, $Operator, $qtyCmpted, $headOrder['EHCT#'], $totalQty, $neededQty, $orderQtyToShow, $selectindex, $codeItem, $itemDesc, $typePart, $Panel, $Production['Production'] );
  
              return;
          }  
@@ -642,7 +687,15 @@ function endProduction($Param ){
    $objData  = new DataAccess();
 
    if ( $Param['flitch'] <> "" ) {
-    $objData -> insertFlitch($Param);
+     if($Param['isflitch'] == "Y") 
+     {
+       $objData -> insertFlitch($Param);
+     } 
+     else
+     {
+       $objData -> updateFlitch($Param);
+     }
+   
    } 
    
    $objData -> insertHistoric($Param);

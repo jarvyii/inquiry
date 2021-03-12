@@ -42,10 +42,10 @@ function viewTrackingInquiry( $Operator, $Order ){
                             <table class="table text-nowrap">
                                   <thead>
                                       <tr>
-                                          <th>Machine</th>
-                                          <th>QTY PRODUCED</th>
-                                          <th>  HOURS  PER MACHINE  </th>
-                                          <th>  TOTAL COST  </th>
+                                          <th>Operation</th>
+                                          <th>SqFt</th>
+                                          <th>  HOURS  </th>
+                                          <th>TTL Cost</th>
                                       </tr>
                                     </thead>
                                   <tbody id = "dashboardrow">
@@ -98,7 +98,7 @@ function viewTrackingInquiry( $Operator, $Order ){
             </div>
           </div>
         </section>
-        <form name="trackinginquiry"  action="ControllerInquiry.php" method="post" autocomplete="on">
+        <form name="trackinginquiry"  id = "trackinginquiry" action="ControllerInquiry.php" method="post" autocomplete="on">
         <input type="hidden" name="inquiry" value="TrackingInquiry"/>
         <!-- <input type="hidden" name="machine" id = "machine" value="<?php echo $Machine?>">
         -->
@@ -134,7 +134,20 @@ function viewTrackingInquiry( $Operator, $Order ){
                 <button  id = "reset" type="reset" class="btn-inquiry btn button-reset">Reset</button>
               </div>
                   <!-- Button trigger modal -->
-                  <button id="btn-endshift" type="button" class="btn  btn-inquiry button-next" data-toggle="modal" data-target="#endShiftModal">End of Shift </button>
+                  <!--
+                  <button id="btn-endshift" type="button" class="btn  btn-inquiry button-next">End of Shift </button>
+                  -->
+                  <div class="dropdown">
+                      <button type="button" class="btn btn-inquiry button-next dropdown-toggle" data-toggle="dropdown">
+                        End of Shift 
+                      </button>
+                      <div class="dropdown-menu">
+                        <h5 class="dropdown-header">Select your shift</h5>
+                        <button id="btn-endshift1" type="button" class="dropdown-item button-next btn">First Shift </button>
+                         <div class="dropdown-divider"></div>
+                        <button id="btn-endshift2" type="button" class="dropdown-item button-next btn">Second Shift </button>
+                      </div>
+                  </div>
           </div>
         </div>
   </form>
@@ -166,6 +179,8 @@ function viewTrackingInquiry( $Operator, $Order ){
   
   $newScript = '<script src="../js/trackinginquiry.js"></script>
                 <script src="../js/showproduction.js"></script>
+                 <script src="../js/endshift.js"></script>
+
   ';
   Foot($newScript);
 }

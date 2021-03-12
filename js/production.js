@@ -13,9 +13,9 @@ $('#qtyproduced').click(function (){
 
 })
 /*******************************************
- endProduction() Call a (PHP) Backend function the save the production value in the Database.
+ Call a (PHP) Backend function to save data with the specific URL.
 ********************************************/
-function endProduction(){
+function postAJAX( Url ){
     
      if (window.XMLHttpRequest) {
                xmlhttp = new XMLHttpRequest();
@@ -45,7 +45,7 @@ function endProduction(){
           }
       }
       
-      xmlhttp.open("post","../php/updateProduction.php",true);
+      xmlhttp.open("post", Url, true);
       xmlhttp.send(formData);  
 
 }
@@ -66,10 +66,10 @@ $('#stopprod').click(function (){
 $('#stopprod').mousedown(function (){
   
   var isflitch = document.getElementById("isflitch").value;
-  if ( isflitch.trim() === "Y" ) {
+  if ( isflitch.trim() == "Y" ) {
     
     var flitchCode = document.getElementById("flitch").value;
-    if (flitchCode === "") {
+    if (flitchCode == "") {
       alert("Error: The Flitch # field can not be empty.");
       return;
     }
@@ -112,7 +112,7 @@ function overrideCode(){
                  document.getElementById("supervisor").value = myObj['SUPERVISOR'];
                  document.getElementById("stopprod").disabled = false;
                 
-                 endProduction();
+                 postAJAX( "../php/updateProduction.php");
 
                  $('#stopprod').click();
               }
@@ -155,7 +155,7 @@ dialogoOverride =  $( "#myOverride" ).dialog({
             },
             "No": function() {
             
-            endProduction();
+            postAJAX( "../php/updateProduction.php" );
             $('#stopprod').click();
            
             $( this ).dialog( "close" );
@@ -179,10 +179,11 @@ dialogoOverride =  $( "#myOverride" ).dialog({
         dialogoWarning.dialog( "open" ); 
         return;     
       }
-    endProduction();
+    postAJAX( "../php/updateProduction.php" );
 
     $('#stopprod').click();
 }
+
 function addWarning(Text) {
      let labelWarning = document.createElement('p');
      labelWarning.innerHTML = Text;
@@ -190,6 +191,63 @@ function addWarning(Text) {
      labelWarning.style.fontWeight = 'bold';
      let Label =   document.getElementById("divProccesing");
      Label.insertBefore(labelWarning, Label.childNodes[0]);
+
+}
+
+function checkFlitch(){
+
+   const isFlitch = document.getElementById("isflitch").value.trim();
+
+   if ( isFlitch == "N" ) {
+    return;
+   }
+
+   let label = document.createElement( "label" ); 
+
+    label.id= "flitchlabel";
+    label.innerHTML = "Flitch #: ";
+    label.htmlFor = "flitch";
+    
+    let input = document.createElement( "input" );
+    input.className =  "formProd quantityproduced" ;
+    input.setAttribute("type", "text"); 
+    input.setAttribute("name", "flitch"); 
+    input.id = "flitch";
+   
+    input.size = 7;
+    input.maxLength = 5;
+    input.setAttribute("placeholder", "Number");
+
+    $("#divflitch").append( label );
+    $("#divflitch").append( input );
+
+    if ( isFlitch == "Y" ) {
+      return;
+    }
+
+    // If isFlitch != Y and != N then isFlitch will be = to a preview enter Flitch number and it's no necesary type again
+      input.setAttribute("value", isFlitch); 
+
+    let button = document.createElement( "input" );
+    button.setAttribute("type", "button");
+    button.className =  "btn button-next formProd quantityproduced" ;
+    button.setAttribute("name", "updateflitch");
+    button.id = "updateflitch";
+   
+    button.setAttribute("value", "Update Flitch #");
+    button.disabled = true;
+    button.addEventListener("click", () => {
+           postAJAX("../php/updateFlitch.php");
+           button.disabled = true;
+          })
+
+    $("#divflitch").append( button ); 
+
+    input.addEventListener("input", () => {
+          document.getElementById("isflitch").value = "U"; // Must update an existing Flitch #
+           button.disabled = false;
+          });
+      
 
 }
 
@@ -202,12 +260,8 @@ function addWarning(Text) {
   
   document.getElementById("qtyproduced").disabled = true;
 
-  if ( document.getElementById("isflitch").value.trim() == "Y"){
-      document.getElementById("flitchlabel").style.display = "block";
-     } else{
-        document.getElementById("flitchlabel").style.display = "none";
-    }
-    
+  checkFlitch();
+
  // Check if qty Produced is equal or  greater than qty Ordered
   if ( parseInt(document.getElementById("qtycmpted").value) >= parseInt(document.getElementById("orderqty").value)) {   
     addWarning("ALERT: The quantity completed is greater than or equal to the quantity ordered."); 

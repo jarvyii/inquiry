@@ -57,9 +57,7 @@ function  viewProduction($BarCode, $Order, $LineNumber,$Date,$idMachine, $descMa
               <label  for="qtyproduced">Qty Produced:</label>
               <input class="formProd  quantityproduced" type="number" name="qtyproduced" id="qtyproduced"  min="0" value="0" >
               <br>
-              <label  id ="flitchlabel" for="flitch"> Flitch #:
-                <input  class="formProd"  type="text" name="flitch" size= "7"  maxlength = "5" id="flitch" placeholder="Number"></label>
-               
+              <div id="divflitch"></div> 
               <label  for="comment">Comment: 
                 <input  class="formProd  comment" type="text" name="comment" size= "50" id="comment" placeholder="Write comments if order incomplete."></label>
               <br>

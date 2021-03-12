@@ -17,6 +17,9 @@ if (isset($_POST['inquiry']) && ! isset($_GET['q'])) {
                             
                       //TrackingInquiry($_POST['barcode'], $_POST['machine'],$_POST['operator']);
                      break;
+    case 'homeSupervisor' : 
+                              TrackingInquiry($_POST['operator'], '' );
+                              break;                
     case 'TrackingInquiry':   $sLink = htmlspecialchars( $_POST['linkbutton'] ) ;
                               /* echo  $sLink;
                               foreach ( $_POST as $i => $C ) {
@@ -105,9 +108,15 @@ if (isset($_POST['inquiry']) && ! isset($_GET['q'])) {
 
                    					  break ;	
           case 'Dailyprod': // To know the Daily Production per machine
-                            
-                              
-                             $P =  getdailyProd();
+
+
+                             $db = new DataAccess();
+                             $Shift = $db->getShift();
+
+                             
+                             
+                             $P =  getdailyProd( $Shift );
+
                              echo json_encode($P);
                              // echo  $P;
                              return $P;

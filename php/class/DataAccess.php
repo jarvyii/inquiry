@@ -7,9 +7,16 @@ class DataAccess {
 	private $os = "i5";
 	protected $user, $registered, $server, $FileHandler;
 	private $pass, $hash, $tkitConn, $config;
+
+  public $shiftTime;
   //$DB_NAME = "CATPACDBF";
+
+ // $Sheets = array(); array( "01", "03", "10", "11", "12", "13", "54", "57" );
+  //$Panels = array("08", "09");
   
   private $conn;  //Database connector	
+
+
 
 	function __construct( $user=false, $pass=false ) {
 		$this->user 	= ( isset( $user ) && $user != '' && $user != false ? $user: false );
@@ -18,6 +25,17 @@ class DataAccess {
 		$this->debug 	= array();
 		$this->error 	= false;
 		$this->connect();
+    $this->Sheets = array( "01", "03", "10", "11", "12", "13", "54", "57" );
+    $this->Panels = array("08", "09");
+
+    // 0 -> "firstShift",   1 -> "secondShift"
+
+    $this->shiftTime = array(  
+                            array( 0, "04.00.00", "15.30.00" ),        
+                            array( 1, "15.30.01", "23.45.00" )
+                   
+                     );
+
 	}
 
 	/************************************************
@@ -68,68 +86,65 @@ class DataAccess {
       getMachineName($OrderNumber, $LineNumber, $Operator)
   Return the Description of the one machine with specific Id Code
 **********************************************/
+
   function getMachineDesc($idMachine) {
+
     $Data = $this->conn->fetchRow('SELECT MACHDESC, MACHGRPID FROM CATPACDBF.MACHLIST WHERE MACHINEID=?', $idMachine);
-
-    // To check MACHLIST Content
-    /*
-    foreach( $Data as $F => $C) {
-      echo "<br>F:".$F. "  C:".$C; 
-    }
-
-    */
+    
     return $Data;  //$Data['MACHDESC'];
 
  }
+
  /****************************************************
    Return a list with all Id & Machines Description
  /**************************************************/
+
 function getMachines(){
+
    $sql = "SELECT MACHINEID, MACHDESC, MACHFLTRQ FROM CATPACDBF.MACHLIST";
    $Data = $this ->conn->query($sql);
    $Rows = $Data->fetchAll();
 
-   // To check MACHLIST Content
-   /*
-    foreach( $Rows as $I => $R) {
-      foreach ($R as $F => $C) {
-        echo "F:".$F. "  C:".$C; 
-      }
-      echo "<br>";
-    } */
-
    return $Rows; 
 }
 
- /******************************************
-    
+ /******************************************   
     return the Description of one specific Item from the table   
     CATPACDBF.PMMM -> Inventory Item Master
  ********************************************/
 
 function getItemDesc( $codeItem){
+
   $Data = $this->conn->fetchRow('SELECT PMDESC, PMCLAS FROM CATPACDBF.PMMM WHERE PMPN=?', $codeItem);
-    return $Data; //return $Data['PMDESC'];
+
+ return $Data; //return $Data['PMDESC'];
+
 }    
+
  /****************************************
         checkOrder($Order)
    Check if the order exist in the table  CATPACDBF.EHM
  ****************************************/
+
 function checkOrder($Order, $pLine){
+
   $Line = (int) $pLine;
   $Order = $Order;
    // $Data = $this->conn->fetchRow('SELECT EHCT#, EHORDT FROM CATPACDBF.EHM WHERE EHORD=?', $Order);
    //$Data = $this->conn->fetchRow($sql);
    // return $Data;
+
     $sql = "SELECT EIORD FROM CATPACDBF.EIM WHERE EIORD='$Order' and EILIN='$Line'";
     $Data = $this ->conn->query($sql);
     $Rows = $Data->fetchAll();
     return $Rows; 
+
  }
 /****************************************
     checkOverrideCode($Code)
     Return the Supervisor Name or "" 
 ******************************************/
+
 function checkOverrideCode($Code){
 
   $Code = trim($Code);
@@ -143,6 +158,7 @@ function checkOverrideCode($Code){
       function getOrderHeader()
       Return the  row value for an specific Order from the Table FLEXWEB.EHM
   **********************************************/
+
  function getOrderHeader($Order, $Line) {
    $Line = (int)$Line;
    /* $Data = $this ->conn->query('SELECT 'EHCT#', EHORDT FROM FLEXWEB.EHM');
@@ -171,6 +187,7 @@ function checkOverrideCode($Code){
       function getTrackLocHistory()
       Return all rows value from the historic of one specific Order from the Table FLEXWEB.FMLOCHIST
   **********************************************/
+
  function getTrackLocHistory($OrderNumber, $Line){
     $Line = (int) $Line;
     $sql = "SELECT LHLIN, LHOPER, LHQTY, LHSTRDTTIM, LHSTPDTTIM,LHSOVR,LHCOMM, MACHDESC, LHFLCH FROM CATPACDBF.FMLOCHIST INNER JOIN CATPACDBF.MACHLIST ON  CATPACDBF.FMLOCHIST.LHMACH = CATPACDBF.MACHLIST.MACHINEID WHERE LHORD='$OrderNumber' and LHLIN='$Line' ORDER BY LHMACH, LHSTRDTTIM, LHOPER";
@@ -246,8 +263,48 @@ function checkOverrideCode($Code){
 ******************************************/ 
 
 function insertFlitch($Param) {
+
+    $Param['flitch'] = trim( $Param['flitch'] );
+
     $row = array( 'FLORD'=> $Param['order'], 'FLLIN'=>(int)$Param['line'],'FLPN'=>$Param['itemnumber'], 'FLFLCH'=>$Param['flitch'] );
+
     $Data = $this ->conn->insert( 'CATPACDBF.FMFLITCH',$row);
+}
+
+function  updateFlitch($Param)
+{
+  $Order = $Param['order'];
+  $Line = $Param['line'];
+  $ItemNumber = $Param['itemnumber'];
+
+  $Where = "FLORD='$Order' and FLLIN='$Line'  and FLPN = '$ItemNumber'";
+  $Table = "CATPACDBF.FMFLITCH";
+  $Fields = array('FLFLCH' => $Param['flitch'] );
+   
+   $Data = $this ->conn->update($Table, $Fields, $Where);
+}
+
+function getFlitchNumber($Order, $Line, $codeItem )
+{
+
+    $sql = "SELECT FLFLCH ".
+           " FROM CATPACDBF.FMFLITCH ". 
+           " WHERE FLORD='$Order' and FLLIN='$Line'  and FLPN = '$codeItem' ";
+
+
+    $Data = $this->conn->fetchRow($sql);
+
+ 
+    if ( $Data == "")
+    {
+        $FlitchNumber = "";
+    }
+     else 
+    {
+        $FlitchNumber = $Data['FLFLCH'];
+    }
+
+    return $FlitchNumber;
 }
 
  /**********************************************
@@ -369,47 +426,117 @@ function getMachProd( $idMachine , $dDate){
 
  }
 
+
 /***********************************************
  return all Orders produced in Shifts
  ***********************************************/
- function dailyOrders( $idMachine ){
-  date_default_timezone_set("America/New_York");
+ function dailyOrders( $idMachine, $dstartDateTime  ){
 
-  $hHour = date("H");
-  $hmTime = ""; // date("H:i");
-  $dDate = "";  
-  if ( (trim(  $idMachine ) == "MACH04") || ( trim(  $idMachine ) == "MACH05" ) ) {
-     // Itale Press && Sennersko Press
-          if ( ($hHour >= "07") && ($hmTime < "15:30")  ) {
-                $dDate = date("Y-m-d-07.00.00") ; //
-             } else { 
-                 if ( ($hmTime >= "15:30") && ($hmTime < "23:45")  ) {
-                    $dDate = date("Y-m-d-15.30.00") ; 
-                   }
-             }
-        
-  } else { 
-     if ( ($hHour >= "07") && ($hHour < "18")  ) {
-         $dDate = date("Y-m-d-07.00.00") ; //
-      } else {
-        if ( ($hHour >= "18") && ($hHour < "24")  ) {
-            $dDate = date("Y-m-d-18.00.00") ; 
-          }
-      }
-  
-  } 
+  if (  $dstartDateTime === "") {
+      return "";
+  }
  
- if ( $dDate == "") {
-    return "";
- }
- 
-  $sql = "SELECT LHSTRDTTIM, LHQTY, LHORD, LHLIN, LHPN FROM CATPACDBF.FMLOCHIST WHERE LHSTRDTTIM >= '$dDate' and LHMACH ='$idMachine' ";
+  $sql = " SELECT LHOPER, LHSTRDTTIM, LHSTPDTTIM, LHQTY, LHORD, LHLIN, LHPN ".
+         " FROM CATPACDBF.FMLOCHIST ".
+         " WHERE LHSTRDTTIM >= '$dstartDateTime' and LHMACH ='$idMachine' " .
+         " ORDER BY LHSTRDTTIM ";
   
    $Data = $this ->conn->query($sql);
  
   $Rows = $Data->fetchAll();
   
   return $Rows; 
+ }
+
+
+ function OLDstartShiftTime( $idMachine ) {
+
+   date_default_timezone_set("America/New_York");
+
+    $hHour = date("H");
+    $hmTime = ""; // date("H:i");
+    $dDate = "";  
+    if ( (trim(  $idMachine ) == "MACH04") || ( trim(  $idMachine ) == "MACH05" ) ) {
+       // Itale Press && Sennersko Press
+            if ( ($hHour >= "07") && ($hmTime < "15:30")  ) {
+                  $dDate = date("Y-m-d-07.00.00") ; //
+               } else { 
+                   if ( ($hmTime >= "15:30") && ($hmTime < "23:45")  ) {
+                      $dDate = date("Y-m-d-15.30.00") ; 
+                     }
+               }
+          
+    } else { 
+       if ( ($hHour >= "07") && ($hHour < "18")  ) {
+           $dDate = date("Y-m-d-07.00.00") ; //
+        } else {
+          if ( ($hHour >= "18") && ($hHour < "24")  ) {
+              $dDate = date("Y-m-d-18.00.00") ; 
+            }
+        }
+    
+    } 
+   
+   return  $dDate;
+ 
+ }
+
+function getShift()
+{
+   date_default_timezone_set("America/New_York");
+  
+  foreach($this->shiftTime as  $Shift )
+  {
+     if ( substr( $Shift[2], 0, 5) >= date("H.i") )
+     {
+        return $Shift[0];
+     }
+  }
+
+  $Length = count( $this->shiftTime );
+  return $this->shiftTime[ $Length -1 ][0];
+} 
+
+function startShiftTime( $Shift = "" ) {
+
+   date_default_timezone_set("America/New_York");
+
+   if ( $Shift === "" ) {
+       $Shift = $this-> getShift();
+    }
+    
+    $Time = $this->shiftTime[ (int) $Shift ][1];
+   
+    $dDate = date ( "Y-m-d-". $Time ) ; 
+    
+    return  $dDate;
+ 
+ }
+
+
+
+/***************************************************************
+Return all operator who works in an specific machine in one shift
+******************************************************************/
+
+ function machinesOperators( $idMachine,  $dstartDateTime ) { 
+
+  if (  $dstartDateTime === "") {
+      return "";
+  }
+
+  $sql = " SELECT LHOPER, MIN(LHSTRDTTIM) AS STARTTIME, MAX(LHSTPDTTIM) AS ENDTIME" .
+         " FROM CATPACDBF.FMLOCHIST " .
+         " WHERE LHSTRDTTIM >= '$dstartDateTime' and LHMACH ='$idMachine' " .
+         " GROUP BY LHOPER " .
+         " ORDER BY LHOPER "; 
+  
+  $Data = $this ->conn->query($sql);
+  
+  $Rows = $Data->fetchAll();
+  
+  return $Rows; 
+
  }
 
 

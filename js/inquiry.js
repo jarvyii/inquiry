@@ -47,24 +47,22 @@ $('#startprod').click(function (){
           Write orderqty value to qtyproduced
           document.getElementById("qtyproduced").value = document.getElementById("orderqty").value;
       */
-  var startDate = new Date();
+     var startDate = new Date();
       document.getElementById("starttime").value = startDate.format("Y-m-d H:i:s.u");
       
       setInterval(function() {
           
-      //var delta = Date.now() - start; // milliseconds elapsed since start
-      var nowDate = new Date();
-      var delta = nowDate - startDate; // milliseconds elapsed since start
-      //intTime= Math.floor(delta / 1000);
-      intTime= Math.round(delta / 1000); // Seconds
-      txtSec =  twoChars(intTime % 60);
-      txtMin =  twoChars(Math.trunc((intTime/60)%60));
-      txtHours = twoChars(Math.trunc(intTime/(60*60)));
-      txtTime = txtHours.toString()+"h:"+txtMin.toString() +"m:"+ txtSec+"s"
-      document.getElementById("processedtime").value = txtTime;
-      //txtDays.toString()+"d:"+txtHours.toString()+"h:"; // in seconds
-      // alternatively just show wall clock time:
-      //alert(new Date().toUTCString());
+            var nowDate = new Date();
+            var delta = nowDate - startDate; // milliseconds elapsed since start
+
+            intTime= Math.round(delta / 1000); // Seconds
+            txtSec =  twoChars(intTime % 60);
+            txtMin =  twoChars(Math.trunc((intTime/60)%60));
+            txtHours = twoChars(Math.trunc(intTime/(60*60)));
+            txtTime = txtHours.toString()+"h:"+txtMin.toString() +"m:"+ txtSec+"s"
+
+            document.getElementById("processedtime").value = txtTime;
+            
       }, 1000); // update about every seconds
     document.getElementById("qtyproduced").focus();  
 })

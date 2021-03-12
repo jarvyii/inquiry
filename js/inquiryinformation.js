@@ -68,13 +68,48 @@ $(document).ready(function(){
      document.getElementById("pdftraveler").href = "../pdf/"+nameTraveler+".pdf";
   } // \FUNCTION TrackingInformation()
 
+   /****************************************************
+   * To Print Traveler from RPG Program
+   *****************************************************/
+   function printTraveler(){
+      
+     if (window.XMLHttpRequest) {
+               xmlhttp = new XMLHttpRequest();
+      }else {
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            if (this.responseText === "") {
+                 alert("Sorry. Error printing");
+                } else {
+                 alert("Traveler has been sent to the Printer.");
+                }
+          }
+      }
+      para = "Traveler&order="+document.getElementById("ordernumber").value ;
+      para +="&line="+document.getElementById("linenumber").value;
+         
+      xmlhttp.open("GET","../php/ControllerInquiry.php?q="+para,true);
+      xmlhttp.send();  
+
+}
    /**********************
-   * Print the PDF to the default Printer
+   * Print the Traveler in PDF to the default Printer
    */
+
   $('#printpdf').click(function () {
+      printTraveler();
+
+    /* To from PDF File
      var pdfName = document.getElementById("ordernumber").value+'.pdf';
     printJS({printable:'/pdf/'+pdfName, type:'pdf', showModal:true})
+
+     */
+
   })// /('#printpdf').click(function())
+
+
 
   /************************************************************************
   Main Block
@@ -84,4 +119,5 @@ TrackingInformation();
 //Asign the physical URL of the specific pdf Traveler to the Button
 var pdfNameLink = '../pdf/'+document.getElementById("ordernumber").value+'.pdf';
 document.getElementById("pdftraveler").href = pdfNameLink;
+
 }); // End ready

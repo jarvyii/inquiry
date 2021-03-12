@@ -41,7 +41,7 @@ function twoChars( Value){
 $('#startprod').click(function (){
       setInterval(blinker,1000);
       document.getElementById("startprod").style.display = "none";
-      document.getElementById("stopprod").style.display = "block";
+      document.getElementById("stopprod").style.display = "inline";
       document.getElementById("qtyproduced").disabled = false;
       /* 
           Write orderqty value to qtyproduced
@@ -49,6 +49,7 @@ $('#startprod').click(function (){
       */
   var startDate = new Date();
       document.getElementById("starttime").value = startDate.format("Y-m-d H:i:s.u");
+      
       setInterval(function() {
           
       //var delta = Date.now() - start; // milliseconds elapsed since start
@@ -57,7 +58,7 @@ $('#startprod').click(function (){
       //intTime= Math.floor(delta / 1000);
       intTime= Math.round(delta / 1000); // Seconds
       txtSec =  twoChars(intTime % 60);
-      txtMin =  twoChars(Math.trunc(intTime/60));
+      txtMin =  twoChars(Math.trunc((intTime/60)%60));
       txtHours = twoChars(Math.trunc(intTime/(60*60)));
       txtTime = txtHours.toString()+"h:"+txtMin.toString() +"m:"+ txtSec+"s"
       document.getElementById("processedtime").value = txtTime;
@@ -66,19 +67,6 @@ $('#startprod').click(function (){
       //alert(new Date().toUTCString());
       }, 1000); // update about every seconds
     document.getElementById("qtyproduced").focus();  
-})
-/***********************************
-   Stop the Production process
-***********************************/
-$('#stopprod').click(function (){
-  var nDate = new Date();
-      document.getElementById("endtime").value = nDate.format("Y-m-d H:i:s.u");
-      document.getElementById("startprod").style.display = "block";
-      document.getElementById("stopprod").style.display = "none";
-      /* if (document.getElementById("qtyproduced").value = document.getElementById("orderqty").value){
-         $("#myModal").modal("show");
-      } */
-     // document.getElementById("qtyproduced").disabled = true;
 })
   /************************************************************************
   Main Block

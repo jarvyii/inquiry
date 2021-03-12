@@ -1,6 +1,12 @@
 $(document).ready(function(){
+/************************************************
+ Add one cero at the beginning for number with one digit
+*************************************************/
+function twoChars( Value){
+      return  (Value < 10 ) ?  "0"+Value.toString() : Value.toString();
+}
 
-    function  showHistoric(){
+function  showHistoric(){
                
           if (window.XMLHttpRequest) {
                xmlhttp = new XMLHttpRequest();
@@ -23,6 +29,7 @@ $(document).ready(function(){
                  txtElapsedTime= sLabel+sTitle+"E. Time"+eLabel+sLabel+gContent;
                  txtLHSTPDTTIM=sLabel+sTitle+"Stop Time"+eLabel+sLabel+gContent;
                  txtLHSOVR =sLabel+sTitle+"Override"+eLabel+sLabel+gContent;
+                 txtLHFLCH = sLabel+sTitle+"Flitch #"+eLabel+sLabel+gContent;
                 txtLHCOMM = sLabel+sTitle+"Comments"+eLabel+sLabel+gContent;
                  for (x in myObj) {
                       txtLHMACH += myObj[x].MACHDESC + "<br>";
@@ -31,6 +38,7 @@ $(document).ready(function(){
                       txtLHSTRDTTIM += myObj[x].LHSTRDTTIM.substr(0,19)+ "<br>";
                       txtLHSTPDTTIM += myObj[x].LHSTPDTTIM.substr(0,19)+ "<br>";
                       txtLHSOVR += myObj[x].LHSOVR+ "<br>";
+                      txtLHFLCH += (myObj[x].LHFLCH == null)? ""+ "<br>":myObj[x].LHFLCH + "<br>";
                       txtLHCOMM += myObj[x].LHCOMM+ "<br>";
                       s= myObj[x].LHSTRDTTIM;
                       var startDate = new Date(s.substr(0,10)+" "+s.substr(11,2)+":"+s.substr(14,2)+":"+s.substr(17,2));
@@ -38,9 +46,31 @@ $(document).ready(function(){
                       var stopDate = new Date(s.substr(0,10)+" "+s.substr(11,2)+":"+s.substr(14,2)+":"+s.substr(17,2));
                      // var elapsedtime = (stopDate.getTime() - startDate.getTime())/(1000*60*60*24);
                      //var Days = Math.round(((stopDate.getTime() - startDate.getTime())/1000)/60/60/24);
+
+
+                     //  var nowDate = new Date();
+                        var delta = stopDate.getTime() - startDate.getTime(); // milliseconds elapsed since start
+                        //intTime= Math.floor(delta / 1000);
+                        intTime = Math.round(delta / 1000); // Seconds
+                        var Seconds =  twoChars(intTime % 60);
+                        var  Minutes =  twoChars(Math.trunc((intTime/60)%60));
+                        var Hours = twoChars(Math.trunc(intTime/(60*60)));
+                        //txtTime = txtHours.toString()+"h:"+txtMin.toString() +"m:"+ txtSec+"s"
+                       // document.getElementById("processedtime").value = txtTime;
+                        //txtDays.toString()+"d:"+txtHours.toString()+"h:"; // in seconds
+                        // alternatively just show wall clock time:
+                        //alert(new Date().toUTCString());
+                      //  }, 1000); // update about every seconds
+
+
+
+                     /*
+
                      var Hours = Math.round(((stopDate.getTime() - startDate.getTime())/1000)/60/60);
                      var Minutes = Math.round(((stopDate.getTime() - startDate.getTime())/1000)/60);
                      var Seconds = Math.trunc( Math.round(((stopDate.getTime() - startDate.getTime())/1000)) % 60);
+                      */
+
                      var elapsedtime = Hours+"h:"+Minutes+"m:"+Seconds+"s";
                      txtElapsedTime += elapsedtime+ "<br>";
 
@@ -53,6 +83,7 @@ $(document).ready(function(){
                 document.getElementById("stopdate").innerHTML += txtLHSTPDTTIM+ eLabel;
                 document.getElementById("elapsedtime").innerHTML += txtElapsedTime+ eLabel;
                 document.getElementById("override").innerHTML += txtLHSOVR+ eLabel;
+                 document.getElementById("flitch").innerHTML += txtLHFLCH+ eLabel;
                 document.getElementById("comment").innerHTML += txtLHCOMM+ eLabel;
                 // alert( myObj);
                  /*

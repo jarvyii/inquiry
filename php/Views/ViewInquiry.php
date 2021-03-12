@@ -3,7 +3,7 @@
 /******************************
   View  function Head()
 *******************************/
-function Head()
+function Head(  $sBody ="" , $sColumn ="")
  { ?>
    <!DOCTYPE html>
    <html lang="en">
@@ -12,23 +12,40 @@ function Head()
    <title>Inquiry System</title>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- Forced the browser not to use cache memory -->
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <!-- End  -->
    <script src="//printjs-4de6.kxcdn.com/print.min.js"></script>
    <link rel="stylesheet" type="text/css" href="https://printjs-4de6.kxcdn.com/print.min.css"> 
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
    <script src="https://cdn.rawgit.com/JDMcKinstry/JavaScriptDateFormat/master/Date.format.min.js"></script>
+   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <link rel="stylesheet" href="../css/inquiry.css">
-  
     </head>
    <body id="home">
      <!-- Main jumbotron for a  Logo Image about the Company-->
      <div class="container">
-       <div class="jumbotron bg-white" id="jumbotron">
-           <img class="img-responsive  img-fluid mx-auto d-block" width="60%" height="52" src="../img/flexiblematerial-bl.png"  alt="Flexible Material">
+      <div class="row">
+       <div class=" col-9 jumbotron bg-white" id="jumbotron">
+           <img class="img-responsive  img-fluid mx-auto logo d-block" width="50%" height="52" src="../img/flexiblematerial-bl.png"  alt="Flexible Material">
+          <?php
+          echo $sBody;
+          ?> 
        </div> <!-- /jumbotron -->
+       <div class="col-3">
+     <?php    
+        echo $sColumn;
+     ?>   
+       </div> 
+      </div>
      </div> <!-- /Container-->
 <?php
 }
@@ -54,8 +71,26 @@ function Foot( $newScript="")
              </div>
            </div>
       </div>
-  <script src="../js/inquiry.js"></script> <?php
-   echo $newScript; ?>
+
+  
+ 
+ <script>
+  
+  function myCost( sIdHour, sIdMin, sIdCost, sIdSqf ) {
+     var Minutes = parseInt( document.getElementById(sIdHour).value)*60 + parseInt(document.getElementById(sIdMin).value);
+     var sqfProduce = parseInt( document.getElementById(sIdSqf).value);
+     var Cost = 0.00;
+     if (( Minutes != 0 ) &&   ( sqfProduce != 0 ) ){
+       Cost = 60 / ( Minutes / sqfProduce );
+     }
+     
+     document.getElementById(sIdCost).innerHTML =  Cost.toFixed(2);
+ }
+ </script>
+ <!-- <script src="https://code.jquery.com/jquery-3.1.0.js"></script> -->
+<script src="../js/inquiry.js"></script> <?php
+echo $newScript; ?>
+   
 </body>
 </html> <?php
 } 

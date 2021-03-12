@@ -5,6 +5,12 @@
     <title>Inquiry System</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Forced the browser not to use cache memory -->
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <!-- End  -->
+ 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
@@ -24,7 +30,7 @@
             </div> <!-- /Container-->
       </div>
       <div class="container">
-            <!-- Login form. It validate the User and password with the file USERS.JSON -->
+            <!-- Login form... It validate the User and password with the file USERS.JSON -->
             <form id="loginform" method="post" action="php/login.php" runat="server">
                   <input type="hidden" name="inquiry" value="Login"/>
                   <input type="hidden" id="typeuser" name="typeuser" value="operator"/>

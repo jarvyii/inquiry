@@ -191,7 +191,22 @@ function  updatemyProduction() {
 
 }
 
+function addMachineSqft (myObj) {
 
+  for( Record in myObj ) {
+    document.getElementById("machinesqft").innerHTML += '<div class= "pt-0 pb-0">' + myObj[Record].MACHDESC + "</div><hr>";
+    document.getElementById("sqftsqft").innerHTML += '<div class= "pt-0 pb-0">' + myObj[Record].PRODUCTION + "</div><hr>";
+  
+  }
+
+}
+
+function showSQFT () {
+
+  getAJAX( "../php/ControllerInquiry.php?q=Dailyprod" )
+                 .then(addMachineSqft); 
+
+}
 
  getAJAX( "../php/ControllerInquiry.php?q=Dailyprod")
                  .then(updateGraphInfo)
@@ -201,6 +216,9 @@ function  updatemyProduction() {
                  .then(addRow); 
 
  updatemyProduction();
+
+ showSQFT ();
+
 
 });
  

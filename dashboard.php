@@ -23,135 +23,145 @@
 
   <!-- Start your project here-->
   
-<header>
-  <!-- Logo -->
- <div class="logo-sn waves-effect">
-    <div class="text-center pt-2">
-        <a href="#" class="pl-0">
-            <img src="img/flexiblematerial-bl.png" width = "30%" class="img-fluid">
-        </a>
-    </div>
- </div>
-</header>
+    <header>
+      <!-- Logo -->
+     <div class="logo-sn waves-effect">
+        <div class="text-center pt-2">
+            <a href="#" class="pl-0">
+                <img src="img/flexiblematerial-bl.png" width = "30%" class="img-fluid">
+            </a>
+        </div>
+     </div>
+    </header>
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="modalMachineOrders"
-  tabindex="-1"
-  aria-labelledby="modalMachineOrdersLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header flexcolor text-white">
-        <h5 class="fw-bold modal-title  center " id="modalMachineOrdersLabel">Modal title</h5>
-        <button
-          type="button"
-          class="btn-close button-next"
-          data-mdb-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <div class = "row">
-           <div  class="col-3 text-center"><strong>Operator</strong><hr><div id="operator"></div></div>
-           <div  class="col-3 text-center"><strong>Order</strong><hr><div id ="order"></div></div>
-           <div class="col-3 text-center"><strong>Qty</strong><hr><div id="qty" ></div></div>
-           <div  class="col-3 text-center"><strong>Time</strong><hr><div  id="time"></div></div>
+    <div
+      class="modal fade"
+      id="modalMachineOrders"
+      tabindex="-1"
+      aria-labelledby="modalMachineOrdersLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header flexcolor text-white">
+            <h5 class="fw-bold modal-title  center " id="modalMachineOrdersLabel">Modal title</h5>
+            <button
+              type="button"
+              class="btn-close button-next"
+              data-mdb-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class = "row">
+               <div  class="col-3 text-center"><strong>Operator</strong><hr><div id="operator"></div></div>
+               <div  class="col-3 text-center"><strong>Order</strong><hr><div id ="order"></div></div>
+               <div class="col-3 text-center"><strong>Qty</strong><hr><div id="qty" ></div></div>
+               <div  class="col-3 text-center"><strong>Time</strong><hr><div  id="time"></div></div>
 
-        </div>  
-     
-      </div>
-      <div class="modal-footer">
+            </div>  
+         
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
 <!--Main layout-->
-<main class ="pl-1 pt-3">
-  <div class="container-fluid">
-      <!--Section: Main panel-->
-      <section class="card card-cascade narrower  mb-5">
+    <main class =" ml-1 pl-1 pt-3 mr-0">
+       <div class="container-fluid">
+         <!--Section: Main panel-->
+         <section class="card card-cascade narrower  mb-5 mr-0">
 
          <!--Grid row-->
             <div class="row">
            <!-- Table -->
            <!--Top Table UI-->
                 <!--Card-->
-                <div class=" col-md-5 card p-2 card-cascade narrower">
+                <div class=" col-md-4 card p-2 card-cascade narrower">
 
-                    <!--Card header-->
-                       <div  class="view view-cascade flexcolor py-3 gradient-card-header  mx-4 d-flex justify-content-between align-items-center">
+                   <!--Card header-->
+                   <div  class="view view-cascade flexcolor py-3 gradient-card-header  mx-4 d-flex justify-content-between align-items-center">
 
-                            <div>
-                                <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-                                    <i class="fas fa-th-large mt-0"></i>
-                                </button>
-                                <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-                                    <i class="fas fa-columns mt-0"></i>
-                                </button>
-                            </div>
+                        <div>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                <i class="fas fa-th-large mt-0"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                <i class="fas fa-columns mt-0"></i>
+                            </button>
+                        </div>
 
-                            <a href="" class="white-text mx-3">Table name</a>
+                        <a href="" class="white-text mx-3">Table name</a>
 
-                            <div>
-                                <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-                                    <i class="fas fa-pencil-alt mt-0"></i>
-                                </button>
-                                <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#modalConfirmDelete">
-                                    <i class="fas fa-times mt-0"></i>
-                                </button>
-                                <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
-                                    <i class="fas fa-info-circle mt-0"></i>
-                                </button>
-                            </div>
+                        <div>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                <i class="fas fa-pencil-alt mt-0"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2" data-toggle="modal" data-target="#modalConfirmDelete">
+                                <i class="fas fa-times mt-0"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                                <i class="fas fa-info-circle mt-0"></i>
+                            </button>
+                        </div>
 
-                          </div>
-                          <!--/Card header-->
-                    <!--/Card header-->
+                      </div>
+                     <!--/Card header-->
 
                     <!--Card content-->
-                        <div class="card-body">
-                           <div class="table-responsive">
-                            <table class="table text-nowrap">
-                                  <thead>
-                                      <tr >
-                                          <th class = "text-center pt-0 pb-0">Machine</th>
-                                          <th class = "text-center pt-0 pb-0">Orders</th>
-                                          <th class = "text-center pt-0 pb-0">Machine Time</th>
-                                          <th class = "text-center pt-0 pb-0">Qty Produced</th>
-                                      </tr>
-                                    </thead>
-                                  <tbody id = "dashboardrow">
-                                     
-                                  </tbody>
-                              </table>
-                            </div>
-                            <hr class="my-0">
+                    <div class="card-body">
+                       <div class="table-responsive">
+                        <table class="table text-nowrap">
+                              <thead>
+                                  <tr >
+                                      <th class = "text-center pt-0 pb-0">Machine</th>
+                                      <th class = "text-center pt-0 pb-0">Orders</th>
+                                      <th class = "text-center pt-0 pb-0">Machine Time</th>
+                                      <th class = "text-center pt-0 pb-0">Qty Produced</th>
+                                  </tr>
+                                </thead>
+                              <tbody id = "dashboardrow">
+                                 
+                              </tbody>
+                          </table>
                         </div>
-                        <!--/.Card content-->
+                        <hr class="my-0">
+                    </div>
+                    <!--/.Card content-->
                 <!--/.Card-->
               <!-- Table-->
                    
                   </div>   
              <!-- Table -->
             <!--Grid column-->
-            <div class="col-md-7">
+            <div class="col-md-6">
 
-                <!--Grid column Graph Chart-->
-                <!--Panel Header-->
-                <!--class="view view-cascade py-3 gradient-card-header info-color-dark mb-4" -->
-                    <div class="view view-cascade py-3 gradient-card-header  mb-4 " >
+              <!--Grid column Graph Chart-->
+              <!--Panel Header-->
+              <!--class="view view-cascade py-3 gradient-card-header info-color-dark mb-4" -->
+              <div class="view view-cascade py-3 gradient-card-header  mb-4 " >
 
-                      <canvas id="barChart"></canvas>
+                <canvas id="barChart"></canvas>
 
 
-                    </div> 
-                    <!--/Card image-->
-                <!--Grid column   Graph Chart-->
+              </div> 
+                  <!--/Card image-->
+              <!--Grid column   Graph Chart-->
             </div>
             <!--Grid column-->
+            <div class="col-md-2">
+              <div class = "text-center flexcolor text-white"><strong>SQ Feet</strong><hr></div>
+              <div class="row  pt-0 pb-0">
+                <div class ="col-7 text-right pt-0 pb-0" id="machinesqft"></div>
+                <div class ="col-5  text-left  pt-0 pb-0" id="sqftsqft"></div>
+              </div>
             </div>
+
+
+
+
+         </div>
             <!--Grid row-->
       </section>
       <!--Section: Main panel-->

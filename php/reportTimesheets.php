@@ -102,6 +102,7 @@ function BasicTable($header, $data)
       $this->Cell( 25, 5, trim($Machine['machine']), 1, 0, 'C');
       $firstOperator = true;
 
+      $totalEmployee = 0;
       foreach( $Machine['Operators'] as $Operators ) 
       {
          
@@ -148,8 +149,13 @@ function BasicTable($header, $data)
           }
           
       //  }
+
+         $totalEmployee ++;  
         $this->Ln();
       }
+      $this->SetFont('Arial','B',8);
+      $this->Cell( $Width, 6, "Total Employees: ". $totalEmployee, 0, 0, 'C');
+
       $this->Ln(); 
     }
 

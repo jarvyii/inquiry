@@ -46,7 +46,7 @@ function createFormHeader(form)
   const divHours =createDiv( "div", "divHours", "col-1  font-weight-bold", "HOURS");
   const divMinutes =createDiv( "div", "divMinutes", "col-1  font-weight-bold", "Min");
   const divHRate = createDiv( "div", "divHRate", "col-2 font-weight-bold", "Hrly Rate");
-  const divTtlCost = createDiv( "div", "divTtlCost", "col-2  font-weight-bold", "TTL Cost");
+  const divTtlCost = createDiv( "div", "divTtlCost", "col-2  font-weight-bold", "TTL Cost<br>");
 
   divEndshift.appendChild( divOperation ); 
   divEndshift.appendChild( divQty );   
@@ -71,7 +71,10 @@ function createFormElement(Element, Type, className, Id, Name, Text, Status, Min
   Input.readOnly = Status;
   
 
-  Input.setAttribute("value", Text); 
+   if (Text != "") {
+    Input.setAttribute("value", Text); 
+   }
+  
   if ( className != "") {
       Input.className =  className;
   }
@@ -503,20 +506,137 @@ function createSchemeTimesheet( form, Machine){
        
     }); 
 
-  let machineTotal = createFormElement("input", "hidden", "", idMachine+"machineTotal", idMachine+"machineTotal", j, true, 30, 40, "left" );
+  let labelTotalEmployees = createDiv( "LABEL", "", "rowTimesheet font-weight-bold pl-1 pr-2 m-0" , "Total employees: ");
+  let machineTotal = createFormElement("input", "text", "font-weight-bold mr-5", idMachine+"machineTotal", idMachine+"machineTotal", j.toString().trim(), true, 4, 4, "left" );
+  
+  col2Div.appendChild( Row );
+  col2Div.appendChild( labelTotalEmployees );
+  col2Div.appendChild( machineTotal );
 
-  col2Div.appendChild( Row);
+  bttnAddEmployee = createButtonAddEmployee( idMachine, Machine.OPERATOR.length, col1, col2, col3, col3, col4, col5 );
+  col2Div.appendChild(  bttnAddEmployee );
+
+  bttnRemoveEmployee = createButtonRemoveEmployee( idMachine );
+  col2Div.appendChild(   bttnRemoveEmployee );
 
   rowDiv.appendChild( col2Div );
-
-  rowDiv.appendChild( machineTotal );
-
+ // rowDiv.appendChild( machineTotal );
 
   form.appendChild( rowDiv );
 
   return form;
+}
+
+function addColumn(Type, idMachine, Index, nameColumn, Text, isReadonly, Size, maxSize){
+
+    let divColumn = createDiv( "DIV","div" + idMachine + nameColumn + Index, "d-block p-0" , "");
+
+    
+    if ( Type == "radio") {
+
+             let Difinedyes = createFormElement("input", Type, "rowTimesheet m-0  p-0", idMachine+nameColumn+Index, idMachine+ "difined"+Index, Text, isReadonly, Size, maxSize, "center" );
+             Difinedyes .checked = "checked";
+             let DifinedlabelYes = createDiv( "LABEL", "", "rowTimesheet pl-1 pr-2 m-0" , "Yes ");
+
+             let Difinedno =  createFormElement( "input", "radio", "", idMachine+"difinedno" + Index, idMachine+"difined" + Index, "NO", false, 0, 59 ,"center" );
+             let DifinedlabelNo = createDiv( "LABEL", "", "rowTimesheet pl-1 m-0" , " No<br>");
+
+             divColumn.appendChild(  Difinedyes );
+             divColumn.appendChild(  DifinedlabelYes );
+             divColumn.appendChild(  Difinedno );
+             divColumn.appendChild(  DifinedlabelNo );
+             return divColumn; 
+
+        } 
+    
+     let Column = createFormElement("input", Type, "rowTimesheet m-0  p-0", idMachine+nameColumn+Index, idMachine+nameColumn+Index, Text, isReadonly, Size, maxSize, "center" );
+
+
+    if( nameColumn === "starttime") {
+       Column.title = "Pattern = h:m";
+       Column.pattern = "[0-9]{1,2}:[0-9]{1,2}";
+       Column.placeholder = "h:m";
+
+    }
+    if (nameColumn === "worked" )
+    {
+      Column.title = "Pattern = 00h:00m";
+      Column.pattern = "[0-9]{1,2}h:[0-9]{1,2}m";
+      Column.placeholder = "Xh:Xm";
+
+    }
+ 
+    divColumn .appendChild(  Column );
+    return divColumn;
 
 }
+
+function removeColumn(idMachine, Index) {
+
+  $("#div"+idMachine + "operator" + Index).remove();
+  $("#div"+idMachine + "starttime" + Index).remove();
+  $("#div"+idMachine + "worked" + Index).remove();
+  $("#div"+idMachine + "difinedyes" + Index).remove();
+  $("#div"+idMachine + "notes" + Index).remove();
+}
+
+function  createButtonRemoveEmployee( idMachine ){
+
+  let buttonRemove = document.createElement("button");
+  buttonRemove.innerHTML = "Remove Employee";
+  buttonRemove.setAttribute( "type", "button");
+  buttonRemove.setAttribute("Class", "button-next" );
+
+  buttonRemove.addEventListener("click", ()=> {
+
+            let Index = parseInt(document.getElementById(idMachine+"machineTotal").value) - 1 ;
+            removeColumn(idMachine, Index)
+            document.getElementById(idMachine+"machineTotal").value = parseInt(Index);
+
+           });
+
+  return   buttonRemove;
+
+}
+
+function createButtonAddEmployee( idMachine, TotalEmployee, col1, col2, col3, col3, col4, col5 ){
+
+  let buttonAdd = document.createElement("button");
+  buttonAdd.innerHTML = "add Employee";
+  buttonAdd.setAttribute( "type", "button");
+  buttonAdd.setAttribute("Class", "button-next mr-3" );
+
+  buttonAdd.addEventListener("click", ()=> {
+
+         let Index = document.getElementById(idMachine+"machineTotal").value ;
+
+         const divEmployee = addColumn( "text", idMachine, Index, "operator", "", false, 7, 7);
+         col1.appendChild( divEmployee ); 
+
+         const divstartTime =  addColumn( "text", idMachine, Index, "starttime", "", false, 5, 5);
+         col2.appendChild( divstartTime );
+
+         const divWorked = addColumn( "text", idMachine, Index, "worked", "", false, 7, 7);
+          col3.appendChild( divWorked );
+
+         const divDifined = addColumn( "radio", idMachine, Index, "difinedyes", "YES", false, 0, 59);
+         col4.appendChild( divDifined );
+
+         const divNotes = addColumn( "text", idMachine, Index, "notes", "", false, 30, 40);
+          col5.appendChild( divNotes );
+
+          document.getElementById(idMachine+"machineTotal").value = parseInt(Index) + 1;
+    /*
+        let divNotes = createDiv( "DIV","" , "d-block p-0" , "");
+          let Notes = createFormElement("input", "text", "rowTimesheet  m-0  p-0", idMachine+"Notes" + Index, idMachine+"Notes" + Index, "", false, 30, 40, "left" );
+        divNotes.appendChild(  Notes );
+    */
+  })  
+
+  return buttonAdd;
+
+}
+
 function headForm( Text ){
 
   const mainDiv =  createDiv( "DIV", "", "container my-0 p-0 z-depth-1" , "");
@@ -622,7 +742,7 @@ function unittestMachineOperators( myObj)
 function addbodyTimesheet( machinesEmployees) {
 
    // Unit Testing 
-   //  machinesEmployees = unittestMachineOperators( machinesEmployees );
+     machinesEmployees = unittestMachineOperators( machinesEmployees );
   
   
    const form = createFormEndshift( reportTimesheets );
@@ -684,6 +804,8 @@ function viewTimesheet( Shift) {
        });  */
 
 }
+
+
 
 
 
